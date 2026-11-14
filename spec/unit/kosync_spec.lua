@@ -1,6 +1,6 @@
 local service = [[
 {
-    "base_url" : "https://sync.universalreader.rocks:443/",
+    "base_url" : "https://sync.koreader.rocks:443/",
     "name" : "api",
     "methods" : {
         "register" : {

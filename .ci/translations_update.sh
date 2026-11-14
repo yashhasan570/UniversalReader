@@ -14,6 +14,6 @@ if run git -C l10n diff --exit-code --ignore-matching-lines='^"POT-Creation-Date
     echo -e "${ANSI_GREEN}No updated translations found."
     exit
 fi
-run git -C l10n -c user.name='Universal Reader build bot' -c user.email='non-reply@universalreader.rocks' commit -m 'Updated translation source file' "${template}"
+run git -C l10n -c user.name='Universal Reader build bot' -c user.email='non-reply@koreader.rocks' commit -m 'Updated translation source file' "${template}"
 run git -C l10n push --quiet
 echo -e "\\n${ANSI_GREEN}Translation update pushed."

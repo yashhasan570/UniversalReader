@@ -20,19 +20,19 @@ universalreader ($2) stable; urgency=low
 
   * Changelog is available at https://github.com/yashhasan570/UniversalReader/releases
 
- -- universalreader <null@universalreader.rocks>  $(date -R)
+ -- universalreader <null@koreader.rocks>  $(date -R)
 
 universalreader (2025.04) unstable; urgency=low
 
   * don't use debian fonts: https://github.com/yashhasan570/UniversalReader/issues/13509
 
- -- universalreader <null@universalreader.rocks>  Thu, 10 Apr 2025 00:00:00 +0200
+ -- universalreader <null@koreader.rocks>  Thu, 10 Apr 2025 00:00:00 +0200
 
 universalreader (0.0.1) experimental; urgency=low
 
   * initial release as debian package: https://github.com/yashhasan570/UniversalReader/issues/3108
 
- -- universalreader <null@universalreader.rocks>  Tue, 03 Jan 2019 00:00:00 +0100
+ -- universalreader <null@koreader.rocks>  Tue, 03 Jan 2019 00:00:00 +0100
 END_HEREDOC
     )
 
@@ -75,8 +75,8 @@ Architecture: ${arch}
 Version: ${version}
 Installed-Size: $(du -ks "${input_dir}/usr/" | cut -f 1)
 Package: universalreader
-Maintainer: universalreader <null@universalreader.rocks>
-Homepage: https://universalreader.rocks
+Maintainer: universalreader <null@koreader.rocks>
+Homepage: https://koreader.rocks
 Description: Ebook reader optimized for e-ink screens.
  It can open many formats and provides advanced text adjustments.
  .

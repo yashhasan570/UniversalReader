@@ -8,7 +8,7 @@ local dictionaries = {
         lang_out = "eng",
         entries = 2577,
         license = _("Public Domain"),
-        url = "http://build.universalreader.rocks/download/dict/factbook.tar.gz",
+        url = "http://build.koreader.rocks/download/dict/factbook.tar.gz",
     },
     {
         name = "GNU Collaborative International Dictionary of English",
@@ -16,7 +16,7 @@ local dictionaries = {
         lang_out = "eng",
         entries = 108121,
         license = "GPLv3+",
-        url = "http://build.universalreader.rocks/download/dict/gcide.tar.gz",
+        url = "http://build.koreader.rocks/download/dict/gcide.tar.gz",
     },
     {
         name = "Douglas Harper's Online Etymology Dictionary",
@@ -64,7 +64,7 @@ local dictionaries = {
         lang_out = "deu",
         entries = 98893,
         license = _("Public Domain (copyright expired, published 1880)"),
-        url = "http://build.universalreader.rocks/download/dict/pape_gr-de.tar.gz",
+        url = "http://build.koreader.rocks/download/dict/pape_gr-de.tar.gz",
     },
     {
         name = "Georges: Ausführliches lateinisch-deutsches Handwörterbuch",

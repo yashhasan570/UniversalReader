@@ -36,9 +36,9 @@ def main():
             try: s = p.read_text(encoding='utf-8')
             except Exception: continue
             o = s
-            for a in PROTECT: s = s.replace(a, '__PT__'+a)
+            for a in PROTECT: s = s.replace(a, chr(1)+'PT'+chr(1))
             for a,b in REPL: s = s.replace(a,b)
-            s = s.replace('__PT__','')
+            s = s.replace(chr(1)+'PT'+chr(1),'')
             if s != o:
                 p.write_text(s, encoding='utf-8'); changed += 1
     badge = ROOT/'scripts/icons/badge.png'
