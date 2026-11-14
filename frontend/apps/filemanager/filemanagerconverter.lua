@@ -5,7 +5,7 @@ This module is responsible for converting files.
 local ButtonDialog = require("ui/widget/buttondialog")
 local ConfirmBox = require("ui/widget/confirmbox")
 local UIManager = require("ui/uimanager")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local util = require("util")
 local _ = require("gettext")

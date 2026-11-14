@@ -2,7 +2,7 @@ local Generic = require("device/generic/device") -- <= look at this file!
 local Event = require("ui/event")
 local UIManager
 local ffiUtil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 
 local function yes() return true end
@@ -297,7 +297,7 @@ end
 
 function Bookeen:supportsScreensaver() return true end
 
--- platform/bookeen/koreader.sh copies itself to /tmp and re-execs from there
+-- platform/bookeen/universalreader.sh copies itself to /tmp and re-execs from there
 -- before doing anything else, so these are "what is currently running" versus
 -- "what is installed". They differ exactly when an update replaced the launcher
 -- underneath us, which reader.lua turns into a prompt to fully exit (a restart
@@ -307,20 +307,20 @@ function Bookeen:supportsScreensaver() return true end
 -- preserves timestamps. sumFile returns nil for a missing file, and nil == nil
 -- would wrongly read as "up to date", so require an actual hash from the
 -- installed copy -- which is also what makes this correct when reader.lua was
--- launched by hand instead of through the launcher: no /tmp/koreader.sh exists,
+-- launched by hand instead of through the launcher: no /tmp/universalreader.sh exists,
 -- so the comparison is nil vs. a hash, i.e. false... and that would nag on every
 -- manual start. Hence the explicit "not running from the launcher" escape.
 function Bookeen:isStartupScriptUpToDate()
-    if lfs.attributes("/tmp/koreader.sh", "mode") ~= "file" then
-        -- Not started via koreader.sh at all; there is nothing to be stale.
+    if lfs.attributes("/tmp/universalreader.sh", "mode") ~= "file" then
+        -- Not started via universalreader.sh at all; there is nothing to be stale.
         return true
     end
     local md5 = require("ffi/MD5")
-    local installed = md5.sumFile("koreader.sh")
+    local installed = md5.sumFile("universalreader.sh")
     if not installed then
         return true
     end
-    return md5.sumFile("/tmp/koreader.sh") == installed
+    return md5.sumFile("/tmp/universalreader.sh") == installed
 end
 
 function Bookeen:setDateTime(year, month, day, hour, min, sec)

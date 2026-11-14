@@ -25,20 +25,20 @@ local ota_dir = DataStorage:getDataDir() .. "/ota/"
 local OTAManager = {
     -- NOTE: Each URL *MUST* end with a /
     ota_servers = {
-        "http://ota.koreader.rocks/",
-        "https://github.com/koreader/koreader/releases/download/ota/",
-        "http://koreader-fr.ak-team.com/",
-        "http://koreader-pl.ak-team.com/",
-        "http://koreader-na.ak-team.com/",
-        "http://koreader.ak-team.com/",
+        "http://ota.universalreader.rocks/",
+        "https://github.com/yashhasan570/UniversalReader/releases/download/ota/",
+        "http://universalreader-fr.ak-team.com/",
+        "http://universalreader-pl.ak-team.com/",
+        "http://universalreader-na.ak-team.com/",
+        "http://universalreader.ak-team.com/",
     },
     ota_channels = {
         "stable",
         "nightly",
     },
-    kotasync_template = "koreader-%s-latest-%s.kotasync",
+    kotasync_template = "universalreader-%s-latest-%s.kotasync",
     kotasync_update_package = ota_dir .. "update.tar.xz",
-    link_template = "koreader-%s-latest-%s",
+    link_template = "universalreader-%s-latest-%s",
 }
 
 local ota_channels = {
@@ -217,7 +217,7 @@ function OTAManager:fetchAndProcessUpdate()
         return
     elseif ota_version == -1 then
         UIManager:show(InfoMessage:new{
-            text = T(_("Device no longer supported.\n\nPlease check %1"), "https://github.com/koreader/koreader/wiki/deprecated-devices")
+            text = T(_("Device no longer supported.\n\nPlease check %1"), "https://github.com/yashhasan570/UniversalReader/wiki/deprecated-devices")
         })
         return
     elseif ota_version == -2 then

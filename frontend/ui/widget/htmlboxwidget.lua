@@ -216,7 +216,7 @@ end
 -- - MuPDF doesn't set some elements as being display:block, and would
 --   consider them inline, and would badly handle <BR/> inside them.
 --   Note: this is a generic issue with <BR/> inside inline elements, see:
---   https://github.com/koreader/koreader/issues/12258#issuecomment-2267629234
+--   https://github.com/yashhasan570/UniversalReader/issues/12258#issuecomment-2267629234
 local mupdf_css_fixes = [[
 article, aside, button, canvas, datalist, details, dialog, dir, fieldset, figcaption,
 figure, footer, form, frame, frameset, header, hgroup, iframe, legend, listing,

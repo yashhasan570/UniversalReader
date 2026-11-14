@@ -6,7 +6,7 @@ menu_items and a separate menu order.
 local DataStorage = require("datastorage")
 local Dbg = require("dbg")
 local FFIUtil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local _ = require("gettext")
 
@@ -102,7 +102,7 @@ function MenuSorter:sort(item_table, order)
         else
             if order_id ~= "KOMenu:disabled" and order_id ~="plus_menu" then
                 --"plus_menu" break an assumption of the menu_sorter, but it's ok, so ignore it.
-                --See : https://github.com/koreader/koreader/pull/3844#issuecomment-383092219
+                --See : https://github.com/yashhasan570/UniversalReader/pull/3844#issuecomment-383092219
                 logger.warn("menu id not found:", order_id)
             end
         end

@@ -5,7 +5,7 @@ describe("defaults module", function()
         DataStorage = require("datastorage")
         persistent_filename = DataStorage:getDataDir() .. "/defaults.defaults_spec.lua"
         Defaults = require("luadefaults"):open(persistent_filename)
-        lfs = require("libs/libkoreader-lfs")
+        lfs = require("libs/libuniversalreader-lfs")
     end)
 
     it("should load all defaults from defaults.lua", function()

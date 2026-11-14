@@ -257,7 +257,7 @@ local order = {
         "about",
     },
     exit_menu = {
-        "restart_koreader", -- if Device:canRestart()
+        "restart_universalreader", -- if Device:canRestart()
         "----------------------------",
         "sleep", -- if Device:canSuspend()
         "poweroff", -- if Device:canPowerOff()

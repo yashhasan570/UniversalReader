@@ -1,7 +1,7 @@
 PHONY = all android-ndk android-sdk base clean distclean doc fetchthirdparty re static-check update update-%
 SOUND = $(INSTALL_DIR)/%
 
-# koreader-base directory
+# universalreader-base directory
 KOR_BASE ?= base
 
 include $(KOR_BASE)/Makefile.defs
@@ -26,7 +26,7 @@ else
 	DIST:=emulator
 endif
 
-INSTALL_DIR ?= koreader-$(DIST)-$(MACHINE)
+INSTALL_DIR ?= universalreader-$(DIST)-$(MACHINE)
 
 # platform directories
 PLATFORM_DIR=platform
@@ -120,46 +120,46 @@ cd $(INSTALL_DIR) &&
 '$(abspath tools/mkrelease.sh)'
 --epoch=$(RELEASE_EPOCH)
 $(if $(PARALLEL_JOBS),--jobs $(PARALLEL_JOBS))
---manifest=$(or $2,koreader)/ota/package.index
-$(foreach a,$1,'$(if $(filter --%,$a),$a,$(abspath $a))') $(or $2,koreader)
-$(call release_excludes,$(or $2,koreader)/)
+--manifest=$(or $2,universalreader)/ota/package.index
+$(foreach a,$1,'$(if $(filter --%,$a),$a,$(abspath $a))') $(or $2,universalreader)
+$(call release_excludes,$(or $2,universalreader)/)
 endef
 
 all: base mo
-	install -d $(INSTALL_DIR)/koreader
-	rm -f $(INSTALL_DIR)/koreader/git-rev; echo "$(VERSION)_$(DIST)" > $(INSTALL_DIR)/koreader/git-rev
+	install -d $(INSTALL_DIR)/universalreader
+	rm -f $(INSTALL_DIR)/universalreader/git-rev; echo "$(VERSION)_$(DIST)" > $(INSTALL_DIR)/universalreader/git-rev
 ifdef ANDROID
-	rm -f android-fdroid-version; echo -e "$(ANDROID_NAME)\n$(ANDROID_VERSION)" > koreader-android-fdroid-latest
+	rm -f android-fdroid-version; echo -e "$(ANDROID_NAME)\n$(ANDROID_VERSION)" > universalreader-android-fdroid-latest
 endif
-	$(SYMLINK) $(KOR_BASE)/ev_replay.py $(INSTALL_DIR)/koreader/
-	bash -O extglob -c '$(SYMLINK) $(OUTPUT_DIR_ARTIFACTS) $(INSTALL_DIR)/koreader/'
+	$(SYMLINK) $(KOR_BASE)/ev_replay.py $(INSTALL_DIR)/universalreader/
+	bash -O extglob -c '$(SYMLINK) $(OUTPUT_DIR_ARTIFACTS) $(INSTALL_DIR)/universalreader/'
 ifneq (,$(EMULATE_READER))
 	@echo "[*] Install front spec only for the emulator"
-	$(SYMLINK) spec $(INSTALL_DIR)/koreader/spec/front
-	$(SYMLINK) test $(INSTALL_DIR)/koreader/spec/front/unit/data
+	$(SYMLINK) spec $(INSTALL_DIR)/universalreader/spec/front
+	$(SYMLINK) test $(INSTALL_DIR)/universalreader/spec/front/unit/data
 	@echo "[*] Install launcher for the emulator"
-	cp $(COMMON_DIR)/koreader.sh $(INSTALL_DIR)/koreader/
+	cp $(COMMON_DIR)/universalreader.sh $(INSTALL_DIR)/universalreader/
 endif
-	$(SYMLINK) $(INSTALL_FILES) $(INSTALL_DIR)/koreader/
+	$(SYMLINK) $(INSTALL_FILES) $(INSTALL_DIR)/universalreader/
 ifdef ANDROID
-	$(SYMLINK) $(ANDROID_DIR)/*.lua $(INSTALL_DIR)/koreader/
+	$(SYMLINK) $(ANDROID_DIR)/*.lua $(INSTALL_DIR)/universalreader/
 endif
 	@echo "[*] Install update once marker"
-	@echo "# This file indicates that update once patches have not been applied yet." > $(INSTALL_DIR)/koreader/update_once.marker
+	@echo "# This file indicates that update once patches have not been applied yet." > $(INSTALL_DIR)/universalreader/update_once.marker
 ifdef WIN32
 	@echo "[*] Install runtime libraries for win32..."
-	$(SYMLINK) $(WIN32_DIR)/*.dll $(INSTALL_DIR)/koreader/
+	$(SYMLINK) $(WIN32_DIR)/*.dll $(INSTALL_DIR)/universalreader/
 endif
 	@echo "[*] Install plugins"
-	$(SYMLINK) plugins $(INSTALL_DIR)/koreader/
+	$(SYMLINK) plugins $(INSTALL_DIR)/universalreader/
 	@echo "[*] Install resources"
-	$(SYMLINK) resources/fonts $(INSTALL_DIR)/koreader/fonts
-	install -d $(INSTALL_DIR)/koreader/{screenshots,fonts/host,ota}
+	$(SYMLINK) resources/fonts $(INSTALL_DIR)/universalreader/fonts
+	install -d $(INSTALL_DIR)/universalreader/{screenshots,fonts/host,ota}
 	# Note: the data dir is distinct from the one in base/build/…!
 	@echo "[*] Install data files"
-	! test -L $(INSTALL_DIR)/koreader/data || rm $(INSTALL_DIR)/koreader/data
-	install -d $(INSTALL_DIR)/koreader/data
-	$(SYMLINK) $(strip $(DATADIR_FILES)) $(INSTALL_DIR)/koreader/data/
+	! test -L $(INSTALL_DIR)/universalreader/data || rm $(INSTALL_DIR)/universalreader/data
+	install -d $(INSTALL_DIR)/universalreader/data
+	$(SYMLINK) $(strip $(DATADIR_FILES)) $(INSTALL_DIR)/universalreader/data/
 
 base: base-all
 

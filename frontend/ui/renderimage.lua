@@ -350,7 +350,7 @@ RenderImage.RENDER_SVG_WITH_NANOSVG = true
 
 function RenderImage:renderSVGImageFileWithNanoSVG(filename, width, height, zoom)
     if not NnSVG then
-        NnSVG = require("libs/libkoreader-nnsvg")
+        NnSVG = require("libs/libuniversalreader-nnsvg")
     end
     local ok, svg_image = pcall(NnSVG.new, filename)
     if not ok then

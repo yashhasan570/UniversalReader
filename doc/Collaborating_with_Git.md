@@ -11,12 +11,12 @@ If you are new to Git, you might find some of the following resources useful:
 ## How to pull the latest code from the Universal Reader repository
 First you need to add the official repo to your remote repo list:
 ```bash
-git remote add upstream git@github.com:koreader/koreader.git
+git remote add upstream git@github.com:universalreader/universalreader.git
 ```
 
-For koreader-base that is:
+For universalreader-base that is:
 ```bash
-git remote add upstream git@github.com:koreader/koreader-base.git
+git remote add upstream git@github.com:universalreader/universalreader-base.git
 ```
 
 You can verify the remote repo is successfully added by using:
@@ -74,8 +74,8 @@ This assumes that your repository clone have `origin` which points to upstream o
 
 ```
 dpavlin$ git remote -v | grep origin
-origin  git@github.com:koreader/koreader.git (fetch)
-origin  git@github.com:koreader/koreader.git (push)
+origin  git@github.com:universalreader/universalreader.git (fetch)
+origin  git@github.com:universalreader/universalreader.git (push)
 dpavlin$ git fetch origin
 dpavlin$ git checkout -b issue-235-toc-position origin/master
 M       djvulibre
@@ -109,7 +109,7 @@ Delta compression using up to 2 threads.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 489 bytes, done.
 Total 3 (delta 2), reused 0 (delta 0)
-To git@github.com:dpavlin/koreader.git
+To git@github.com:dpavlin/universalreader.git
  * [new branch]      issue-235-toc-position -> issue-235-toc-position
 ```
 
@@ -117,8 +117,8 @@ This assumes that your copy of github source is named `dpavlin` as here:
 
 ```
 dpavlin$ git remote -v | grep dpavlin
-dpavlin git@github.com:dpavlin/koreader.git (fetch)
-dpavlin git@github.com:dpavlin/koreader.git (push)
+dpavlin git@github.com:dpavlin/universalreader.git (fetch)
+dpavlin git@github.com:dpavlin/universalreader.git (push)
 ```
 
 Go to your github page and issue pull request

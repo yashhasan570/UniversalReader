@@ -553,7 +553,7 @@ This service is aimed at developers, <mark>use at your own risk</mark>.
 </html>
 ]]
 -- Other ideas for entry points:
--- - Browse filesystem, koreader and library, allow upload of books
+-- - Browse filesystem, universalreader and library, allow upload of books
 -- - Stream live crash.log
 
 -- Process HTTP request
@@ -573,18 +573,18 @@ function HttpInspector:onRequest(data, request_id)
     uri = util.urlDecode(uri)
     logger.dbg("HttpInspector: Received request:", method, uri)
 
-    if not util.stringStartsWith(uri, "/koreader/") then
+    if not util.stringStartsWith(uri, "/universalreader/") then
         -- Anything else is static content.
         -- We allow the user to put anything he'd like to in /koreder/web/ and have
         -- this content served as the main content, which can allow building a web
-        -- app with HTML/CSS/JS to interact with the API exposed under /koreader/.
+        -- app with HTML/CSS/JS to interact with the API exposed under /universalreader/.
         if uri == "/" then
             uri = "/index.html"
         end
         -- No security/sanity check for now
         local filepath = DataStorage:getDataDir() .. "/web" .. uri
         if uri == "/favicon.ico" then -- hijack this one to return our icon
-            filepath = "resources/koreader.png"
+            filepath = "resources/universalreader.png"
         end
         local f = io.open(filepath, "rb")
         if f then
@@ -593,15 +593,15 @@ function HttpInspector:onRequest(data, request_id)
             return self:sendResponse(reqinfo, 200, nil, data) -- let content-type be sniffed
         end
         if uri == "/index.html" then
-            -- / but no /web/index.html created by the user: redirect to our /koreader/
-            return self:sendResponse(reqinfo, 302, nil, "/koreader/")
+            -- / but no /web/index.html created by the user: redirect to our /universalreader/
+            return self:sendResponse(reqinfo, 302, nil, "/universalreader/")
         end
-        return self:sendResponse(reqinfo, 404, CTYPE.TEXT, "Static file not found: koreader/web" .. uri)
+        return self:sendResponse(reqinfo, 404, CTYPE.TEXT, "Static file not found: universalreader/web" .. uri)
     end
 
-    -- Request starts with /koreader/, followed by some predefined entry point
+    -- Request starts with /universalreader/, followed by some predefined entry point
     local ftype, fragment
-    ftype, fragment, uri = stepUriFragment(uri) -- skip "/koreader"
+    ftype, fragment, uri = stepUriFragment(uri) -- skip "/universalreader"
     reqinfo.parsed_uri = ftype .. fragment
     table.insert(reqinfo.fragments, 1, fragment)
 
@@ -908,7 +908,7 @@ function HttpInspector:showFunctionDetails(obj, reqinfo)
         add_html(T("Builtin function or from a C module: no source code available."))
     else
         local dummy, git_commit = require("version"):getNormalizedCurrentVersion()
-        local github_uri = T("https://github.com/koreader/koreader/blob/%1/%2#L%3", git_commit, func_info.source, func_info.firstline)
+        local github_uri = T("https://github.com/yashhasan570/UniversalReader/blob/%1/%2#L%3", git_commit, func_info.source, func_info.firstline)
         add_html(T("Here's a snippet of the function code (it can be viewed with syntax coloring and line numbers <a href='%1'>on Github</a>):", github_uri))
         add_html("<div style='background-color: lightgray'>")
         for _, line in ipairs(func_info.lines) do
@@ -1003,7 +1003,7 @@ function HttpInspector:callFunction(func, instance, args_as_uri, output_html, re
 end
 
 -- Handy function for testing the above, to be called with:
---   /koreader/ui/httpinspector/someFunctionForInteractiveTesting?/
+--   /universalreader/ui/httpinspector/someFunctionForInteractiveTesting?/
 function HttpInspector:someFunctionForInteractiveTesting(...)
     if select(1, ...) then
         HttpInspector.foo.bar = true -- error
@@ -1292,7 +1292,7 @@ function HttpInspector:exposeBroadcastEvent(uri, reqinfo)
     local add_html = function(h) table.insert(html, h) end
     add_html(T("<title>Broadcast event</title>"))
     add_html(T("<pre>No suggestion, <mark>use at your own risk</mark>."))
-    add_html(T("Usage: <a href='%1'>%1</a>", "/koreader/broadcast/EventName/arg1/arg2"))
+    add_html(T("Usage: <a href='%1'>%1</a>", "/universalreader/broadcast/EventName/arg1/arg2"))
     add_html("</pre>")
     html = table.concat(html, "\n")
     return self:sendResponse(reqinfo, 200, CTYPE.HTML, html)

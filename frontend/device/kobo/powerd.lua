@@ -58,12 +58,12 @@ function KoboPowerD:_syncKoboLightOnStart()
             if is_frontlight_on == false and new_intensity == 0 then
                 -- frontlight was toggled off in nickel, and we have no
                 -- level-before-toggle-off (firmware without "FrontLightState"):
-                -- use the one from koreader settings
+                -- use the one from universalreader settings
                 new_intensity = G_reader_settings:readSetting("frontlight_intensity")
             end
         else -- if kobo_light_on_start == -1 or other unexpected value then
             -- As we can't read value from the OS or hardware, use last values
-            -- stored in koreader settings
+            -- stored in universalreader settings
             new_intensity = G_reader_settings:readSetting("frontlight_intensity")
             is_frontlight_on = G_reader_settings:readSetting("is_frontlight_on")
             if self.fl_warmth ~= nil then
@@ -177,7 +177,7 @@ function KoboPowerD:init()
                 self:_syncKoboLightOnStart()
             end
         end
-        -- See discussion in https://github.com/koreader/koreader/issues/3118#issuecomment-334995879
+        -- See discussion in https://github.com/yashhasan570/UniversalReader/issues/3118#issuecomment-334995879
         -- for the reasoning behind this bit of insanity.
         if self:isFrontlightOnHW() then
             -- On devices with a mixer, setIntensity will *only* set the FL, so, ensure we honor the warmth, too.
@@ -208,7 +208,7 @@ function KoboPowerD:saveSettings()
         -- be turned on but we still want to save its state.
         local cur_is_fl_on = self.is_fl_on or self.fl_was_on or false
         local cur_warmth = self.fl_warmth
-        -- Save intensity to koreader settings
+        -- Save intensity to universalreader settings
         G_reader_settings:saveSetting("frontlight_intensity", cur_intensity)
         G_reader_settings:saveSetting("is_frontlight_on", cur_is_fl_on)
         if cur_warmth ~= nil then

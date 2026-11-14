@@ -477,7 +477,7 @@ listing, plaintext, xmp, samp, tt, kbd, pre, code { font-family: monospace !impo
                 description = _("Prevent sub- and superscript from affecting line-height."),
                 priority = 5, -- so we can override "font_size_all_inherit"
                 -- https://friendsofepub.github.io/eBookTricks/
-                -- https://github.com/koreader/koreader/issues/3923#issuecomment-386510294
+                -- https://github.com/yashhasan570/UniversalReader/issues/3923#issuecomment-386510294
                 css = [[
 sup { font-size: 50% !important; vertical-align: super !important; }
 sub { font-size: 50% !important; vertical-align: sub !important; }

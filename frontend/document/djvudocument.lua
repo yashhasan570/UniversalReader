@@ -25,7 +25,7 @@ local function validDjvuFile(filename)
 end
 
 function DjvuDocument:init()
-    local djvu = require("libs/libkoreader-djvu")
+    local djvu = require("libs/libuniversalreader-djvu")
     self.koptinterface = require("document/koptinterface")
     self.koptinterface:setDefaultConfigurable(self.configurable)
     if not validDjvuFile(self.file) then

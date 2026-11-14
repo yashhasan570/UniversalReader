@@ -17,7 +17,7 @@ local function getDir(isUser)
     if isUser and not home then return end
 
     if Device:isAndroid() then
-        return isUser and home .. "/fonts;" .. home .. "/koreader/fonts"
+        return isUser and home .. "/fonts;" .. home .. "/universalreader/fonts"
                        or "/system/fonts"
     elseif Device:isPocketBook() then
         return isUser and "/mnt/ext1/system/fonts"

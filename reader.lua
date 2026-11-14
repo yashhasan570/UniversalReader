@@ -96,7 +96,7 @@ local function showusage()
     print("If you don't pass any path, the File Manager will be opened")
     print("")
     print("This software is licensed under the AGPLv3.")
-    print("See http://github.com/koreader/koreader for more info.")
+    print("See http://github.com/yashhasan570/UniversalReader for more info.")
 end
 
 local function getPathFromURI(str)
@@ -115,7 +115,7 @@ local function getPathFromURI(str)
     return unescape(str):sub(#prefix+1)
 end
 
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local file
 local directory
 local Profiler = nil

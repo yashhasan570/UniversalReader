@@ -1,7 +1,7 @@
 # Use the git commit count as the (integer) Android version code
 ANDROID_VERSION ?= $(shell git rev-list --count HEAD)
 ANDROID_NAME ?= $(VERSION)
-ANDROID_APK = koreader-android-$(ANDROID_ARCH)$(KODEDUG_SUFFIX)-$(ANDROID_NAME).apk
+ANDROID_APK = universalreader-android-$(ANDROID_ARCH)$(KODEDUG_SUFFIX)-$(ANDROID_NAME).apk
 
 # Run. {{{
 
@@ -84,7 +84,7 @@ endef
 
 update-apk: all
 	# Note: do not remove the module directory so there's no need
-	# for `mk7z.sh` to always recreate `koreader.7z` from scratch.
+	# for `mk7z.sh` to always recreate `universalreader.7z` from scratch.
 	rm -rf $(ANDROID_LIBS)
 	# Remove old in-tree build artifacts that could conflict.
 	rm -rf $(ANDROID_LAUNCHER_DIR)/assets/{libs,module}
@@ -92,17 +92,17 @@ update-apk: all
 	mkdir -p $(ANDROID_ASSETS)/module $(ANDROID_LIBS)
 	echo '$(VERSION)_$(DIST)' >$(ANDROID_ASSETS)/module/version.txt
 	# Libraries.
-	cp -v $(INSTALL_DIR)/koreader/libs/*$(LIB_EXT) $(ANDROID_LIBS)/
+	cp -v $(INSTALL_DIR)/universalreader/libs/*$(LIB_EXT) $(ANDROID_LIBS)/
 	# Binaries are stored as shared libraries to prevent W^X exception on Android 10+
 	# https://developer.android.com/about/versions/10/behavior-changes-10#execute-permission
-	cp -v $(INSTALL_DIR)/koreader/sdcv $(ANDROID_LIBS)/libsdcv$(LIB_EXT)
+	cp -v $(INSTALL_DIR)/universalreader/sdcv $(ANDROID_LIBS)/libsdcv$(LIB_EXT)
 	# Assets are compressed manually and stored inside the APK.
-	cd $(INSTALL_DIR)/koreader && \
+	cd $(INSTALL_DIR)/universalreader && \
 	  ./tools/mkrelease.sh \
 	  $(if $(PARALLEL_JOBS),--jobs $(PARALLEL_JOBS)) \
 	  --epoch="$$(git show -s --format='%ci')" \
 	  --options='$(ANDROID_ASSETS_COMPRESSION)' \
-	  $(abspath $(ANDROID_ASSETS)/module/koreader.7z) \
+	  $(abspath $(ANDROID_ASSETS)/module/universalreader.7z) \
 	  . '-x!libs' '-x!sdcv' $(release_excludes)
 	$(ANDROID_LAUNCHER_DIR)/gradlew \
 		--project-dir='$(abspath $(ANDROID_LAUNCHER_DIR))' \
@@ -110,8 +110,8 @@ update-apk: all
 		-PassetsPath='$(abspath $(ANDROID_ASSETS))' \
 		-PbuildDir='$(abspath $(ANDROID_LAUNCHER_BUILD))' \
 		-PlibsPath='$(abspath $(dir $(ANDROID_LIBS)))' \
-		-PsevenZipLib='$(if $(MONOLIBTIC),koreader-monolibtic,7z)' \
-		-PprojectName='KOReader' \
+		-PsevenZipLib='$(if $(MONOLIBTIC),universalreader-monolibtic,7z)' \
+		-PprojectName='Universal Reader' \
 		-PversCode='$(ANDROID_VERSION)' \
 		-PversName='$(ANDROID_NAME)' \
 		$(GRADLE_FLAGS) \

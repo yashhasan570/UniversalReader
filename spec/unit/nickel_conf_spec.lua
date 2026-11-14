@@ -2,7 +2,7 @@ describe("Nickel configuration module", function()
     local lfs, NickelConf
     setup(function()
         require("commonrequire")
-        lfs = require("libs/libkoreader-lfs")
+        lfs = require("libs/libuniversalreader-lfs")
         NickelConf = require("device/kobo/nickel_conf")
     end)
 

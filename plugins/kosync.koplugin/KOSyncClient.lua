@@ -27,7 +27,7 @@ function KOSyncClient:init()
     })
     package.loaded["Spore.Middleware.GinClient"] = {}
     require("Spore.Middleware.GinClient").call = function(_, req)
-        req.headers["accept"] = "application/vnd.koreader.v1+json"
+        req.headers["accept"] = "application/vnd.universalreader.v1+json"
     end
     package.loaded["Spore.Middleware.KOSyncAuth"] = {}
     require("Spore.Middleware.KOSyncAuth").call = function(args, req)

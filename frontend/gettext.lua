@@ -33,7 +33,7 @@ local GetText = {
     translation = {},
     current_lang = "C",
     dirname = "l10n",
-    textdomain = "koreader",
+    textdomain = "universalreader",
     plural_default = "n != 1",
 }
 

@@ -87,7 +87,7 @@ function CervantesPowerD:saveSettings()
         local cur_intensity = self.fl_intensity
         local cur_is_fl_on = self.is_fl_on
         local cur_warmth = self.fl_warmth
-        -- Save intensity to koreader settings
+        -- Save intensity to universalreader settings
         G_reader_settings:saveSetting("frontlight_intensity", cur_intensity)
         G_reader_settings:saveSetting("is_frontlight_on", cur_is_fl_on)
         if cur_warmth ~= nil then

@@ -36,7 +36,7 @@ function ReaderActivityIndicator:isStub() return false end
 function ReaderActivityIndicator:init()
     local haslipc, lipc = pcall(require, "liblipclua")
     if haslipc then
-        self.lipc_handle = lipc.init("com.github.koreader.activityindicator")
+        self.lipc_handle = lipc.init("com.github.universalreader.activityindicator")
     end
 end
 
@@ -49,7 +49,7 @@ function ReaderActivityIndicator:onStartActivityIndicator()
                 "com.lab126.pillow", "activityIndicator",
                 '{"activityIndicator":{ \
                     "action":"start","timeout":10000, \
-                    "clientId":"com.github.koreader.activityindicator", \
+                    "clientId":"com.github.universalreader.activityindicator", \
                     "priority":true}}')
             self.indicator_started = true
         end
@@ -64,7 +64,7 @@ function ReaderActivityIndicator:onStopActivityIndicator()
             "com.lab126.pillow", "activityIndicator",
             '{"activityIndicator":{ \
                 "action":"stop","timeout":10000, \
-                "clientId":"com.github.koreader.activityindicator", \
+                "clientId":"com.github.universalreader.activityindicator", \
                 "priority":true}}')
         self.indicator_started = false
     end

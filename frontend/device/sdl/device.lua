@@ -205,7 +205,7 @@ function Device:init()
     self.window.height = self.screen.h
     self.powerd = require("device/sdl/powerd"):new{device = self}
 
-    local ok, re = pcall(self.screen.setWindowIcon, self.screen, "resources/koreader.png")
+    local ok, re = pcall(self.screen.setWindowIcon, self.screen, "resources/universalreader.png")
     if not ok then logger.warn(re) end
 
     local function makeKeyPressEvent(keycode)

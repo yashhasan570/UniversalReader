@@ -65,25 +65,25 @@ def asset_parse:
   | "(?<version>(?<base_version>[0-9]+(\\.[0-9]+)*)(-(?<commit_number>[0-9]+)-g(?<commit_hash>[a-f0-9]+))?(_[0-9]{4}-[0-9]{2}-[0-9]{2})?)" as $version_rx
   | "\\.(?<extension>(7z|apk|AppImage|deb|kotasync|targz|tar\\.xz|zip|zsync))$" as $extension_rx
   | $file | (
-    # koreader-linux-x86_64-v2023.06.1.tar.xz
-    # koreader-android-arm-v2015.11-654-gb7392f7_2018-03-09.apk
-    capture("/?koreader-" + $platform_rx + "-v" + $version_rx + $extension_rx)
-    # koreader-v2023.06.1-x86_64.AppImage
-    # koreader-v2025.10-197-g7c5ee9c1a2_2026-03-13-x86_64.AppImage
+    # universalreader-linux-x86_64-v2023.06.1.tar.xz
+    # universalreader-android-arm-v2015.11-654-gb7392f7_2018-03-09.apk
+    capture("/?universalreader-" + $platform_rx + "-v" + $version_rx + $extension_rx)
+    # universalreader-v2023.06.1-x86_64.AppImage
+    # universalreader-v2025.10-197-g7c5ee9c1a2_2026-03-13-x86_64.AppImage
     // (
-         capture("/?koreader-v" + $version_rx + "-" + $platform_rx + $extension_rx)
+         capture("/?universalreader-v" + $version_rx + "-" + $platform_rx + $extension_rx)
          | .platform = "linux-" + .platform
     )
-    # koreader_2026.09-8-g84cf973-1_amd64.deb
+    # universalreader_2026.09-8-g84cf973-1_amd64.deb
     // (
-         capture("/?koreader_" + $version_rx + "-1_" + $platform_rx + $extension_rx)
+         capture("/?universalreader_" + $version_rx + "-1_" + $platform_rx + $extension_rx)
          | .platform = "linux-" + .platform
     )
-    # koreader-android-arm-latest-nightly
-    # koreader-kindlepw2-latest-nightly.kotasync
-    # koreader-kindlepw2-latest-stable.zsync
+    # universalreader-android-arm-latest-nightly
+    # universalreader-kindlepw2-latest-nightly.kotasync
+    # universalreader-kindlepw2-latest-stable.zsync
     // (
-      capture("/?koreader-" + $platform_rx + "-latest-(?<version>nightly|stable)(" + $extension_rx + "|$)")
+      capture("/?universalreader-" + $platform_rx + "-latest-(?<version>nightly|stable)(" + $extension_rx + "|$)")
       | .base_version = .version
       | .sort_version = [666]
       | .extension //= ($link_type[.platform] // "link")
@@ -91,9 +91,9 @@ def asset_parse:
       | .ota = true
       | .stable = .base_version == "stable"
     )
-    # koreader-android-fdroid-latest
+    # universalreader-android-fdroid-latest
     // (
-      capture("/?koreader-android-fdroid-latest$")
+      capture("/?universalreader-android-fdroid-latest$")
       | .platform = "android-fdroid"
       | .base_version = "stable"
       | .sort_version = [666]

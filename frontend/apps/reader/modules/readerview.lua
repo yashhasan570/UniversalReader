@@ -158,7 +158,7 @@ Register a view UI widget module for document browsing.
 @usage
 local ImageWidget = require("ui/widget/imagewidget")
 local dummy_image = ImageWidget:new{
-    file = "resources/koreader.png",
+    file = "resources/universalreader.png",
 }
 -- the image will be painted on all book pages
 readerui.view:registerViewModule('dummy_image', dummy_image)
@@ -685,7 +685,7 @@ function ReaderView:drawHighlightRect(bb, _x, _y, rect, drawer, color, draw_note
                 -- MUL doesn't really work on a black background, so, switch to OVER if we're in software nightmode...
                 -- NOTE: If we do *not* invert the color here, it *will* get inverted by the blitter given that the target bb is inverted.
                 --       While not particularly pretty, this (roughly) matches with hardware nightmode, *and* how MuPDF renders highlights...
-                --       But it's *really* not pretty (https://github.com/koreader/koreader/pull/11044#issuecomment-1902886069), so we'll fix it ;p.
+                --       But it's *really* not pretty (https://github.com/yashhasan570/UniversalReader/pull/11044#issuecomment-1902886069), so we'll fix it ;p.
                 local c = Blitbuffer.ColorRGB32(color.r, color.g, color.b, 0xFF * lighten_factor):invert()
                 bb:blendRectRGB32(x, y, w, h, c)
             else

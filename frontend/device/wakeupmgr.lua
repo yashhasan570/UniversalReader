@@ -75,7 +75,7 @@ function WakeupMgr:addTask(seconds_from_now, callback)
 
     -- NOTE: Apparently, some RTCs have trouble with timers further away than UINT16_MAX, so,
     --       if necessary, setup an alarm chain to work it around...
-    --       c.f., https://github.com/koreader/koreader/issues/8039#issuecomment-1263547625
+    --       c.f., https://github.com/yashhasan570/UniversalReader/issues/8039#issuecomment-1263547625
     if self.dodgy_rtc and seconds_from_now > 0xFFFF then
         logger.info("WakeupMgr: scheduling a chain of alarms for a wakeup in", seconds_from_now)
 

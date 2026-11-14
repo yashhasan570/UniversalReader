@@ -6,7 +6,7 @@
       "base/thirdparty"
     ],
     "ignoreGlobs": [
-      "koreader-*/**"
+      "universalreader-*/**"
     ],
     "workspaceRoots": [
       "./base",

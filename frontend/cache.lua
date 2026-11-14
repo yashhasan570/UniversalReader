@@ -4,7 +4,7 @@ An LRU cache, based on https://github.com/starius/lua-lru
 @module cache
 --]]
 
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local lru = require("ffi/lru")
 local md5 = require("ffi/sha2").md5

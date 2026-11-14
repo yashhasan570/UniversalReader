@@ -8,7 +8,7 @@ set +e
 
 if [ -z "${CIRCLE_PULL_REQUEST}" ] && [ "${CIRCLE_BRANCH}" = 'master' ]; then
     echo -e "\\n${ANSI_GREEN}Uploading coverage."
-    cd install/koreader && {
+    cd install/universalreader && {
         # see https://github.com/codecov/example-lua
         bash <(curl -s https://codecov.io/bash)
     }

@@ -11,16 +11,16 @@ ko_splash() {
     [ -x /bin/eink ] && [ -e "$1" ] && /bin/eink d "$1" >/dev/null 2>&1
 }
 
-if [ -z "${KOREADER_DIR}" ]; then
-    if KOREADER_DIR="$(dirname "$(realpath "$0")" 2>/dev/null)" && [ -n "${KOREADER_DIR}" ]; then
+if [ -z "${UNIVERSALREADER_DIR}" ]; then
+    if UNIVERSALREADER_DIR="$(dirname "$(realpath "$0")" 2>/dev/null)" && [ -n "${UNIVERSALREADER_DIR}" ]; then
         :
     else
         # Support Bookeen images without the realpath applet.
-        KOREADER_DIR="$(cd "$(dirname "$0")" && pwd -P)"
+        UNIVERSALREADER_DIR="$(cd "$(dirname "$0")" && pwd -P)"
     fi
 fi
-export KOREADER_DIR
-UNPACK_DIR="${KOREADER_DIR%/*}"
+export UNIVERSALREADER_DIR
+UNPACK_DIR="${UNIVERSALREADER_DIR%/*}"
 
 for arg; do
     shift
@@ -31,12 +31,12 @@ for arg; do
 done
 
 if [ "$(dirname "$0")" != '/tmp' ]; then
-    cp -pf "$0" '/tmp/koreader.sh' || exit 1
-    chmod 755 '/tmp/koreader.sh'
-    exec '/tmp/koreader.sh' "$@"
+    cp -pf "$0" '/tmp/universalreader.sh' || exit 1
+    chmod 755 '/tmp/universalreader.sh'
+    exec '/tmp/universalreader.sh' "$@"
 fi
 
-cd "${KOREADER_DIR}" || exit 1
+cd "${UNIVERSALREADER_DIR}" || exit 1
 
 if [ -e crash.log ]; then
     tail -c 500000 crash.log >crash.log.new
@@ -44,28 +44,28 @@ if [ -e crash.log ]; then
 fi
 
 if [ ! -x ./reader.lua ] || [ ! -x ./luajit ]; then
-    echo "koreader.sh: ${KOREADER_DIR} is not a usable install (missing reader.lua or luajit)" >>crash.log 2>&1
+    echo "universalreader.sh: ${UNIVERSALREADER_DIR} is not a usable install (missing reader.lua or luajit)" >>crash.log 2>&1
     ko_splash /system/update_finished_error.bmp
     exit 1
 fi
 
 ko_update_check() {
-    NEWUPDATE="${KOREADER_DIR}/ota/update.tar.xz"
+    NEWUPDATE="${UNIVERSALREADER_DIR}/ota/update.tar.xz"
     if [ -f "${NEWUPDATE}" ]; then
-        echo "[$(date)] koreader.sh: applying update from ${NEWUPDATE}" >>crash.log 2>&1
-        cp "${KOREADER_DIR}/ota/package.index" /tmp/package.index 2>/dev/null
-        (cd "${UNPACK_DIR}" && "${KOREADER_DIR}/unpack" -X "${NEWUPDATE}" >>"${KOREADER_DIR}/crash.log" 2>&1)
+        echo "[$(date)] universalreader.sh: applying update from ${NEWUPDATE}" >>crash.log 2>&1
+        cp "${UNIVERSALREADER_DIR}/ota/package.index" /tmp/package.index 2>/dev/null
+        (cd "${UNPACK_DIR}" && "${UNIVERSALREADER_DIR}/unpack" -X "${NEWUPDATE}" >>"${UNIVERSALREADER_DIR}/crash.log" 2>&1)
         fail=$?
         if [ "${fail}" -eq 0 ]; then
-            if [ -f /tmp/package.index ] && [ -f "${KOREADER_DIR}/ota/package.index" ]; then
-                grep -x -v -F -f "${KOREADER_DIR}/ota/package.index" /tmp/package.index 2>/dev/null |
+            if [ -f /tmp/package.index ] && [ -f "${UNIVERSALREADER_DIR}/ota/package.index" ]; then
+                grep -x -v -F -f "${UNIVERSALREADER_DIR}/ota/package.index" /tmp/package.index 2>/dev/null |
                     while IFS= read -r leftover; do
                         [ -n "${leftover}" ] && rm -f "${UNPACK_DIR}/${leftover}"
                     done
             fi
-            echo "[$(date)] koreader.sh: update successful" >>crash.log 2>&1
+            echo "[$(date)] universalreader.sh: update successful" >>crash.log 2>&1
         else
-            echo "[$(date)] koreader.sh: update FAILED (${fail}); Universal Reader may not function properly" >>crash.log 2>&1
+            echo "[$(date)] universalreader.sh: update FAILED (${fail}); Universal Reader may not function properly" >>crash.log 2>&1
         fi
         # Always purge the payload to prevent an update loop.
         rm -f /tmp/package.index "${NEWUPDATE}"
@@ -76,7 +76,7 @@ ko_update_check() {
 
 ko_update_check
 if [ -n "${fail}" ] && [ "${fail}" -eq 0 ]; then
-    exec ./koreader.sh "$@"
+    exec ./universalreader.sh "$@"
 fi
 
 export STARDICT_DATA_DIR="data/dict"
@@ -90,11 +90,11 @@ export EXT_FONT_DIR="/mnt/fat/fonts"
 # ebrmain is then Universal Reader's parent and must receive the shim's exit code.
 VIA_EBRMAIN="false"
 if [ -n "${KO_STOP_EBRMAIN}" ] && [ -n "${KO_VIA_BOORDR_SHIM}" ]; then
-    echo "[$(date)] koreader.sh: ignoring KO_STOP_EBRMAIN -- started via the boordr shim, ebrmain is our parent" >>crash.log 2>&1
+    echo "[$(date)] universalreader.sh: ignoring KO_STOP_EBRMAIN -- started via the boordr shim, ebrmain is our parent" >>crash.log 2>&1
 elif [ -n "${KO_STOP_EBRMAIN}" ] && [ -x /etc/init.d/ebrmain.sh ]; then
     if pidof ebrmain >/dev/null 2>&1 || pidof boordr >/dev/null 2>&1; then
         VIA_EBRMAIN="true"
-        echo "[$(date)] koreader.sh: stopping the stock reader (KO_STOP_EBRMAIN set)" >>crash.log 2>&1
+        echo "[$(date)] universalreader.sh: stopping the stock reader (KO_STOP_EBRMAIN set)" >>crash.log 2>&1
         /etc/init.d/ebrmain.sh stop >>crash.log 2>&1
     fi
 fi
@@ -165,7 +165,7 @@ while [ ${RETURN_VALUE} -ne 0 ]; do
 done
 
 if [ "${VIA_EBRMAIN}" = "true" ]; then
-    echo "[$(date)] koreader.sh: restarting the stock reader" >>crash.log 2>&1
+    echo "[$(date)] universalreader.sh: restarting the stock reader" >>crash.log 2>&1
     /etc/init.d/ebrmain.sh start >>crash.log 2>&1
 fi
 

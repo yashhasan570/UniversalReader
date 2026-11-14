@@ -4,7 +4,7 @@ Handles append-mostly data such as Universal Reader's bookmarks and dictionary s
 
 local LuaSettings = require("luasettings")
 local dump = require("dump")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local util = require("util")
 

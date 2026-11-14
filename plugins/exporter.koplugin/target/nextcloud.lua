@@ -14,7 +14,7 @@ local NextcloudExporter = require("base"):new{
     help_text = T(_([[For Nextcloud Notes setup instructions, see %1
 
 Markdown formatting can be configured in:
-Export highlights > Choose formats and services > Markdown.]]), "https://github.com/koreader/koreader/wiki/Nextcloud-notes"),
+Export highlights > Choose formats and services > Markdown.]]), "https://github.com/yashhasan570/UniversalReader/wiki/Nextcloud-notes"),
 }
 
 -- fetching all notes from Nextcloud is costly, so we keep a copy here

@@ -1,7 +1,7 @@
 --[[--
 Allows applying developer patches while running Universal Reader.
 
-The contents in `koreader/patches/` are applied on calling `userpatch.applyPatches(priority)`.
+The contents in `universalreader/patches/` are applied on calling `userpatch.applyPatches(priority)`.
 --]]--
 
 local isAndroid, android = pcall(require, "android")
@@ -28,7 +28,7 @@ if isAndroid and android.prop.flavor == "fdroid" then
     return userpatch -- allows to use applyPatches as a no-op on F-Droid flavor
 end
 
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local sort = require("sort")
 local DataStorage = require("datastorage")
@@ -105,7 +105,7 @@ local function runUserPatchTasks(dir, priority)
     return true
 end
 
---- This function applies lua patches from `/koreader/patches`
+--- This function applies lua patches from `/universalreader/patches`
 ---- @string priority ... one of the defined priorities in the userpatch hashtable
 function userpatch.applyPatches(priority)
     if patches_disabled then return end

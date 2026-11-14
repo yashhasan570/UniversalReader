@@ -13,26 +13,26 @@ command_exists() {
 }
 
 write_changelog() {
-    CHANGELOG_PATH="${1}/usr/share/doc/koreader/changelog.Debian.gz"
+    CHANGELOG_PATH="${1}/usr/share/doc/universalreader/changelog.Debian.gz"
     CHANGELOG=$(
         cat <<END_HEREDOC
-koreader ($2) stable; urgency=low
+universalreader ($2) stable; urgency=low
 
-  * Changelog is available at https://github.com/koreader/koreader/releases
+  * Changelog is available at https://github.com/yashhasan570/UniversalReader/releases
 
- -- koreader <null@koreader.rocks>  $(date -R)
+ -- universalreader <null@universalreader.rocks>  $(date -R)
 
-koreader (2025.04) unstable; urgency=low
+universalreader (2025.04) unstable; urgency=low
 
-  * don't use debian fonts: https://github.com/koreader/koreader/issues/13509
+  * don't use debian fonts: https://github.com/yashhasan570/UniversalReader/issues/13509
 
- -- koreader <null@koreader.rocks>  Thu, 10 Apr 2025 00:00:00 +0200
+ -- universalreader <null@universalreader.rocks>  Thu, 10 Apr 2025 00:00:00 +0200
 
-koreader (0.0.1) experimental; urgency=low
+universalreader (0.0.1) experimental; urgency=low
 
-  * initial release as debian package: https://github.com/koreader/koreader/issues/3108
+  * initial release as debian package: https://github.com/yashhasan570/UniversalReader/issues/3108
 
- -- koreader <null@koreader.rocks>  Tue, 03 Jan 2019 00:00:00 +0100
+ -- universalreader <null@universalreader.rocks>  Tue, 03 Jan 2019 00:00:00 +0100
 END_HEREDOC
     )
 
@@ -74,9 +74,9 @@ Depends: libc6 (>= 2.34), libdecor-0-0 (>= 0.1.0), libdrm2 (>= 2.4.46), libgbm1 
 Architecture: ${arch}
 Version: ${version}
 Installed-Size: $(du -ks "${input_dir}/usr/" | cut -f 1)
-Package: koreader
-Maintainer: koreader <null@koreader.rocks>
-Homepage: https://koreader.rocks
+Package: universalreader
+Maintainer: universalreader <null@universalreader.rocks>
+Homepage: https://universalreader.rocks
 Description: Ebook reader optimized for e-ink screens.
  It can open many formats and provides advanced text adjustments.
  .
@@ -106,12 +106,12 @@ EOF
 chmod -R og=rX "${input_dir}/DEBIAN"
 
 # use absolute path to luajit in reader.lua
-sed -i 's,./luajit,/usr/lib/koreader/luajit,' "${input_dir}/usr/lib/koreader/reader.lua"
+sed -i 's,./luajit,/usr/lib/universalreader/luajit,' "${input_dir}/usr/lib/universalreader/reader.lua"
 
 # lintian complains if shared libraries have execute rights.
 find "${input_dir}" -type f -perm /+x -name '*.so*' -print0 | xargs -0 chmod a-x
 
-# remove misc files that are already summarized in usr/share/doc/koreader
+# remove misc files that are already summarized in usr/share/doc/universalreader
 find "${input_dir}" '(' -name "*.md" -o -name "LICENSE" ')' -type f -print0 | xargs -0 rm -rf
 
 # add debian changelog

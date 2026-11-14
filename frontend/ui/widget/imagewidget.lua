@@ -4,7 +4,7 @@ ImageWidget shows an image from a file or memory.
 Show image from file example:
 
         UIManager:show(ImageWidget:new{
-            file = "resources/koreader.png",
+            file = "resources/universalreader.png",
             -- Make sure alpha is set to true if png has transparent background
             -- alpha = true,
         })
@@ -583,7 +583,7 @@ function ImageWidget:paintTo(bb, x, y)
     ---        (which simply involves blending it onto a white background, then inverting the result),
     ---        and colorBlit it a dim gray onto the target bb.
     ---        This would require the *original* transparent icon, not the flattened one in the cache.
-    ---        c.f., https://github.com/koreader/koreader/pull/6937#issuecomment-748372429 for a PoC
+    ---        c.f., https://github.com/yashhasan570/UniversalReader/pull/6937#issuecomment-748372429 for a PoC
     if self.dim then
         bb:lightenRect(x, y, size.w, size.h)
     end

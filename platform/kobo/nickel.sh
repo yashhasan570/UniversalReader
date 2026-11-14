@@ -3,7 +3,7 @@ PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/lib:"
 
 # We don't need to duplicate any of the env setup from rcS, since we will only ever run this to *restart* nickel, and not bootstrap it.
 # Meaning we've already got most of the necessary env from nickel itself via both our launcher (fmon/KFMon) and our own startup script.
-# NOTE: LD_LIBRARY_PATH is the only late export from rcS we don't siphon in koreader.sh, for obvious reasons ;).
+# NOTE: LD_LIBRARY_PATH is the only late export from rcS we don't siphon in universalreader.sh, for obvious reasons ;).
 # NOTE: For v5, env will be restored properly before nickel start script.
 export LD_LIBRARY_PATH="/usr/local/Kobo"
 # Ditto, 4.28+
@@ -110,7 +110,7 @@ if grep -q "^${WIFI_MODULE} " "/proc/modules"; then
     case "${POWER_TOGGLE}" in
         "ntx_io")
             usleep 250000
-            "${KOREADER_DIR}"/luajit "${KOREADER_DIR}"/frontend/device/kobo/ntx_io.lua 208 0
+            "${UNIVERSALREADER_DIR}"/luajit "${UNIVERSALREADER_DIR}"/frontend/device/kobo/ntx_io.lua 208 0
             ;;
         "wmt")
             echo 0 >/dev/wmtWifi
@@ -129,13 +129,13 @@ if grep -q "^${WIFI_MODULE} " "/proc/modules"; then
 
             if [ ! -e "/drivers/${PLATFORM}/wifi/sdio_wifi_pwr.ko" ]; then
                 usleep 250000
-                "${KOREADER_DIR}"/luajit "${KOREADER_DIR}"/frontend/device/kobo/ntx_io.lua 208 0
+                "${UNIVERSALREADER_DIR}"/luajit "${UNIVERSALREADER_DIR}"/frontend/device/kobo/ntx_io.lua 208 0
             fi
             ;;
     esac
 fi
 
-unset KOREADER_DIR
+unset UNIVERSALREADER_DIR
 unset CPUFREQ_DVFS CPUFREQ_CONSERVATIVE
 
 # Handle the sdcard:

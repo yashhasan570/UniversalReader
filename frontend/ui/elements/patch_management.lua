@@ -1,5 +1,5 @@
 local DataStorage = require("datastorage")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 
 local patch_dir = DataStorage:getPatchesDir()
 if lfs.attributes(patch_dir, "mode") ~= "directory" then return end
@@ -99,7 +99,7 @@ local about_text = _([[Patch management allows enabling, disabling or editing us
 The runlevel and priority of a patch can not be modified here. This has to be done manually by renaming the patch prefix.
 
 For more information about user patches, see
-https://github.com/koreader/koreader/wiki/User-patches
+https://github.com/yashhasan570/UniversalReader/wiki/User-patches
 
 Patches are an advanced feature, so be careful what you do!]])
 

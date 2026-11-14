@@ -17,7 +17,7 @@ local WidgetContainer = require("ui/widget/container/widgetcontainer")
 local dateparser = require("lib.dateparser")
 local http = require("socket.http")
 local mime = require("mime")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local ltn12 = require("ltn12")
 local logger = require("logger")
 local socket = require("socket")
@@ -107,7 +107,7 @@ end
 --- @todo Write unit tests.
 -- Some feeds that can be used for unit test.
 -- http://fransdejonge.com/feed/ for multiple links.
--- https://github.com/koreader/koreader/commits/master.atom for single link with attributes.
+-- https://github.com/yashhasan570/UniversalReader/commits/master.atom for single link with attributes.
 function NewsDownloader.getFeedLink(possible_link)
     local E = {}
     if type(possible_link) == "string" then
@@ -663,7 +663,7 @@ function NewsDownloader:deserializeXMLString(xml_str)
     -- uses LuaXML https://github.com/manoelcampos/LuaXML
     -- The MIT License (MIT)
     -- Copyright (c) 2016 Manoel Campos da Silva Filho
-    -- see: koreader/plugins/newsdownloader.koplugin/lib/LICENSE_LuaXML
+    -- see: universalreader/plugins/newsdownloader.koplugin/lib/LICENSE_LuaXML
     local treehdl = require("lib/handler")
     local libxml = require("lib/xml")
     -- Instantiate the object that parses the XML file as a Lua table.

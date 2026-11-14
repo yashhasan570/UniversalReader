@@ -35,7 +35,7 @@ base64 -d >"${APK_SIGN_TEMP_STORE}" <<<"${APK_SIGN_STORE_BASE64}"
 container_start
 
 # Sign APKs.
-for a in "${assets_dir}"/koreader-*.apk; do
+for a in "${assets_dir}"/universalreader-*.apk; do
     [[ -e "${a}" ]] || continue
     apks_sign "${a}"
 done

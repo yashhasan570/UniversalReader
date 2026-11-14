@@ -279,7 +279,7 @@ function Remarkable:init()
     }
 
     -- Assume input stuff is saner on mainline kernels...
-    -- (c.f., https://github.com/koreader/koreader/issues/10012)
+    -- (c.f., https://github.com/yashhasan570/UniversalReader/issues/10012)
     local is_mainline = false
     --- @fixme: Find a better way to discriminate mainline from stock...
     local std_out = io.popen("uname -r", "r")
@@ -473,7 +473,7 @@ end
 function Remarkable:isStartupScriptUpToDate()
     local md5 = require("ffi/MD5")
     -- Compare the hash of the *active* script and manifest to the *potential* one.
-    local script_utd = md5.sumFile("/tmp/koreader.sh") == md5.sumFile("koreader.sh")
+    local script_utd = md5.sumFile("/tmp/universalreader.sh") == md5.sumFile("universalreader.sh")
     local manifest_utd = md5.sumFile("/tmp/external.manifest.json") == md5.sumFile("external.manifest.json")
     return script_utd and manifest_utd
 end

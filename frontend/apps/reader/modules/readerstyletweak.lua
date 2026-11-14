@@ -22,7 +22,7 @@ local UIManager = require("ui/uimanager")
 local VerticalGroup = require("ui/widget/verticalgroup")
 local VerticalSpan = require("ui/widget/verticalspan")
 local WidgetContainer = require("ui/widget/container/widgetcontainer")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local util = require("util")
 local _ = require("gettext")
@@ -641,7 +641,7 @@ You can enable individual tweaks on this book with a tap, or view more details a
     end
 
     -- Users can put their own style tweaks as individual .css files into
-    -- koreader/styletweaks/ directory. These can be organized into
+    -- universalreader/styletweaks/ directory. These can be organized into
     -- sub-directories that will show up as sub-menus.
     local user_styletweaks_dir = DataStorage:getDataDir() .. "/styletweaks"
     local user_tweaks_table = { title = _("User style tweaks") }
@@ -675,7 +675,7 @@ You can enable individual tweaks on this book with a tap, or view more details a
             local filepath = dir.."/"..file
             table.insert(item_table, {
                 title = title,
-                id = file, -- keep ".css" in id, to distinguish between koreader/user tweaks
+                id = file, -- keep ".css" in id, to distinguish between universalreader/user tweaks
                 description = T(_("User style tweak at %1"), BD.filepath(filepath)),
                 priority = 10, -- give user tweaks a higher priority
                 css_path = filepath,
@@ -687,7 +687,7 @@ You can enable individual tweaks on this book with a tap, or view more details a
             })
         end
     end
-    local if_empty_menu_title = _("Add your own tweaks in koreader/styletweaks/")
+    local if_empty_menu_title = _("Add your own tweaks in universalreader/styletweaks/")
     process_tweaks_dir(user_styletweaks_dir, user_tweaks_table, if_empty_menu_title)
     self.tweaks_table[#self.tweaks_table].separator = true
     addTweakMenuItem(self.tweaks_table, user_tweaks_table, 6)

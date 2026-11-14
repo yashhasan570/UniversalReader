@@ -3,7 +3,7 @@ local DataStorage = require("datastorage")
 local DocumentRegistry = require("document/documentregistry")
 local LuaSettings = require("luasettings")
 local ffiUtil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local util = require("util")
 

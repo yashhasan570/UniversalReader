@@ -7,7 +7,7 @@ return {--do NOT change this line
 
  -- you can also edit this file in external text editor. Config file is located under:
  -- <your_download_directory>/feed_config.lua
- -- default: <koreader_dir>/news/feed_config.lua
+ -- default: <universalreader_dir>/news/feed_config.lua
 
 
  -- DETAILS:
@@ -51,7 +51,7 @@ return {--do NOT change this line
 
  -- LIST YOUR FEEDS HERE:
 
- { "https://github.com/koreader/koreader/releases.atom", limit = 3, download_full_article=false, include_images=false, enable_filter=true, filter_element = "div.release-main-section", block_element = ""},
+ { "https://github.com/yashhasan570/UniversalReader/releases.atom", limit = 3, download_full_article=false, include_images=false, enable_filter=true, filter_element = "div.release-main-section", block_element = ""},
  { "https://ourworldindata.org/atom.xml", limit = 5 , download_full_article=true, include_images=true, enable_filter=false, filter_element = "", block_element = ""},
 
 }--do NOT change this line

@@ -3,7 +3,7 @@ This module handles generic settings as well as Universal Reader's global settin
 ]]
 
 local dump = require("dump")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local util = require("util")
 

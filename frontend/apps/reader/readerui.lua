@@ -65,7 +65,7 @@ local SettingsMigration = require("ui/data/settings_migration")
 local UIManager = require("ui/uimanager")
 local ffiUtil  = require("ffi/util")
 local filemanagerutil = require("apps/filemanager/filemanagerutil")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local time = require("ui/time")
 local util = require("util")
@@ -460,7 +460,7 @@ function ReaderUI:init()
         ui = self,
     })
 
-    -- koreader plugins
+    -- universalreader plugins
     for _, plugin_module in ipairs(PluginLoader:loadPlugins()) do
         local ok, plugin_or_err = PluginLoader:createPluginInstance(
             plugin_module,

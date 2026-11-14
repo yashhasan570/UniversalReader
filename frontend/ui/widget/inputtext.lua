@@ -575,7 +575,7 @@ function InputText:init()
     end
     --- @todo In MultiInputDialogs, this will fire multiple times as that widget both inherits
     -- inputtexts from InputDialog and also creates its own.
-    -- See <https://github.com/koreader/koreader/pull/14901#issuecomment-3837678877>.
+    -- See <https://github.com/yashhasan570/UniversalReader/pull/14901#issuecomment-3837678877>.
     if self.focused and not self.for_measurement_only then
         Device:startTextInput()
     end

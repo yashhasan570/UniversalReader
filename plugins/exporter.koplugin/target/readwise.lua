@@ -67,7 +67,7 @@ function ReadwiseExporter:createHighlights(booknotes)
                 text = clipping.text,
                 title = booknotes.title,
                 author = booknotes.author ~= "" and booknotes.author:gsub("\n", ", ") or nil, -- optional author
-                source_type = "koreader",
+                source_type = "universalreader",
                 category = "books",
                 note = clipping.note,
                 location = clipping.page,

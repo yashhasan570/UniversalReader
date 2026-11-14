@@ -254,7 +254,7 @@ function FootnoteWidget:init()
             -- provided). So, keep track of what's been seen and used.
             if font_path and not seen_font_path[font_path] then
                 seen_font_path[font_path] = true
-                font_css = font_css .. T("\n@font-face { font-family: 'Universal ReaderFootnoteFont'; src: url('%1')%2%3}",
+                font_css = font_css .. T("\n@font-face { font-family: 'Universal Reader Footnote Font'; src: url('%1')%2%3}",
                             font_path,
                             bold and "; font-weight: bold" or "",
                             italic and "; font-style: italic" or "")
@@ -264,7 +264,7 @@ function FootnoteWidget:init()
             -- If not using our standard font, override "line-height:1.3" (which is fine
             -- with Noto Sans) to use something smaller (looks like MuPDF's default is 1.2
             -- and we can't make it use the font natural line height...)
-            font_css = font_css .. "\nbody { font-family: 'Universal ReaderFootnoteFont'; line-height: 1.2 !important; }\n"
+            font_css = font_css .. "\nbody { font-family: 'Universal Reader Footnote Font'; line-height: 1.2 !important; }\n"
         end
     end
 

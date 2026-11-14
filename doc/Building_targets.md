@@ -33,7 +33,7 @@ they do *not* exactly target the proper devices. While your build *may* go fine,
 As time goes by, and/or the more bleeding-edge your distro is, the greater the risk for mismatch gets.  
 
 Which means, that, unless you are *very* sure you know what you're doing, you'll want to use the exact same TCs we do, ones that target their respective platforms properly.  
-We have a distribution-agnostic solution to make that mostly painless: [koxtoolchain](https://github.com/koreader/koxtoolchain)!  
+We have a distribution-agnostic solution to make that mostly painless: [koxtoolchain](https://github.com/universalreader/koxtoolchain)!  
 This will allow you to build the *exact* same TCs used to build the nightlies, thanks to the magic of [crosstool-ng](https://github.com/crosstool-ng/crosstool-ng). These are also included precompiled in the Docker images for the respective targets.  
 
 
@@ -76,7 +76,7 @@ Where `ANDROID_TARGET` is one of the supported targets:
 
 #### Emulator
 
-See [Building](https://github.com/koreader/koreader/blob/master/doc/Building.md).
+See [Building](https://github.com/yashhasan570/UniversalReader/blob/master/doc/Building.md).
 
 #### AppImage (x86_64)
 
@@ -144,4 +144,4 @@ See [Building](https://github.com/koreader/koreader/blob/master/doc/Building.md)
 
 See [Porting.md](Porting.md)
 
-[nb-script]:https://gitlab.com/koreader/nightly-builds/blob/master/build_release.sh
+[nb-script]:https://gitlab.com/universalreader/nightly-builds/blob/master/build_release.sh

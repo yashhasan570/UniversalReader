@@ -22,7 +22,7 @@ local UIManager = require("ui/uimanager")
 local RenderImage = require("ui/renderimage")
 local WidgetContainer = require("ui/widget/container/widgetcontainer")
 local ffiutil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local util = require("util")
 local _ = require("gettext")
@@ -42,8 +42,8 @@ local function isPathAllowed(path)
     elseif not util.pathExists(path:gsub("/$", "")) then -- pathExists expects no trailing slash
         return false
     elseif Device.isAndroid() then
-        return path ~= "/sdcard/koreader/cache/"
-            and ffiutil.realpath(path) ~= ffiutil.realpath(android.getExternalStoragePath() .. "/koreader/cache/")
+        return path ~= "/sdcard/universalreader/cache/"
+            and ffiutil.realpath(path) ~= ffiutil.realpath(android.getExternalStoragePath() .. "/universalreader/cache/")
     else
         return path ~= "./cache/" and ffiutil.realpath(path) ~= ffiutil.realpath("./cache/")
     end

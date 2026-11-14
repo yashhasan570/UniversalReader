@@ -9,7 +9,7 @@ describe("FileManager module", function()
         Screen = require("device").screen
         UIManager = require("ui/uimanager")
         docsettings = require("docsettings")
-        lfs = require("libs/libkoreader-lfs")
+        lfs = require("libs/libuniversalreader-lfs")
         makePath = require("util").makePath
         util = require("ffi/util")
     end)

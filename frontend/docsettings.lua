@@ -8,7 +8,7 @@ local DataStorage = require("datastorage")
 local LuaSettings = require("luasettings")
 local dump = require("dump")
 local ffiutil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local util = require("util")
 
@@ -62,7 +62,7 @@ local function buildCandidates(list)
             -- NOTE: Extra trickery: if we're inserting a "backup" file, and its primary buddy exists,
             --       make sure it will *never* sort ahead of it by using the same mtime.
             --       This aims to avoid weird UTC/localtime issues when USBMS is involved,
-            --       c.f., https://github.com/koreader/koreader/issues/9227#issuecomment-1345263324
+            --       c.f., https://github.com/yashhasan570/UniversalReader/issues/9227#issuecomment-1345263324
             if file_path:sub(-4) == ".old" and previous_entry_exists then
                 local primary_mtime = candidates[#candidates].mtime
                 -- Only proceed with the switcheroo when necessary, and warn about it.

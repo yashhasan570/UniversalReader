@@ -5,7 +5,7 @@ local dump = require("dump")
 local ffiutil = require("ffi/util")
 local util = require("util")
 local joinPath = ffiutil.joinPath
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local realpath = ffiutil.realpath
 local C_ = require("gettext").pgettext
 

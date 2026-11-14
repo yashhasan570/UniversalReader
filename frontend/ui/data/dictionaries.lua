@@ -8,7 +8,7 @@ local dictionaries = {
         lang_out = "eng",
         entries = 2577,
         license = _("Public Domain"),
-        url = "http://build.koreader.rocks/download/dict/factbook.tar.gz",
+        url = "http://build.universalreader.rocks/download/dict/factbook.tar.gz",
     },
     {
         name = "GNU Collaborative International Dictionary of English",
@@ -16,7 +16,7 @@ local dictionaries = {
         lang_out = "eng",
         entries = 108121,
         license = "GPLv3+",
-        url = "http://build.koreader.rocks/download/dict/gcide.tar.gz",
+        url = "http://build.universalreader.rocks/download/dict/gcide.tar.gz",
     },
     {
         name = "Douglas Harper's Online Etymology Dictionary",
@@ -24,7 +24,7 @@ local dictionaries = {
         lang_out = "eng",
         entries = 46133,
         license = "Unknown/©Douglas Harper",
-        url = "https://gitlab.com/koreader/stardict-dictionaries/uploads/ce281fd8b5e83751d5c7b82d1e07a663/etymonline.tar.gz",
+        url = "https://gitlab.com/universalreader/stardict-dictionaries/uploads/ce281fd8b5e83751d5c7b82d1e07a663/etymonline.tar.gz",
     },
     {
         name = "Folkets lexikon",
@@ -32,7 +32,7 @@ local dictionaries = {
         lang_out = "swe",
         entries = 53618,
         license = "CC-BY-SA 2.5",
-        url = "https://gitlab.com/koreader/stardict-dictionaries/uploads/619cbab2537b4d115d5503cdd023ce05/folkets_en-sv.tar.gz",
+        url = "https://gitlab.com/universalreader/stardict-dictionaries/uploads/619cbab2537b4d115d5503cdd023ce05/folkets_en-sv.tar.gz",
     },
     {
         name = "Folkets lexikon",
@@ -40,7 +40,7 @@ local dictionaries = {
         lang_out = "eng",
         entries = 36513,
         license = "CC-BY-SA 2.5",
-        url = "https://gitlab.com/koreader/stardict-dictionaries/uploads/53a0a9fea8cab8661cf930ddd2353a4c/folkets_sv-en.tar.gz",
+        url = "https://gitlab.com/universalreader/stardict-dictionaries/uploads/53a0a9fea8cab8661cf930ddd2353a4c/folkets_sv-en.tar.gz",
     },
     {
         name = "Dictionnaire Littré (xmlittre)",
@@ -56,7 +56,7 @@ local dictionaries = {
         lang_out = "fra",
         entries = 31934,
         license = _("Public Domain (copyright expired, published 1935)"),
-        url = "https://gitlab.com/koreader/stardict-dictionaries/uploads/b8e8ba6b8941a78762675ff2ef95d1d1/acadfran.tar.gz",
+        url = "https://gitlab.com/universalreader/stardict-dictionaries/uploads/b8e8ba6b8941a78762675ff2ef95d1d1/acadfran.tar.gz",
     },
     {
         name = "Pape: Handwörterbuch der griechischen Sprache",
@@ -64,7 +64,7 @@ local dictionaries = {
         lang_out = "deu",
         entries = 98893,
         license = _("Public Domain (copyright expired, published 1880)"),
-        url = "http://build.koreader.rocks/download/dict/pape_gr-de.tar.gz",
+        url = "http://build.universalreader.rocks/download/dict/pape_gr-de.tar.gz",
     },
     {
         name = "Georges: Ausführliches lateinisch-deutsches Handwörterbuch",
@@ -72,7 +72,7 @@ local dictionaries = {
         lang_out = "deu",
         entries = 54831,
         license = _("Public Domain (copyright expired, published 1913)"),
-        url = "https://gitlab.com/koreader/stardict-dictionaries/uploads/6339585b68ac485bedb8ee67892cb974/georges_lat-de.tar.gz",
+        url = "https://gitlab.com/universalreader/stardict-dictionaries/uploads/6339585b68ac485bedb8ee67892cb974/georges_lat-de.tar.gz",
     },
     {
         name = "Georges: Kleines deutsch-lateinisches Handwörterbuch",
@@ -80,7 +80,7 @@ local dictionaries = {
         lang_out = "lat",
         entries = 26608,
         license = _("Public Domain (copyright expired, published 1910)"),
-        url = "https://gitlab.com/koreader/stardict-dictionaries/uploads/a04de66c7376e436913ca288a3ca608b/georges_de-lat.tar.gz",
+        url = "https://gitlab.com/universalreader/stardict-dictionaries/uploads/a04de66c7376e436913ca288a3ca608b/georges_de-lat.tar.gz",
     },
     {
         name = "Dicionário Aberto",
@@ -98,7 +98,7 @@ local dictionaries = {
         license = _("GNU/FDL"),
         url = "https://github.com/Vuizur/czech-dictionary-extender/releases/download/1.0.0/czech-english-dict.tar.gz",
     },
-    -- Dictionaries mirrored from Sourceforge, see https://github.com/koreader/koreader/pull/3176#issuecomment-447085441
+    -- Dictionaries mirrored from Sourceforge, see https://github.com/yashhasan570/UniversalReader/pull/3176#issuecomment-447085441
     {
         name = "Afrikaans-English dictionary",
         lang_in = "afr",
@@ -10441,8 +10441,8 @@ local dictionaries = {
 local wikdict = require("ui/data/dictionaries_wikdict")
 table.move(wikdict, 1, #wikdict, #dictionaries + 1, dictionaries)
 
--- koreader-dicts dictionaries (generated, see dictionaries_koreader_dicts.lua)
-local koreader_dicts = require("ui/data/dictionaries_koreader_dicts")
-table.move(koreader_dicts, 1, #koreader_dicts, #dictionaries + 1, dictionaries)
+-- universalreader-dicts dictionaries (generated, see dictionaries_universalreader_dicts.lua)
+local universalreader_dicts = require("ui/data/dictionaries_universalreader_dicts")
+table.move(universalreader_dicts, 1, #universalreader_dicts, #dictionaries + 1, dictionaries)
 
 return dictionaries

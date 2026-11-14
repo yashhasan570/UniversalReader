@@ -8,7 +8,7 @@ Conflicts=xochitl.service
 OnFailure=xochitl.service
 
 [Service]
-ExecStart=/home/root/koreader/koreader.sh
+ExecStart=/home/root/universalreader/universalreader.sh
 ExecStopPost=/bin/false
 Restart=no
 

@@ -56,10 +56,10 @@ describe("ReadHistory module", function()
         DocSettings = require("docsettings")
         DataStorage = require("datastorage")
         joinPath = require("ffi/util").joinPath
-        mkdir = require("libs/libkoreader-lfs").mkdir
+        mkdir = require("libs/libuniversalreader-lfs").mkdir
         realpath = require("ffi/util").realpath
         reload = function() return package.reload("readhistory") end
-        lfs = require("libs/libkoreader-lfs")
+        lfs = require("libs/libuniversalreader-lfs")
 
         mkdir(joinPath(DataStorage:getDataDir(), "testdata"))
     end)

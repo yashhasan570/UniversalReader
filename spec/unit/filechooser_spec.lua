@@ -8,7 +8,7 @@ describe("FileChooser unreadable directories", function()
         require("commonrequire")
         FileChooser = require("ui/widget/filechooser")
         ffiUtil = require("ffi/util")
-        lfs = require("libs/libkoreader-lfs")
+        lfs = require("libs/libuniversalreader-lfs")
         InfoMessage = require("ui/widget/infomessage")
         UIManager = require("ui/uimanager")
         Screen = require("device").screen

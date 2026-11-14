@@ -8,7 +8,7 @@ local Notification = require("ui/widget/notification")
 local UIManager = require("ui/uimanager")
 local Version = require("version")
 local dbg = require("dbg")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local userpatch = require("userpatch")
 local _ = require("gettext")
 local T = require("ffi/util").template
@@ -55,7 +55,7 @@ common_info.report_bug = {
     keep_menu_open = true,
     callback = function(touchmenu_instance)
         local log_path = string.format("%s/%s", DataStorage:getDataDir(), "crash.log")
-        local common_msg = T(_("Please report bugs to \nhttps://github.com/koreader/koreader/issues\n\nVersion:\n%1\n\nDetected device:\n%2"),
+        local common_msg = T(_("Please report bugs to \nhttps://github.com/yashhasan570/UniversalReader/issues\n\nVersion:\n%1\n\nDetected device:\n%2"),
             Version:getCurrentRevision(), Device:info())
         local log_msg = T(_("Verbose logs will make our investigations easier. If possible, try to reproduce the issue while it's enabled, and attach %1 to your bug report."), log_path)
 
@@ -129,8 +129,8 @@ common_info.about = {
     keep_menu_open = true,
     callback = function()
         UIManager:show(InfoMessage:new{
-            text = T(_("Universal Reader %1\n\nA document viewer for E Ink devices.\n\nLicensed under Affero GPL v3. All dependencies are free software.\n\nhttp://koreader.rocks"), BD.ltr(Version:getCurrentRevision())),
-            icon = "koreader",
+            text = T(_("Universal Reader %1\n\nA document viewer for E Ink devices.\n\nLicensed under Affero GPL v3. All dependencies are free software.\n\nhttp://universalreader.rocks"), BD.ltr(Version:getCurrentRevision())),
+            icon = "universalreader",
         })
     end
 }

@@ -8,11 +8,11 @@ local test_po_part1 = [[
 msgid ""
 msgstr ""
 "Project-Id-Version: Universal Reader\n"
-"Report-Msgid-Bugs-To: https://github.com/koreader/koreader-base/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/yashhasan570/UniversalReader-base/issues\n"
 "POT-Creation-Date: 2019-08-10 06:01+0000\n"
 "PO-Revision-Date: 2019-08-08 06:34+0000\n"
 "Last-Translator: Frans de Jonge <fransdejonge@gmail.com>\n"
-"Language-Team: Dutch (Netherlands) (http://www.transifex.com/houqp/koreader/language/nl_NL/)\n"
+"Language-Team: Dutch (Netherlands) (http://www.transifex.com/houqp/universalreader/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -112,14 +112,14 @@ describe("GetText module", function()
         GetText = require("gettext")
         GetText.dirname = (os.getenv("KO_HOME") or ".").."/i18n-test"
 
-        local lfs = require("libs/libkoreader-lfs")
+        local lfs = require("libs/libuniversalreader-lfs")
 
         lfs.mkdir(GetText.dirname)
 
         local pocreate = function(lang, ...)
             local dir = GetText.dirname.."/"..lang
-            local po = dir.."/koreader.po"
-            local mo = dir.."/koreader.mo"
+            local po = dir.."/universalreader.po"
+            local mo = dir.."/universalreader.mo"
             lfs.mkdir(dir)
             local f = io.open(po, "w")
             f:write(...)

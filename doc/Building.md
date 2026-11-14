@@ -5,9 +5,9 @@ These instructions are intended to build the emulator in Linux and macOS. Window
 If you only want to work with Lua frontend stuff, you can grab the AppImage and
 run it with `--appimage-extract`.
 
-You can skip most of the following instructions if desired, and use our premade Docker image instead. In that case the only requirements are Git and Docker. See [the virtual development environment README](https://github.com/koreader/virdevenv) for more information.
+You can skip most of the following instructions if desired, and use our premade Docker image instead. In that case the only requirements are Git and Docker. See [the virtual development environment README](https://github.com/universalreader/virdevenv) for more information.
 
-**Note:** If you want to use WSL then you'll need to export a sane PATH first, because Windows appends its own directories to it. You'll also need to [install an XServer](https://virtualizationreview.com/articles/2017/02/08/graphical-programs-on-windows-subsystem-on-linux.aspx). If you need more info please read <https://github.com/koreader/koreader/issues/6354>.
+**Note:** If you want to use WSL then you'll need to export a sane PATH first, because Windows appends its own directories to it. You'll also need to [install an XServer](https://virtualizationreview.com/articles/2017/02/08/graphical-programs-on-windows-subsystem-on-linux.aspx). If you need more info please read <https://github.com/yashhasan570/UniversalReader/issues/6354>.
 
 ## Prerequisites
 
@@ -191,8 +191,8 @@ sudo apt install gcc15-devel
 
 
 ```
-git clone https://github.com/koreader/koreader.git
-cd koreader && ./kodev fetch-thirdparty
+git clone https://github.com/yashhasan570/UniversalReader.git
+cd universalreader && ./kodev fetch-thirdparty
 ```
 
 Building the emulator
@@ -225,14 +225,14 @@ Sample usage:
 ./kodev run -s=kobo-aura-one
 ```
 
-To use your own koreader-base repo instead of the default one change the `KOR_BASE`
+To use your own universalreader-base repo instead of the default one change the `KOR_BASE`
 environment variable:
 
 ```
-make KOR_BASE=../koreader-base
+make KOR_BASE=../universalreader-base
 ```
 
-This will be handy if you are developing `koreader-base` and you want to test your
+This will be handy if you are developing `universalreader-base` and you want to test your
 modifications with the Universal Reader frontend. NOTE: this only supports relative path for now.
 
 ## Building for other platforms
@@ -271,14 +271,14 @@ NOTE: Extra dependencies for tests: `luacheck` from luarocks.
 ## Translations
 
 Please refer to [l10n's README][l10n-readme] to grab the latest translations
-from [the Universal Reader project on Weblate][koreader-weblate] with this command:
+from [the Universal Reader project on Weblate][universalreader-weblate] with this command:
 
 ```
 make po
 ```
 
 If your language is not listed on the Weblate project, please don't hesitate
-to send a language request [here][koreader-weblate].
+to send a language request [here][universalreader-weblate].
 
 ### Variables in translation
 
@@ -322,7 +322,7 @@ build time when the sources have been built before. To install ccache use:
 
 To disable ccache, use `export USE_NO_CCACHE=1` before make.
 
-[circleci-conf]:https://github.com/koreader/koreader/blob/master/.circleci/config.yml
-[koreader-weblate]:https://hosted.weblate.org/engage/koreader/
-[base-readme]:https://github.com/koreader/koreader-base/blob/master/README.md
-[l10n-readme]:https://github.com/koreader/koreader/blob/master/l10n/README.md
+[circleci-conf]:https://github.com/yashhasan570/UniversalReader/blob/master/.circleci/config.yml
+[universalreader-weblate]:https://hosted.weblate.org/engage/universalreader/
+[base-readme]:https://github.com/yashhasan570/UniversalReader-base/blob/master/README.md
+[l10n-readme]:https://github.com/yashhasan570/UniversalReader/blob/master/l10n/README.md

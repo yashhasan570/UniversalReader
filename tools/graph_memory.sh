@@ -6,7 +6,7 @@
 # $1 arguments to pass to pgrep
 # $2 process name to pgrep for
 function gnuplot_wrapper() {
-    TEMP_DIR="$(mktemp --directory /tmp/tmp.koreaderXXX)"
+    TEMP_DIR="$(mktemp --directory /tmp/tmp.universalreaderXXX)"
     LOG="${TEMP_DIR}/memory.log"
     SCRIPT_PNG="${TEMP_DIR}/script_png.p"
     SCRIPT_SHOW="${TEMP_DIR}/script_show.p"

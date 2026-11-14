@@ -4,7 +4,7 @@ local logger = require("logger")
 logger:setLevel(logger.levels.warn)
 
 local DataStorage = require("datastorage")
-require("libs/libkoreader-lfs").mkdir(DataStorage:getHistoryDir()) -- for legacy history tests
+require("libs/libuniversalreader-lfs").mkdir(DataStorage:getHistoryDir()) -- for legacy history tests
 
 -- global defaults
 os.remove(DataStorage:getDataDir() .. "/defaults.tests.lua")

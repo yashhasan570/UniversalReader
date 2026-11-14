@@ -184,7 +184,7 @@ dbg:guard(TextWidget, "updateSize",
 
 function TextWidget:_measureWithXText()
     if not self._xtext_loaded then
-        xtext = require("libs/libkoreader-xtext")
+        xtext = require("libs/libuniversalreader-xtext")
         TextWidget._xtext_loaded = true
     end
     self._xtext = xtext.new(self.text, self.face, self.auto_para_direction,

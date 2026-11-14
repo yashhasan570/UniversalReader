@@ -7,10 +7,10 @@ Universal Reader %%VERSION%% (Linux %%ARCH%%)
 
 ## Users
 
-#### You shouldn't use this package unless you know what you're doing. Please use [AppImage](https://github.com/koreader/koreader/wiki/Installation-on-desktop-linux#what-is-an-appimage) instead.
+#### You shouldn't use this package unless you know what you're doing. Please use [AppImage](https://github.com/yashhasan570/UniversalReader/wiki/Installation-on-desktop-linux#what-is-an-appimage) instead.
 
 ## Package maintainers
 
-The script in **`bin/`** expects the rest of the **assets** in **`../lib/koreader`**.
+The script in **`bin/`** expects the rest of the **assets** in **`../lib/universalreader`**.
 
 In any case the aforementioned script should jump to the **assets** dir and call **`./reader.lua`**.

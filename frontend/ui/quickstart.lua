@@ -8,7 +8,7 @@ local Language = require("ui/language")
 local Version = require("version")
 local FFIUtil = require("ffi/util")
 local T = FFIUtil.template
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local util = require("util")
 local _ = require("gettext")
 
@@ -52,7 +52,7 @@ local quickstart_guide = {}
 if Device:hasScreenKB() or Device:hasSymKey() then
     -- On Non-Touch kindle, not showing "Frontlight", showing specific section "Shortcuts"
     table.insert(quickstart_guide, _([[
-<div class="logo">![Universal Reader](resources/koreader.svg)</div>
+<div class="logo">![Universal Reader](resources/universalreader.svg)</div>
 
 # Quickstart guide
 
@@ -66,12 +66,12 @@ if Device:hasScreenKB() or Device:hasSymKey() then
 * [More info](#more)
 
 ---
-You can access the complete user manual from [our GitHub page](https://github.com/koreader/koreader).
+You can access the complete user manual from [our GitHub page](https://github.com/yashhasan570/UniversalReader).
 ]])
     ) --insert toc
 else
     table.insert(quickstart_guide, _([[
-<div class="logo">![Universal Reader](resources/koreader.svg)</div>
+<div class="logo">![Universal Reader](resources/universalreader.svg)</div>
 
 # Quickstart guide
 
@@ -85,7 +85,7 @@ else
 * [More info](#more)
 
 ---
-You can access the complete user manual from [our GitHub page](https://github.com/koreader/koreader).
+You can access the complete user manual from [our GitHub page](https://github.com/yashhasan570/UniversalReader).
 ]])
     ) -- insert toc
 end
@@ -379,7 +379,7 @@ You can find any option within the top menu using:
 
 You can find more information on our GitHub page
 
-[https://github.com/koreader/koreader](https://github.com/koreader/koreader)
+[https://github.com/yashhasan570/UniversalReader](https://github.com/yashhasan570/UniversalReader)
 
 You can find other Universal Reader users on MobileRead forums
 

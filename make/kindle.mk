@@ -1,5 +1,5 @@
 KINDLE_DIR = $(PLATFORM_DIR)/kindle
-KINDLE_PACKAGE = koreader-$(DIST)$(KODEDUG_SUFFIX)-$(VERSION).zip
+KINDLE_PACKAGE = universalreader-$(DIST)$(KODEDUG_SUFFIX)-$(VERSION).zip
 
 # Don't bundle launchpad on touch devices..
 ifeq ($(TARGET), kindle-legacy)
@@ -12,14 +12,14 @@ endef
 
 update-prepare: all
 	# ensure that the binaries were built for ARM
-	file --dereference $(INSTALL_DIR)/koreader/luajit | grep ARM
+	file --dereference $(INSTALL_DIR)/universalreader/luajit | grep ARM
 	# Kindle launching scripts
 	$(SYMLINK) $(KINDLE_DIR)/extensions $(INSTALL_DIR)/
 	$(SYMLINK) $(KINDLE_DIR)/launchpad $(INSTALL_DIR)/
-	$(SYMLINK) $(KINDLE_DIR)/koreader.sh $(INSTALL_DIR)/koreader/
-	$(SYMLINK) $(KINDLE_DIR)/libkohelper.sh $(INSTALL_DIR)/koreader/
-	$(SYMLINK) $(KINDLE_DIR)/libkohelper.sh $(INSTALL_DIR)/extensions/koreader/bin/
-	$(SYMLINK) $(KINDLE_DIR)/wmctrl $(INSTALL_DIR)/koreader/
+	$(SYMLINK) $(KINDLE_DIR)/universalreader.sh $(INSTALL_DIR)/universalreader/
+	$(SYMLINK) $(KINDLE_DIR)/libkohelper.sh $(INSTALL_DIR)/universalreader/
+	$(SYMLINK) $(KINDLE_DIR)/libkohelper.sh $(INSTALL_DIR)/extensions/universalreader/bin/
+	$(SYMLINK) $(KINDLE_DIR)/wmctrl $(INSTALL_DIR)/universalreader/
 
 update-zip: update-prepare
 	$(strip $(call mkupdate,$(KINDLE_PACKAGE))) extensions $(KINDLE_LEGACY_LAUNCHER)

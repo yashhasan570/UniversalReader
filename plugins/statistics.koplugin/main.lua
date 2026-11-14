@@ -15,7 +15,7 @@ local UIManager = require("ui/uimanager")
 local Widget = require("ui/widget/widget")
 local datetime = require("datetime")
 local ffiUtil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local util = require("util")
 local _ = require("gettext")
@@ -434,7 +434,7 @@ local STATISTICS_DB_PAGE_STAT_VIEW_SCHEMA = [[
 
     -- Create the page_stat view
     -- This view rescales data from the page_stat_data table to the current number of book pages
-    -- c.f., https://github.com/koreader/koreader/pull/6761#issuecomment-705660154
+    -- c.f., https://github.com/yashhasan570/UniversalReader/pull/6761#issuecomment-705660154
     CREATE VIEW IF NOT EXISTS page_stat AS
         SELECT id_book, first_page + idx - 1 AS page, start_time, duration / (last_page - first_page + 1) AS duration
         FROM (
@@ -1688,7 +1688,7 @@ function ReaderStatistics:getBookStat(id_book)
 
     -- Due to some bug, some books opened around April 2020 might
     -- have notes and highlight NULL in the DB.
-    -- See: https://github.com/koreader/koreader/issues/6190#issuecomment-633693940
+    -- See: https://github.com/yashhasan570/UniversalReader/issues/6190#issuecomment-633693940
     -- (We made these last in the SQL so NULL/nil doesn't prevent
     -- fetching the other fields.)
     -- Show "?" when these values are not known (they will be

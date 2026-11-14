@@ -493,7 +493,7 @@ Some of the other settings are only available when reflow mode is enabled.]]),
                 name = "contrast",
                 name_text = _("Contrast"),
                 buttonprogress = true,
-                -- See https://github.com/koreader/koreader/issues/1299#issuecomment-65183895
+                -- See https://github.com/yashhasan570/UniversalReader/issues/1299#issuecomment-65183895
                 -- For pdf reflowing mode (kopt_contrast):
                 values = {0.8, 1.0, 1.5, 2.0, 4.0, 6.0, 10.0, 50.0},
                 default_pos = 2,

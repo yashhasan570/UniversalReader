@@ -1,6 +1,6 @@
 {
   "name": "Universal Reader",
-  "application": "koreader.sh",
+  "application": "universalreader.sh",
   "environment": {
     "KO_USE_QTFB": "1"
   },

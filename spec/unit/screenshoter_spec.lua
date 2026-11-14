@@ -8,7 +8,7 @@ describe("ReaderScreenshot module", function()
         DataStorage = require("datastorage")
         DocumentRegistry = require("document/documentregistry")
         ReaderUI = require("apps/reader/readerui")
-        lfs = require("libs/libkoreader-lfs")
+        lfs = require("libs/libuniversalreader-lfs")
         UIManager = require("ui/uimanager")
         Event = require("ui/event")
         Screen = require("device").screen

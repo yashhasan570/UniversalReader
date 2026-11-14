@@ -3,7 +3,7 @@ local DataStorage = require("datastorage")
 local Version = require("version")
 local ffiutil = require("ffi/util")
 local http = require("socket.http")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local ltn12 = require("ltn12")
 local socket = require("socket")
@@ -412,8 +412,8 @@ function EpubDownloadBackend:createEpub(epub_path, html, url, include_images, me
     local page_htmltitle = html:match([[<title[^>]*>(.-)</title>]])
     logger.dbg("page_htmltitle is ", page_htmltitle)
 
-    -- Rejigger HTML into XHTML to avoid unclosed elements. See <https://github.com/koreader/crengine/pull/370#issuecomment-910156921>.
-    local cre = require("libs/libkoreader-cre")
+    -- Rejigger HTML into XHTML to avoid unclosed elements. See <https://github.com/universalreader/crengine/pull/370#issuecomment-910156921>.
+    local cre = require("libs/libuniversalreader-cre")
     html = cre.getBalancedHTML(html, 0x0)
 
 --    local sections = html.sections -- Wikipedia provided TOC

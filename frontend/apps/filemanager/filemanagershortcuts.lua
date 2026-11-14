@@ -10,7 +10,7 @@ local Screenshoter = require("ui/widget/screenshoter")
 local UIManager = require("ui/uimanager")
 local WidgetContainer = require("ui/widget/container/widgetcontainer")
 local filemanagerutil = require("apps/filemanager/filemanagerutil")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local util = require("util")
 local _ = require("gettext")
 

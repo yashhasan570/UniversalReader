@@ -15,7 +15,7 @@ local KindlePowerD = BasePowerD:new{
 function KindlePowerD:init()
     local haslipc, lipc = pcall(require, "liblipclua")
     if haslipc then
-        self.lipc_handle = lipc.init("com.github.koreader.kindlepowerd")
+        self.lipc_handle = lipc.init("com.github.universalreader.kindlepowerd")
     end
 
     -- On devices where lipc step 0 is *not* off, we add a synthetic fl level where 0 *is* off,

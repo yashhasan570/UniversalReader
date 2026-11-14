@@ -1,4 +1,4 @@
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 
 local OCR = {}
 

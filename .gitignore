@@ -33,7 +33,7 @@ git-rev-base
 emu
 luacov.stats.out
 trace-out.txt
-koreader-*
+universalreader-*
 
 i18n
 

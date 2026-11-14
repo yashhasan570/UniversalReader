@@ -3,8 +3,8 @@ This plugin downloads a set number of the newest arcticles in your Wallabag "Unr
 or in their original formats. It can archive or delete articles from Wallabag when you finish them
 in Universal Reader. And it will delete or archive them locally when you finish them elsewhere.
 
-@todo Integrate comments from https://github.com/koreader/koreader/pull/12949
-@todo Translate the new menu labels? See https://github.com/koreader/koreader-translations
+@todo Integrate comments from https://github.com/yashhasan570/UniversalReader/pull/12949
+@todo Translate the new menu labels? See https://github.com/yashhasan570/UniversalReader-translations
 @todo Make sure all menu labels and message texts are wrapped in _() for translation
 @todo An option to parse comma-separated reviews as tags, full text as review?
 
@@ -33,7 +33,7 @@ local WidgetContainer = require("ui/widget/container/widgetcontainer")
 local ffiUtil = require("ffi/util")
 local filemanagerutil = require("apps/filemanager/filemanagerutil")
 local http = require("socket.http")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local ltn12 = require("ltn12")
 local socket = require("socket")

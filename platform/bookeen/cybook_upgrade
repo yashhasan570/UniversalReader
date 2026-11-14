@@ -1,22 +1,22 @@
 #!/bin/sh
-# Bookeen drop-in KOReader installer.
+# Bookeen drop-in Universal Reader installer.
 # Copy this script to the root of the mounted user partition as cybook_upgrade,
 # then reboot. Bookeen's ebrmain runs and removes it once during startup.
 #
 # The installer places a shim at /mnt/app/boordr, preserving the stock reader as
-# /mnt/app/boordr.stock. The shim starts KOReader when available and otherwise
-# falls back to the stock reader. Create /mnt/fat/koreader/.disabled to disable
-# KOReader without a shell; remove the marker to enable it again.
+# /mnt/app/boordr.stock. The shim starts Universal Reader when available and otherwise
+# falls back to the stock reader. Create /mnt/fat/universalreader/.disabled to disable
+# Universal Reader without a shell; remove the marker to enable it again.
 # untouched by any of this, so reflashing rootfs.fex from a CybUpdate restores
 # /mnt/app/boordr wholesale.
 
 set -u
 
-KO_DIR="/mnt/fat/koreader"
+KO_DIR="/mnt/fat/universalreader"
 STOCK="/mnt/app/boordr"
 STOCK_SAVED="/mnt/app/boordr.stock"
 SHIM="/mnt/app/boordr"
-LOG="/mnt/fat/koreader-install.log"
+LOG="/mnt/fat/universalreader-install.log"
 
 # ebrmain has no terminal; keep the log on the user partition for USB access.
 log() {
@@ -36,19 +36,19 @@ if ! grep -q ' /mnt/fat ' /proc/mounts 2>/dev/null; then
     fi
 fi
 
-log "cybook_upgrade: starting (KOReader drop-in installer)"
+log "cybook_upgrade: starting (Universal Reader drop-in installer)"
 log "  kernel:  $(uname -r)"
 log "  rootfs:  $(grep ' / ' /proc/mounts 2>/dev/null | head -1)"
 
-# Verify the KOReader launcher before changing the read-only rootfs.
-if [ ! -x "${KO_DIR}/koreader.sh" ]; then
-    log "!! ${KO_DIR}/koreader.sh not found or not executable -- nothing installed."
-    log "   Unzip a koreader-bookeen-*.zip into the root of this partition first,"
-    log "   so that ${KO_DIR}/koreader.sh exists, then copy this file again."
+# Verify the Universal Reader launcher before changing the read-only rootfs.
+if [ ! -x "${KO_DIR}/universalreader.sh" ]; then
+    log "!! ${KO_DIR}/universalreader.sh not found or not executable -- nothing installed."
+    log "   Unzip a universalreader-bookeen-*.zip into the root of this partition first,"
+    log "   so that ${KO_DIR}/universalreader.sh exists, then copy this file again."
     splash /system/update_finished_error.bmp
     exit 0
 fi
-log "  found ${KO_DIR}/koreader.sh"
+log "  found ${KO_DIR}/universalreader.sh"
 
 splash /system/factory_processing.bmp
 
@@ -75,25 +75,25 @@ fi
 # ebrmain execv()s this small, dependency-free shim directly.
 cat >"${SHIM}" <<'SHIM_EOF'
 #!/bin/sh
-# Bookeen reader shim. Start KOReader when available, otherwise use the stock reader.
-# ebrmain passes wake/USB reason codes that KOReader must not receive as filenames.
+# Bookeen reader shim. Start Universal Reader when available, otherwise use the stock reader.
+# ebrmain passes wake/USB reason codes that Universal Reader must not receive as filenames.
 
-KO_DIR="/mnt/fat/koreader"
+KO_DIR="/mnt/fat/universalreader"
 
 # ebrmain does not mount the user partition; the reader is expected to.
 grep -q ' /mnt/fat ' /proc/mounts 2>/dev/null || mount /mnt/fat >/dev/null 2>&1
 
-if [ -x "${KO_DIR}/koreader.sh" ] && [ ! -e "${KO_DIR}/.disabled" ]; then
+if [ -x "${KO_DIR}/universalreader.sh" ] && [ ! -e "${KO_DIR}/.disabled" ]; then
     cd "${KO_DIR}" || exit 13
 
-    # Prevent KOReader shutdown handling from killing its Bookeen supervisor.
+    # Prevent Universal Reader shutdown handling from killing its Bookeen supervisor.
     KO_VIA_BOORDR_SHIM=1
     export KO_VIA_BOORDR_SHIM
 
-    ./koreader.sh
+    ./universalreader.sh
     rc=$?
 
-    # Return Bookeen ebrmain codes, not KOReader's exit status. Code 101 powers
+    # Return Bookeen ebrmain codes, not Universal Reader's exit status. Code 101 powers
     # off after a clean exit; code 11 exposes the user partition after a crash.
     if [ "${rc}" -eq 0 ]; then
         exit 101
@@ -101,7 +101,7 @@ if [ -x "${KO_DIR}/koreader.sh" ] && [ ! -e "${KO_DIR}/.disabled" ]; then
     exit 11
 fi
 
-# No KOReader: hand over to the stock reader, preserving ebrmain's argv.
+# No Universal Reader: hand over to the stock reader, preserving ebrmain's argv.
 exec /mnt/app/boordr.stock "$@"
 SHIM_EOF
 
@@ -110,7 +110,7 @@ sync
 mount -o remount,ro / >/dev/null 2>&1
 
 log "  installed shim at ${SHIM}"
-log "cybook_upgrade: done. ebrmain will now start KOReader."
+log "cybook_upgrade: done. ebrmain will now start Universal Reader."
 log ""
 log "To undo: delete ${SHIM} and move ${STOCK_SAVED} back to ${STOCK}"
 log "  (mount -o remount,rw / first). Or, without any shell at all, create the"

@@ -4,7 +4,7 @@ CONTAINS: KUAL files for installation in /mnt/us/extensions/
 
 REF: Main KUAL thread http://www.mobileread.com/forums/showthread.php?t=203326
 
-UPSTREAM SOURCE: https://github.com/koreader/koreader
+UPSTREAM SOURCE: https://github.com/yashhasan570/UniversalReader
 
 SUPPORTS:
 DX Yes
@@ -22,7 +22,7 @@ KOA2 Yes
 PW4 Yes
 KT4 Yes
 
-REQUIRES: koreader
+REQUIRES: universalreader
 
 ARCHIVAL LINK:
 

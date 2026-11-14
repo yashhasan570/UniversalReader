@@ -451,7 +451,7 @@ EMULATOR OPTIONS:
 
 ANDROID TARGET:
 
-    Install and run KOReader on an Android device connected through ADB.
+    Install and run Universal Reader on an Android device connected through ADB.
 "
     local short_opts="tg:::cW:H:D:s:w:"
     local long_opts="disable-touch,gdb::,valgrind::,callgrind,screen-width:,screen-height:,screen-dpi:,simulate:,wrap:"
@@ -719,13 +719,13 @@ function docker_create() {
     local image="$1"
     shift
     case "${image}" in
-        android-arm | android-arm64 | android-x86 | android-x86_64) image=koreader/koandroid ;;
-        cervantes) image=koreader/kocervantes ;;
-        kindle | kindlehf | kindlepw2 | kindle-legacy) image=koreader/kokindle ;;
-        kobo | kobov4 | kobov5) image=koreader/kokobo ;;
-        linux) image=koreader/koappimage ;;
-        pocketbook | pocketbookhf) image=koreader/kopb ;;
-        remarkable | remarkable-aarch64) image=koreader/koremarkable ;;
+        android-arm | android-arm64 | android-x86 | android-x86_64) image=universalreader/koandroid ;;
+        cervantes) image=universalreader/kocervantes ;;
+        kindle | kindlehf | kindlepw2 | kindle-legacy) image=universalreader/kokindle ;;
+        kobo | kobov4 | kobov5) image=universalreader/kokobo ;;
+        linux) image=universalreader/koappimage ;;
+        pocketbook | pocketbookhf) image=universalreader/kopb ;;
+        remarkable | remarkable-aarch64) image=universalreader/koremarkable ;;
     esac
     local user uid gid
     if docker_is_rootless; then
@@ -843,7 +843,7 @@ COMMANDS:
 
     create <DOCKER_IMAGE> DOCKER_ARGS*   setup docker container (DOCKER_IMAGE
                                          can be a target name to use the right
-                                         corresponding koreader/koxxx image)
+                                         corresponding universalreader/koxxx image)
 
     destroy [CONTAINER_ID]               destroy docker container
 
@@ -896,24 +896,24 @@ Supported commands:
 
   Building:
 
-    build               Build KOReader
-    clean               Clean KOReader build
-    release             Build KOReader release package
+    build               Build Universal Reader
+    clean               Clean Universal Reader build
+    release             Build Universal Reader release package
 
   Emulator & Android:
 
-    run                 Run KOReader
+    run                 Run Universal Reader
 
   Emulator only:
 
     cov                 Run busted tests for coverage
-    prompt              Run a LuaJIT shell within KOReader's environment
+    prompt              Run a LuaJIT shell within Universal Reader's environment
     test                Run busted tests
     wbuilder            Run wbuilder.lua script (useful for building new UI widget)
 
   Android only:
 
-    log                 Tail log stream for a running KOReader app
+    log                 Tail log stream for a running Universal Reader app
 
   Miscellaneous:
 

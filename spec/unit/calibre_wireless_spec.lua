@@ -8,7 +8,7 @@ describe("CalibreWireless collections", function()
     local original_metadata
     local original_search
 
-    local HOME = "/koreader/home"
+    local HOME = "/universalreader/home"
 
     setup(function()
         require("commonrequire")
@@ -17,7 +17,7 @@ describe("CalibreWireless collections", function()
         original_metadata = package.loaded["metadata"]
         original_search = package.loaded["search"]
         original_readcollection = require("readcollection")
-        original_lfs = require("libs/libkoreader-lfs")
+        original_lfs = require("libs/libuniversalreader-lfs")
     end)
 
     before_each(function()
@@ -78,7 +78,7 @@ describe("CalibreWireless collections", function()
         end
 
         package.replace("readcollection", readcollection_mock)
-        package.replace("libs/libkoreader-lfs", lfs_mock)
+        package.replace("libs/libuniversalreader-lfs", lfs_mock)
         package.path = "plugins/calibre.koplugin/?.lua;" .. original_package_path
         CalibreWireless = dofile("plugins/calibre.koplugin/wireless.lua")
         ReadCollection = readcollection_mock
@@ -90,7 +90,7 @@ describe("CalibreWireless collections", function()
         package.loaded["metadata"] = original_metadata
         package.loaded["search"] = original_search
         package.replace("readcollection", original_readcollection)
-        package.replace("libs/libkoreader-lfs", original_lfs)
+        package.replace("libs/libuniversalreader-lfs", original_lfs)
     end)
 
     local function new_wireless()
@@ -158,7 +158,7 @@ describe("CalibreWireless collections", function()
         it("creates a collection and adds book memberships in one update", function()
             ReadCollection.coll = {}
             ReadCollection.coll_settings = {}
-            local lfs = require("libs/libkoreader-lfs")
+            local lfs = require("libs/libuniversalreader-lfs")
             lfs.attributes_results[HOME .. "/books/one.epub"] = { mode = "file" }
 
             local wireless = new_wireless()
@@ -190,7 +190,7 @@ describe("CalibreWireless collections", function()
         it("does not write when requested memberships already match", function()
             ReadCollection.coll = { fiction = { [HOME .. "/books/one.epub"] = { file = HOME .. "/books/one.epub" } } }
             ReadCollection.coll_settings = { fiction = { order = 7 } }
-            local lfs = require("libs/libkoreader-lfs")
+            local lfs = require("libs/libuniversalreader-lfs")
             lfs.attributes_results[HOME .. "/books/one.epub"] = { mode = "file" }
 
             local wireless = new_wireless()
@@ -204,7 +204,7 @@ describe("CalibreWireless collections", function()
         it("adds book memberships", function()
             ReadCollection.coll = { fiction = {} }
             ReadCollection.coll_settings = { fiction = { order = 7 } }
-            local lfs = require("libs/libkoreader-lfs")
+            local lfs = require("libs/libuniversalreader-lfs")
             lfs.attributes_results[HOME .. "/books/one.epub"] = { mode = "file" }
 
             local wireless = new_wireless()
@@ -241,7 +241,7 @@ describe("CalibreWireless collections", function()
             ReadCollection.coll_settings = { fiction = { order = 42, collate = true, custom = "preserve me" } }
 
             local wireless = new_wireless()
-            local lfs = require("libs/libkoreader-lfs")
+            local lfs = require("libs/libuniversalreader-lfs")
             lfs.attributes_results[HOME .. "/books/one.epub"] = { mode = "file" }
             wireless:updateCollections{ add = { fiction = { HOME .. "/books/one.epub" } } }
 

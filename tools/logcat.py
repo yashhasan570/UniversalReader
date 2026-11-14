@@ -38,22 +38,22 @@ class Logcat:
     }
 
     LOGCAT_BRIEF_LINE_RX = re.compile(
-        # V/KOReader(32615): HttpInspector: onCloseWidget
+        # V/Universal Reader(32615): HttpInspector: onCloseWidget
         r'{priority} / {tag} \s* \( \s* {pid} \) :[ ]? {text}'
         .format(**RX), re.X,
     )
     LOGCAT_THREADTIME_LINE_RX = re.compile(
-        # 08-19 23:41:39.347 10000 10023 V KOReader: HttpInspector: onCloseWidget
+        # 08-19 23:41:39.347 10000 10023 V Universal Reader: HttpInspector: onCloseWidget
         r'\d+-\d+ \s+ {time} \s+ {pid} \s+ {tid} \s+ {priority} \s+ {tag} \s* :[ ]? {text}'
         .format(**RX), re.X,
     )
     LOGCAT_TIME_LINE_RX = re.compile(
-        # 08-18 02:24:43.331 D/KOReader( 2686): ffi.load rt.so.1
+        # 08-18 02:24:43.331 D/Universal Reader( 2686): ffi.load rt.so.1
         r'\d+-\d+ \s+ {time} \s+ {priority} / {tag} \s* \( \s* {pid} \) :[ ]? {text}'
         .format(**RX), re.X,
     )
     SELF_LINE_RX = re.compile(
-        # 23:41:39.347 10000:10023            KOReader  V  HttpInspector: onCloseWidget
+        # 23:41:39.347 10000:10023            Universal Reader  V  HttpInspector: onCloseWidget
         r'{time} \s+ {pid} (?: : {tid} )? \s+ {tag} \s{{2}} {priority} \s{{2}} {text}'
         .format(**RX), re.X,
     )
@@ -65,16 +65,16 @@ class Logcat:
     )
 
     ACTIVITY_MANAGER_DEATH_RX = re.compile(
-        # Process org.koreader.launcher.debug (pid 2785) has died
+        # Process org.universalreader.launcher.debug (pid 2785) has died
         r'Process [ ] {package} [ ] \( pid [ ] {pid} \) [ ] has [ ] died'
         .format(**RX), re.X,
     )
     ACTIVITY_MANAGER_START_RX1 = re.compile(
-        # Start proc 2525:org.koreader.launcher/u0a56 for activity org.koreader.launcher/.MainActivity
+        # Start proc 2525:org.universalreader.launcher/u0a56 for activity org.universalreader.launcher/.MainActivity
         r'Start [ ] proc [ ] {pid} : {package} /'
         .format(**RX), re.X,
     )
-    # Start proc org.koreader.launcher.debug for activity org.koreader.launcher.debug/org.koreader.launcher.MainActivity: pid=2686 uid=10047 gids={50047, 3003, 1028, 1015}
+    # Start proc org.universalreader.launcher.debug for activity org.universalreader.launcher.debug/org.universalreader.launcher.MainActivity: pid=2686 uid=10047 gids={50047, 3003, 1028, 1015}
     ACTIVITY_MANAGER_START_RX2 = re.compile(
         r'Start [ ] proc [ ] {package} [ ] .* \b pid={pid} \b'
         .format(**RX), re.X,
@@ -315,8 +315,8 @@ def main():
     if bool(args.clear or args.dump) and bool(args.filter):
         parser.error('logcat and filter options are mutually exclusive')
     if (args.packages, args.tags) == (None, None):
-        args.packages = 'org.koreader.launcher,org.koreader.launcher.debug'
-        args.tags = 'KOReader,NativeGlue,dlopen,k2pdfopt,libmupdf,luajit-launcher'
+        args.packages = 'org.universalreader.launcher,org.universalreader.launcher.debug'
+        args.tags = 'Universal Reader,NativeGlue,dlopen,k2pdfopt,libmupdf,luajit-launcher'
     if not args.packages and not args.tags:
         parser.error('no packages and no tags, means there\'s nothing to filter!')
     # Main.

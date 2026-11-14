@@ -11,7 +11,7 @@ only 2 valid combinations:
 - LTR and not-mirrored: for western languages, CJK, Indic...
 - RTL and mirrored: for Arabic, Hebrew, Farsi and a few others.
 
-Text direction is handled by the libkoreader-xtext.so C module,
+Text direction is handled by the libuniversalreader-xtext.so C module,
 and the TextWidget and TextBoxWidget widgets that handle text
 alignment. We just need here to set the default global paragraph
 direction (that widgets can override if needed).
@@ -57,7 +57,7 @@ function Bidi.setup(lang)
     end
     -- Xtext default language and direction
     if G_reader_settings:nilOrTrue("use_xtext") then
-        local xtext = require("libs/libkoreader-xtext")
+        local xtext = require("libs/libuniversalreader-xtext")
 
         -- Text direction should normally not follow ui mirroring
         -- lang override (so that Arabic is still right aligned

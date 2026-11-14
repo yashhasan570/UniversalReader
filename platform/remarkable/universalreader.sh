@@ -3,28 +3,28 @@
 export LC_ALL="en_US.UTF-8"
 
 # Universal Reader's working directory.
-# NOTE: We need to remember the *actual* KOREADER_DIR, not the relocalized version in /tmp...
-export KOREADER_DIR="${KOREADER_DIR:-${0%/*}}"
-UNPACK_DIR="${KOREADER_DIR%/*}"
+# NOTE: We need to remember the *actual* UNIVERSALREADER_DIR, not the relocalized version in /tmp...
+export UNIVERSALREADER_DIR="${UNIVERSALREADER_DIR:-${0%/*}}"
+UNPACK_DIR="${UNIVERSALREADER_DIR%/*}"
 
 # Relocalize ourselves to /tmp: this is used by Universal Reader to detect if the
 # original script has changed after an update (requiring a complete restart
 # from the parent launcher).
 if [ "$(dirname "${0}")" != '/tmp' ]; then
-    cp -pf "${0}" '/tmp/koreader.sh'
-    cp -pf "${KOREADER_DIR}/external.manifest.json" '/tmp/external.manifest.json'
-    chmod 777 '/tmp/koreader.sh'
-    exec '/tmp/koreader.sh' "$@"
+    cp -pf "${0}" '/tmp/universalreader.sh'
+    cp -pf "${UNIVERSALREADER_DIR}/external.manifest.json" '/tmp/external.manifest.json'
+    chmod 777 '/tmp/universalreader.sh'
+    exec '/tmp/universalreader.sh' "$@"
 fi
 
 # we're always starting from our working directory
-cd "${KOREADER_DIR}" || exit
+cd "${UNIVERSALREADER_DIR}" || exit
 
 # reMarkable QTFB/Blight setup
 if [ -n "${KO_USE_QTFB}" ] || [ -n "${KO_USE_BLIGHT}" ]; then
     export KO_DONT_GRAB_INPUT=1
     export KO_DONT_SET_DEPTH=1
-    export LD_LIBRARY_PATH="${KOREADER_DIR}/libs:/home/root/.vellum/lib:${LD_LIBRARY_PATH}"
+    export LD_LIBRARY_PATH="${UNIVERSALREADER_DIR}/libs:/home/root/.vellum/lib:${LD_LIBRARY_PATH}"
 fi
 
 fbink_wrapped() {
@@ -59,7 +59,7 @@ fi
 
 # update to new version from OTA directory
 ko_update_check() {
-    NEWUPDATE="${KOREADER_DIR}/ota/update.tar.xz"
+    NEWUPDATE="${UNIVERSALREADER_DIR}/ota/update.tar.xz"
     if [ -f "${NEWUPDATE}" ]; then
         # If button-listen service is running then stop it during update so that
         # the update can overwrite the binary
@@ -71,22 +71,22 @@ ko_update_check() {
 
         fbink_wrapped -q -y -7 -pmh "Updating Universal Reader"
         # Keep a copy of the old manifest for cleaning leftovers later.
-        cp "${KOREADER_DIR}/ota/package.index" /tmp/
+        cp "${UNIVERSALREADER_DIR}/ota/package.index" /tmp/
         # Setup the FBInk daemon
-        export FBINK_NAMED_PIPE="/tmp/koreader.fbink"
+        export FBINK_NAMED_PIPE="/tmp/universalreader.fbink"
         rm -f "${FBINK_NAMED_PIPE}"
-        FBINK_PID="$(fbink_wrapped --daemon 1 %KOREADER% -q -y -6 -P 0)"
+        FBINK_PID="$(fbink_wrapped --daemon 1 %UNIVERSALREADER% -q -y -6 -P 0)"
         # Open a handle to the fifo ourselves too: this prevent writes to the
         # fifo from hanging if fbink crashed (even with no one reading, its
         # buffer should still be big enough to never be full either).
         exec 3<>"${FBINK_NAMED_PIPE}"
-        (cd "${UNPACK_DIR}" && "${KOREADER_DIR}/unpack" -X "${NEWUPDATE}" >&3)
+        (cd "${UNPACK_DIR}" && "${UNIVERSALREADER_DIR}/unpack" -X "${NEWUPDATE}" >&3)
         fail=$?
         kill -TERM "${FBINK_PID}"
         # Cleanup behind us...
         if [ "${fail}" -eq 0 ]; then
             # Cleanup leftovers from previous install.
-            (cd "${UNPACK_DIR}" && grep -xvFf "${KOREADER_DIR}/ota/package.index" /tmp/package.index | xargs -r rm -vf)
+            (cd "${UNPACK_DIR}" && grep -xvFf "${UNIVERSALREADER_DIR}/ota/package.index" /tmp/package.index | xargs -r rm -vf)
             fbink_wrapped -q -y -6 -pm "Update successful :)"
             fbink_wrapped -q -y -5 -pm "Universal Reader will start momentarily . . ."
         else
@@ -112,7 +112,7 @@ ko_update_check
 # If an update happened, and was successful, reexec
 if [ -n "${fail}" ] && [ "${fail}" -eq 0 ]; then
     # By now, we know we're in the right directory, and our script name is pretty much set in stone, so we can forgo using $0
-    exec ./koreader.sh "${@}"
+    exec ./universalreader.sh "${@}"
 fi
 
 # export dict directory

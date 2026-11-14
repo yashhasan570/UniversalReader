@@ -58,9 +58,9 @@ function CoverMenu:updateItems(select_number, no_recalculate_dimen)
 
     -- Force garbage collecting before drawing a new page.
     -- It's not really needed from a memory usage point of view, we did
-    -- all the free() where necessary, and koreader memory usage seems
+    -- all the free() where necessary, and universalreader memory usage seems
     -- stable when file browsing only (15-25 MB).
-    -- But I witnessed some freezes after browsing a lot when koreader's main
+    -- But I witnessed some freezes after browsing a lot when universalreader's main
     -- process was using 100% cpu (and some slow downs while drawing soon before
     -- the freeze, like the full refresh happening before the final drawing of
     -- new text covers), while still having a small memory usage (20/30 Mb)

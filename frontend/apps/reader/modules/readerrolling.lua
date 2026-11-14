@@ -10,7 +10,7 @@ local Size = require("ui/size")
 local UIManager = require("ui/uimanager")
 local bit = require("bit")
 local ffiutil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local time = require("ui/time")
 local _ = require("gettext")
@@ -30,7 +30,7 @@ local ffi = require("ffi")
 local shared_state_data = ffi.C.mmap(nil, 3*ffi.sizeof("uint32_t"), bit.bor(ffi.C.PROT_READ, ffi.C.PROT_WRITE),
                                        bit.bor(ffi.C.MAP_SHARED, ffi.C.MAP_ANONYMOUS), -1, 0)
 local shared_state = ffi.cast("uint32_t*", shared_state_data)
-local koreader_pid = ffi.C.getpid()
+local universalreader_pid = ffi.C.getpid()
 
 --[[
     Rolling is just like paging in page-based documents except that
@@ -1737,7 +1737,7 @@ function ReaderRolling:setupRerenderingAutomation()
     local last_input_event_time = UIManager:getTime() -- (we got here because of some input)
     self._watchInputEvent = function()
         -- :getTime(), although not accurate, should be good enough, see:
-        -- https://github.com/koreader/koreader/issues/9087#issuecomment-1419852952
+        -- https://github.com/yashhasan570/UniversalReader/issues/9087#issuecomment-1419852952
         last_input_event_time = UIManager:getTime()
     end
     UIManager.event_hook:register("InputEvent", self._watchInputEvent)
@@ -1967,7 +1967,7 @@ function ReaderRolling:_rerenderInBackground()
                 logger.info("rerendering subprocess: no longer waited, exiting")
                 os.exit(0)
             end
-            if ffi.C.getppid() ~= koreader_pid then
+            if ffi.C.getppid() ~= universalreader_pid then
                 -- new parent pid: main process exited/crashed
                 logger.info("rerendering subprocess: parent gone, exiting")
                 os.exit(0)

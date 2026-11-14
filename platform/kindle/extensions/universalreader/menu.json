@@ -8,7 +8,7 @@
 			"name": "Start Universal Reader",
 			"if": "\"KindleVoyage\" -m!",
 			"priority": 2,
-			"action": "/mnt/us/koreader/koreader.sh",
+			"action": "/mnt/us/universalreader/universalreader.sh",
 			"params": "--kual",
 			"status": false,
 			"internal": "status Start Universal Reader"
@@ -17,7 +17,7 @@
 			"name": "Start Universal Reader",
 			"if": "\"KindleVoyage\" -m",
 			"priority": 2,
-			"action": "/mnt/us/koreader/koreader.sh",
+			"action": "/mnt/us/universalreader/universalreader.sh",
 			"params": "--kual",
 			"exitmenu": false,
 			"status": false,
@@ -26,7 +26,7 @@
 		{
 			"name": "Start Universal Reader (no framework)",
 			"priority": 4,
-			"action": "/mnt/us/koreader/koreader.sh",
+			"action": "/mnt/us/universalreader/universalreader.sh",
 			"params": "--kual --framework_stop",
 			"status": false,
 			"internal": "status Kill the framework and start Universal Reader"
@@ -35,7 +35,7 @@
 			"name": "Start Universal Reader (ASAP)",
 			"if": "\"KindleVoyage\" -m!",
 			"priority": 6,
-			"action": "/mnt/us/koreader/koreader.sh",
+			"action": "/mnt/us/universalreader/universalreader.sh",
 			"params": "--kual --asap",
 			"status": false,
 			"internal": "status Start Universal Reader ASAP"
@@ -44,7 +44,7 @@
 			"name": "Start Universal Reader (ASAP)",
 			"if": "\"KindleVoyage\" -m",
 			"priority": 6,
-			"action": "/mnt/us/koreader/koreader.sh",
+			"action": "/mnt/us/universalreader/universalreader.sh",
 			"params": "--kual --asap",
 			"exitmenu": false,
 			"status": false,
@@ -57,8 +57,8 @@
 			{
 				"name": "Update Universal Reader",
 				"priority": 1,
-				"action": "./bin/koreader-ext.sh",
-				"params": "update_koreader",
+				"action": "./bin/universalreader-ext.sh",
+				"params": "update_universalreader",
 				"exitmenu": false,
 				"refresh": false,
 				"internal": "status Try to update Universal Reader . . ."
@@ -66,8 +66,8 @@
 			{
 				"name": "Clean Install of Universal Reader",
 				"priority": 2,
-				"action": "./bin/koreader-ext.sh",
-				"params": "install_koreader",
+				"action": "./bin/universalreader-ext.sh",
+				"params": "install_universalreader",
 				"exitmenu": false,
 				"refresh": false,
 				"internal": "status Try to install Universal Reader from scratch . . ."
@@ -75,7 +75,7 @@
 			{
 				"name": "Start SSH server",
 				"priority": 3,
-				"action": "./bin/koreader-ext.sh",
+				"action": "./bin/universalreader-ext.sh",
 				"params": "start_ssh",
 				"exitmenu": false,
 				"refresh": false,
@@ -84,7 +84,7 @@
 			{
 				"name": "Stop SSH server",
 				"priority": 4,
-				"action": "./bin/koreader-ext.sh",
+				"action": "./bin/universalreader-ext.sh",
 				"params": "stop_ssh",
 				"exitmenu": false,
 				"refresh": false,

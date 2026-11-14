@@ -1184,7 +1184,7 @@ function NetworkMgr:reconnectOrShowNetworkMenu(complete_callback, interactive)
 
     -- If we haven't even seen any of our preferred networks, wait a bit to see if wpa_supplicant manages to connect in the background anyway...
     -- This happens when we break too early from re-scans triggered by wpa_supplicant itself,
-    -- which shouldn't really ever happen since https://github.com/koreader/lj-wpaclient/pull/11
+    -- which shouldn't really ever happen since https://github.com/universalreader/lj-wpaclient/pull/11
     -- c.f., WpaClient:scanThenGetResults in lj-wpaclient for more details.
     if Device:hasWifiManager() and not success and not ssid then
         -- Don't bother if wpa_supplicant doesn't actually have any configured networks...

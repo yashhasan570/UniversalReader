@@ -12,7 +12,7 @@
 local DataStorage = require("datastorage")
 local ImageWidget = require("ui/widget/imagewidget")
 local Screen = require("device").screen
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 
 local DGENERIC_ICON_SIZE = G_defaults:readSetting("DGENERIC_ICON_SIZE")
 
@@ -39,7 +39,7 @@ local ICONS_PATH = {}
 
 --- @table IconWidget
 -- @field alpha A boolean on whether to enable transparency on the icon (defaults to false)
--- @field icon The name (excluding the file extension) of any SVG or PNG in [resources/icons](https://github.com/koreader/koreader/tree/master/resources/icons)
+-- @field icon The name (excluding the file extension) of any SVG or PNG in [resources/icons](https://github.com/yashhasan570/UniversalReader/tree/master/resources/icons)
 local IconWidget = ImageWidget:extend{
     -- The icon filename should be provided without any path
     icon = ICON_NOT_FOUND, -- show this if not provided

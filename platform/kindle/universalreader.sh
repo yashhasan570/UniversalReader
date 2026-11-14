@@ -4,9 +4,9 @@ export LC_ALL="en_US.UTF-8"
 
 # Compute our working directory in an extremely defensive manner
 SCRIPT_DIR="$(CDPATH='' cd "$(dirname "$0")" && pwd -P)"
-# NOTE: We need to remember the *actual* KOREADER_DIR, not the relocalized version in /tmp...
-export KOREADER_DIR="${KOREADER_DIR:-${SCRIPT_DIR}}"
-UNPACK_DIR="${KOREADER_DIR%/*}"
+# NOTE: We need to remember the *actual* UNIVERSALREADER_DIR, not the relocalized version in /tmp...
+export UNIVERSALREADER_DIR="${UNIVERSALREADER_DIR:-${SCRIPT_DIR}}"
+UNPACK_DIR="${UNIVERSALREADER_DIR%/*}"
 
 # NOTE: Stupid workaround to make sure the script we end up running is a *copy*,
 # living in a magical land that doesn't suffer from gross filesystem deficiencies.
@@ -16,13 +16,13 @@ UNPACK_DIR="${KOREADER_DIR%/*}"
 # changed after an update (requiring a complete restart from the parent
 # launcher).
 if [ "$(dirname "${0}")" != "/var/tmp" ]; then
-    cp -pf "${0}" /var/tmp/koreader.sh
-    chmod 777 /var/tmp/koreader.sh
-    exec /var/tmp/koreader.sh "$@"
+    cp -pf "${0}" /var/tmp/universalreader.sh
+    chmod 777 /var/tmp/universalreader.sh
+    exec /var/tmp/universalreader.sh "$@"
 fi
 
 # We rely on starting from our working directory, and it needs to be set, sane and absolute.
-cd "${KOREADER_DIR:-/dev/null}" || exit
+cd "${UNIVERSALREADER_DIR:-/dev/null}" || exit
 
 PROC_KEYPAD="/proc/keypad"
 PROC_FIVEWAY="/proc/fiveway"
@@ -30,13 +30,13 @@ PROC_FIVEWAY="/proc/fiveway"
 [ -e "${PROC_FIVEWAY}" ] && echo unlock >"${PROC_FIVEWAY}"
 
 # NOTE: Same vfat+fuse shenanigans needed for FBInk, before we source libko...
-cp -pf "${KOREADER_DIR}/fbink" /var/tmp/fbink
+cp -pf "${UNIVERSALREADER_DIR}/fbink" /var/tmp/fbink
 chmod 777 /var/tmp/fbink
 
 # Load our helper functions...
-if [ -f "${KOREADER_DIR}/libkohelper.sh" ]; then
+if [ -f "${UNIVERSALREADER_DIR}/libkohelper.sh" ]; then
     # shellcheck source=/dev/null
-    . "${KOREADER_DIR}/libkohelper.sh"
+    . "${UNIVERSALREADER_DIR}/libkohelper.sh"
 else
     echo "Can't source helper functions, aborting!"
     exit 1
@@ -46,9 +46,9 @@ fi
 logmsg() {
     # Use the right tools for the platform
     if [ "${INIT_TYPE}" = "sysv" ]; then
-        msg "koreader: ${1}" "I"
+        msg "universalreader: ${1}" "I"
     elif [ "${INIT_TYPE}" = "upstart" ]; then
-        f_log I koreader wrapper "" "${1}"
+        f_log I universalreader wrapper "" "${1}"
     fi
 
     # And throw that on stdout too, for the DIY crowd ;)
@@ -127,22 +127,22 @@ if [ "${FROM_KUAL}" = "yes" ]; then
 fi
 
 # we're always starting from our working directory
-cd "${KOREADER_DIR}" || exit
+cd "${UNIVERSALREADER_DIR}" || exit
 
 # Handle pending OTA update
 ko_update_check() {
-    NEWUPDATE="${KOREADER_DIR}/ota/update.tar.xz"
+    NEWUPDATE="${UNIVERSALREADER_DIR}/ota/update.tar.xz"
     if [ -f "${NEWUPDATE}" ]; then
         logmsg "Updating Universal Reader . . ."
         /var/tmp/fbink -c
         # Let our checkpoint script handle the detailed visual feedback...
         eips_print_bottom_centered "Updating Universal Reader" 3
         # Keep a copy of the old manifest for cleaning leftovers later.
-        cp "${KOREADER_DIR}/ota/package.index" /tmp/
+        cp "${UNIVERSALREADER_DIR}/ota/package.index" /tmp/
         # Setup the FBInk daemon
-        export FBINK_NAMED_PIPE="/tmp/koreader.fbink"
+        export FBINK_NAMED_PIPE="/tmp/universalreader.fbink"
         rm -f "${FBINK_NAMED_PIPE}"
-        FBINK_PID="$(/var/tmp/fbink --daemon 1 %KOREADER% -q -y -6 -P 0)"
+        FBINK_PID="$(/var/tmp/fbink --daemon 1 %UNIVERSALREADER% -q -y -6 -P 0)"
         # Open a handle to the fifo ourselves too: this prevent writes to the
         # fifo from hanging if fbink crashed (even with no one reading, its
         # buffer should still be big enough to never be full either).
@@ -151,7 +151,7 @@ ko_update_check() {
         # tmpfs, and run them from there (c.f., #4602)...  This is most likely a side-effect of the weird fuse overlay
         # being used for /mnt/us (vs. the real vfat on /mnt/base-us), which we cannot use because it's been mounted
         # noexec for a few years now...
-        cp -pf "${KOREADER_DIR}/unpack" /var/tmp/
+        cp -pf "${UNIVERSALREADER_DIR}/unpack" /var/tmp/
         (cd "${UNPACK_DIR}" && /var/tmp/unpack -X "${NEWUPDATE}" >&3)
         fail=$?
         kill -TERM "${FBINK_PID}"
@@ -160,7 +160,7 @@ ko_update_check() {
         # Cleanup behind us...
         if [ "${fail}" -eq 0 ]; then
             # Cleanup leftovers from previous install.
-            (cd "${UNPACK_DIR}" && grep -xvFf "${KOREADER_DIR}/ota/package.index" /tmp/package.index | xargs -r rm -vf)
+            (cd "${UNPACK_DIR}" && grep -xvFf "${UNIVERSALREADER_DIR}/ota/package.index" /tmp/package.index | xargs -r rm -vf)
             logmsg "Update successful :)"
             eips_print_bottom_centered "Update successful :)" 2
             eips_print_bottom_centered "Universal Reader will start momentarily . . ." 1
@@ -191,7 +191,7 @@ if [ -n "${fail}" ] && [ "${fail}" -eq 0 ]; then
     # By now, we know we're in the right directory, and our script name is pretty much set in stone, so we can forgo using $0
     # NOTE: REEXEC_FLAGS *needs* to be unquoted: we *want* word splitting here ;).
     # shellcheck disable=SC2086
-    exec ./koreader.sh ${REEXEC_FLAGS} "${@}"
+    exec ./universalreader.sh ${REEXEC_FLAGS} "${@}"
 fi
 
 # export dict directory
@@ -247,13 +247,13 @@ if [ "${STOP_FRAMEWORK}" = "no" ] && [ "${INIT_TYPE}" = "upstart" ]; then
     if [ "${FROM_KUAL}" = "yes" ]; then
         kpv_launch_count="0"
     else
-        kpv_launch_count="$(lipc-get-prop -eiq com.github.koreader.kpvbooklet.timer count)"
+        kpv_launch_count="$(lipc-get-prop -eiq com.github.universalreader.kpvbooklet.timer count)"
     fi
     # Check if KPVBooklet was launched more than once, if not we will disable pillow
-    # c.f., https://github.com/koreader/koreader/commit/60f83e842ccce57931cbed5ffcebb28515f6f5d7
+    # c.f., https://github.com/yashhasan570/UniversalReader/commit/60f83e842ccce57931cbed5ffcebb28515f6f5d7
     if [ "${kpv_launch_count}" = "" ] || [ "${kpv_launch_count}" = "0" ]; then
         # NOTE: Dump the fb so we can restore something useful on exit...
-        cat /dev/fb0 >/var/tmp/koreader-fb.dump
+        cat /dev/fb0 >/var/tmp/universalreader-fb.dump
         # We're going to need our current FW version...
         FW_VERSION="$(grep '^Kindle 5' /etc/prettyversion.txt 2>&1 | sed -n -r 's/^(Kindle)([[:blank:]]*)([[:digit:]\.]*)(.*?)$/\3/p')"
         # NOTE: We want to disable the status bar (at the very least). Unfortunately, the soft hide/unhide method doesn't work properly anymore since FW 5.6.5...
@@ -265,13 +265,13 @@ if [ "${STOP_FRAMEWORK}" = "no" ] && [ "${INIT_TYPE}" = "upstart" ]; then
             # NOTE: And, oh, joy, on FW >= 5.7.2, this is not enough to prevent the clock from refreshing, so, take the bull by the horns, and SIGSTOP the WM while we run...
             if [ "$(version "${FW_VERSION}")" -ge "$(version "5.7.2")" ]; then
                 # Less drastically, we'll also be "minimizing" (actually, resizing) the title bar manually (c.f., https://www.mobileread.com/forums/showpost.php?p=2449275&postcount=5).
-                # NOTE: Hiding it "works", but has a nasty side-effect of triggering ligl timeouts in some circumstances (c.f., https://github.com/koreader/koreader/pull/5943#issuecomment-598514376)
+                # NOTE: Hiding it "works", but has a nasty side-effect of triggering ligl timeouts in some circumstances (c.f., https://github.com/yashhasan570/UniversalReader/pull/5943#issuecomment-598514376)
                 # FIXME: There's apparently a nasty side-effect on FW >= 5.12.4 which somehow softlocks the UI on exit (despite wmctrl succeeding). Don't have the HW to investigate, so, just drop it. (#6117)
                 if [ "$(version "${FW_VERSION}")" -lt "$(version "5.12.4")" ]; then
                     logmsg "Hiding the title bar . . ."
-                    TITLEBAR_GEOMETRY="$("${KOREADER_DIR}/wmctrl" -l -G | grep ":titleBar_ID:" | awk '{print $2,$3,$4,$5,$6}' OFS=',')"
-                    "${KOREADER_DIR}/wmctrl" -r ":titleBar_ID:" -e "${TITLEBAR_GEOMETRY%,*},1"
-                    logmsg "Title bar geometry: '${TITLEBAR_GEOMETRY}' -> '$("${KOREADER_DIR}/wmctrl" -l -G | grep ":titleBar_ID:" | awk '{print $2,$3,$4,$5,$6}' OFS=',')'"
+                    TITLEBAR_GEOMETRY="$("${UNIVERSALREADER_DIR}/wmctrl" -l -G | grep ":titleBar_ID:" | awk '{print $2,$3,$4,$5,$6}' OFS=',')"
+                    "${UNIVERSALREADER_DIR}/wmctrl" -r ":titleBar_ID:" -e "${TITLEBAR_GEOMETRY%,*},1"
+                    logmsg "Title bar geometry: '${TITLEBAR_GEOMETRY}' -> '$("${UNIVERSALREADER_DIR}/wmctrl" -l -G | grep ":titleBar_ID:" | awk '{print $2,$3,$4,$5,$6}' OFS=',')'"
                     USED_WMCTRL="yes"
                 fi
                 logmsg "Stopping awesome . . ."
@@ -341,7 +341,7 @@ done
 
 # clean up our own process tree in case the reader crashed (if needed, to avoid flooding KUAL's log)
 if pidof reader.lua >/dev/null 2>&1; then
-    logmsg "Sending a SIGTERM to stray KOreader processes . . ."
+    logmsg "Sending a SIGTERM to stray Universal Reader processes . . ."
     killall -TERM reader.lua
 fi
 
@@ -385,16 +385,16 @@ if [ "${STOP_FRAMEWORK}" = "no" ] && [ "${INIT_TYPE}" = "upstart" ]; then
     if [ "${PILLOW_HARD_DISABLED}" = "yes" ]; then
         logmsg "Enabling pillow . . ."
         # NOTE: Try to leave the user with a slightly more useful FB content than our own last screen...
-        cat /var/tmp/koreader-fb.dump >/dev/fb0
-        rm -f /var/tmp/koreader-fb.dump
+        cat /var/tmp/universalreader-fb.dump >/dev/fb0
+        rm -f /var/tmp/universalreader-fb.dump
         lipc-set-prop com.lab126.pillow disableEnablePillow enable
         lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home
     fi
     if [ "${PILLOW_SOFT_DISABLED}" = "yes" ]; then
         logmsg "Restoring the status bar . . ."
         # NOTE: Try to leave the user with a slightly more useful FB content than our own last screen...
-        cat /var/tmp/koreader-fb.dump >/dev/fb0
-        rm -f /var/tmp/koreader-fb.dump
+        cat /var/tmp/universalreader-fb.dump >/dev/fb0
+        rm -f /var/tmp/universalreader-fb.dump
         lipc-set-prop com.lab126.pillow interrogatePillow '{"pillowId": "default_status_bar", "function": "nativeBridge.showMe();"}'
         lipc-set-prop com.lab126.appmgrd start app://com.lab126.booklet.home
     fi
@@ -403,17 +403,17 @@ if [ "${STOP_FRAMEWORK}" = "no" ] && [ "${INIT_TYPE}" = "upstart" ]; then
         # NOTE: Wait and retry for a bit, because apparently there may be timing issues (c.f., #5990)?
         usleep 250000
         WMCTRL_COUNT=0
-        until [ "$("${KOREADER_DIR}/wmctrl" -l -G | grep ":titleBar_ID:" | awk '{print $2,$3,$4,$5,$6}' OFS=',')" = "${TITLEBAR_GEOMETRY}" ]; do
+        until [ "$("${UNIVERSALREADER_DIR}/wmctrl" -l -G | grep ":titleBar_ID:" | awk '{print $2,$3,$4,$5,$6}' OFS=',')" = "${TITLEBAR_GEOMETRY}" ]; do
             # Abort after 5s
             if [ ${WMCTRL_COUNT} -gt 20 ]; then
                 log "Giving up on restoring the title bar geometry!"
                 break
             fi
-            "${KOREADER_DIR}/wmctrl" -r ":titleBar_ID:" -e "${TITLEBAR_GEOMETRY}"
+            "${UNIVERSALREADER_DIR}/wmctrl" -r ":titleBar_ID:" -e "${TITLEBAR_GEOMETRY}"
             usleep 250000
             WMCTRL_COUNT=$((WMCTRL_COUNT + 1))
         done
-        logmsg "Title bar geometry restored to '$("${KOREADER_DIR}/wmctrl" -l -G | grep ":titleBar_ID:" | awk '{print $2,$3,$4,$5,$6}' OFS=',')' (ought to be: '${TITLEBAR_GEOMETRY}') [after ${WMCTRL_COUNT} attempts]"
+        logmsg "Title bar geometry restored to '$("${UNIVERSALREADER_DIR}/wmctrl" -l -G | grep ":titleBar_ID:" | awk '{print $2,$3,$4,$5,$6}' OFS=',')' (ought to be: '${TITLEBAR_GEOMETRY}') [after ${WMCTRL_COUNT} attempts]"
     fi
 fi
 
@@ -429,6 +429,6 @@ if [ "${PASSCODE_DISABLED}" = "yes" ]; then
 fi
 
 # Wipe the clones on exit
-rm -f /var/tmp/koreader.sh /var/tmp/fbink
+rm -f /var/tmp/universalreader.sh /var/tmp/fbink
 
 exit ${RETURN_VALUE}

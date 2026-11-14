@@ -177,7 +177,7 @@ function Cloud.getReadablePath(server)
     return url
 end
 
--- Former SyncService https://github.com/koreader/koreader/pull/9709
+-- Former SyncService https://github.com/yashhasan570/UniversalReader/pull/9709
 -- Prepares three files for sync_cb to call to do the actual syncing:
 -- * local_file (one that is being used)
 -- * income_file (one that has just been downloaded from Cloud to be merged, then to be deleted)

@@ -555,7 +555,7 @@ function AutoWarmth:scheduleNextWarmthChange(from_resume)
         -- On some strange devices like KA1 setWarmth doesn't work right after a resume so
         -- schedule setting of another valid warmth (=`warmth_in_1p5_s`) again (one time) in 1.5s.
         -- On sane devices this schedule does no harm.
-        -- see https://github.com/koreader/koreader/issues/8363
+        -- see https://github.com/yashhasan570/UniversalReader/issues/8363
         UIManager:scheduleIn(1.5, self.setWarmth, self, warmth_in_1p5_s, true) -- force warmth one time
     end
 end

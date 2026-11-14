@@ -9,11 +9,11 @@ with a USB cable.
 # Install
 
 ```
-scp <koreader-package>.zip root@<your-remarkable>:
+scp <universalreader-package>.zip root@<your-remarkable>:
 
 ssh root@<your-remarkable>
 
-unzip <koreader-package>.zip
+unzip <universalreader-package>.zip
 ```
 
 # Launching using the included launcher
@@ -23,7 +23,7 @@ Universal Reader when the middle button is held down for 3 or more seconds in th
 default UI (xochitl).
 
 ```
-cp -v koreader/*.service /etc/systemd/system/
+cp -v universalreader/*.service /etc/systemd/system/
 systemctl enable --now button-listen
 ```
 
@@ -38,18 +38,18 @@ to run the two install steps again when that happens.
 The command that the launcher needs to run is:
 
 ```
-/home/root/koreader/koreader.sh
+/home/root/universalreader/universalreader.sh
 ```
 
 Alternatively, if you want the default behaviour of Universal Reader exit starting the
 default UI you can run (once on installation):
 
 ```
-cp -v koreader/koreader.service /etc/systemd/system/
+cp -v universalreader/universalreader.service /etc/systemd/system/
 ```
 
 Then to start Universal Reader the launcher needs to run:
 
 ```
-systemctl start koreader
+systemctl start universalreader
 ```

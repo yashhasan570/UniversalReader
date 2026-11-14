@@ -3,7 +3,7 @@ local RenderImage = require("ui/renderimage")
 local Screen = require("device").screen
 local ffiutil = require("ffi/util")
 local httpasync = require("httpasync")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local time = require("ui/time")
 local util = require("util")
@@ -976,10 +976,10 @@ function Wikipedia:createEpub(epub_path, page, lang, with_images)
     --       <reference href="title.html" type="cover" title="Cover"/>
     --       <reference href="toc.html" type="toc" title="Table of Contents" href="toc.html" />
     --     </guide>
-    local koreader_version = "Universal Reader"
+    local universalreader_version = "Universal Reader"
     if lfs.attributes("git-rev", "mode") == "file" then
         local Version = require("version")
-        koreader_version = "Universal Reader " .. Version:getCurrentRevision()
+        universalreader_version = "Universal Reader " .. Version:getCurrentRevision()
     end
     local content_opf_parts = {}
     -- head
@@ -1004,7 +1004,7 @@ function Wikipedia:createEpub(epub_path, page, lang, with_images)
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
     <item id="content" href="content.html" media-type="application/xhtml+xml"/>
     <item id="css" href="stylesheet.css" media-type="text/css"/>
-]], page_cleaned, lang:upper(), bookid, lang, koreader_version, meta_cover))
+]], page_cleaned, lang:upper(), bookid, lang, universalreader_version, meta_cover))
     -- images files
     if include_images then
         for inum, img in ipairs(images) do
@@ -1119,24 +1119,24 @@ h3, h4, h5, h6 {
     text-align: start;
 }
 /* Styles for our centered titles on first page */
-h1.koreaderwikifrontpage, h5.koreaderwikifrontpage {
+h1.universalreaderwikifrontpage, h5.universalreaderwikifrontpage {
     page-break-before: avoid;
     text-align: center;
     margin-top: 0;
 }
-p.koreaderwikifrontpage {
+p.universalreaderwikifrontpage {
     font-style: italic;
     font-size: 90%;
     text-indent: 0;
     margin: 1em 2em 1em 2em;
 }
-hr.koreaderwikifrontpage {
+hr.universalreaderwikifrontpage {
     margin-left: 20%;
     margin-right: 20%;
     margin-bottom: 1.2em;
 }
 /* Have these HR get the same margins and position as our H2 */
-hr.koreaderwikitocstart {
+hr.universalreaderwikitocstart {
     page-break-before: always;
     font-size: 140%;
     margin: 0.7em 30% 1.5em;
@@ -1144,7 +1144,7 @@ hr.koreaderwikitocstart {
     border: none;
     background-color: black;
 }
-hr.koreaderwikitocend {
+hr.universalreaderwikitocend {
     page-break-before: avoid;
     page-break-after: always;
     font-size: 140%;
@@ -1463,7 +1463,7 @@ abbr.abbr {
     local toc_html_parts = {}
     -- Unfortunately, we don't and can't get any localized "Contents" or "Sommaire" to use
     -- as a heading. So, use some <hr> at start and at end to make this HTML ToC stand out.
-    table.insert(toc_html_parts, '<hr class="koreaderwikitocstart"/>\n')
+    table.insert(toc_html_parts, '<hr class="universalreaderwikitocstart"/>\n')
     cur_level = 0
     for isec, s in ipairs(sections) do
         -- Some chars in headings are converted to html entities in the
@@ -1505,7 +1505,7 @@ abbr.abbr {
             table.insert(toc_html_parts, "</li>")
         end
     end
-    table.insert(toc_html_parts, '<hr class="koreaderwikitocend"/>\n')
+    table.insert(toc_html_parts, '<hr class="universalreaderwikitocend"/>\n')
     html = html:gsub([[<meta property="mw:PageProp/toc" />]], table.concat(toc_html_parts))
 
     -- ----------------------------------------------------------------
@@ -1589,10 +1589,10 @@ abbr.abbr {
   <link type="text/css" rel="stylesheet" href="stylesheet.css"/>
 </head>
 <body>
-<h1 class="koreaderwikifrontpage">%s</h1>
-<h5 class="koreaderwikifrontpage">Wikipedia %s</h5>
-<p class="koreaderwikifrontpage">%s<br/>%s</p>
-<hr class="koreaderwikifrontpage"/>
+<h1 class="universalreaderwikifrontpage">%s</h1>
+<h5 class="universalreaderwikifrontpage">Wikipedia %s</h5>
+<p class="universalreaderwikifrontpage">%s<br/>%s</p>
+<hr class="universalreaderwikifrontpage"/>
 %s
 </body>
 </html>

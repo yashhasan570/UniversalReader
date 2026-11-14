@@ -1,33 +1,33 @@
 #!/bin/sh
 
 # Work around PocketBook firmware 6.11.1480 rejecting executable-stack system libraries.
-# See https://github.com/koreader/koreader/issues/15720#issuecomment-5059698020
+# See https://github.com/yashhasan570/UniversalReader/issues/15720#issuecomment-5059698020
 export GLIBC_TUNABLES="${GLIBC_TUNABLES}${GLIBC_TUNABLES:+:}glibc.rtld.execstack=2"
 
 export LC_ALL="en_US.UTF-8"
 
 UNPACK_DIR='/mnt/ext1'
-# KOReader's working directory.
-KOREADER_DIR="${UNPACK_DIR}/applications/koreader"
+# Universal Reader's working directory.
+UNIVERSALREADER_DIR="${UNPACK_DIR}/applications/universalreader"
 
-# Relocalize ourselves to /tmp: this is used by KOReader to detect if the
+# Relocalize ourselves to /tmp: this is used by Universal Reader to detect if the
 # original script has changed after an update (requiring a complete restart
 # from the parent launcher).
 if [ "$(dirname "${0}")" != '/tmp' ]; then
-    cp -pf "${0}" '/tmp/koreader.app'
-    chmod 777 '/tmp/koreader.app'
-    exec '/tmp/koreader.app' "$@"
+    cp -pf "${0}" '/tmp/universalreader.app'
+    chmod 777 '/tmp/universalreader.app'
+    exec '/tmp/universalreader.app' "$@"
 fi
 
 # load our own shared libraries if possible, solely because we don't control InkView, and we'd rather not it have load duplicate system libs...
 # (We handle this via DT_RPATH for our own stuff).
-export LD_LIBRARY_PATH="${KOREADER_DIR}/libs${LD_LIBRARY_PATH+:}${LD_LIBRARY_PATH}"
+export LD_LIBRARY_PATH="${UNIVERSALREADER_DIR}/libs${LD_LIBRARY_PATH+:}${LD_LIBRARY_PATH}"
 
 # file through which we communicate instanced opens
-export KO_PATH_OPEN_BOOK="/tmp/.koreader.open"
+export KO_PATH_OPEN_BOOK="/tmp/.universalreader.open"
 
 # check for and notify a running instance
-INSTANCE_PID=$(cat /tmp/koreader.pid 2>/dev/null)
+INSTANCE_PID=$(cat /tmp/universalreader.pid 2>/dev/null)
 if [ "${INSTANCE_PID}" != "" ] && [ -e "/proc/${INSTANCE_PID}" ]; then
     echo "$@" >"${KO_PATH_OPEN_BOOK}"
     exec $(if [ -f "/usr/bin/iv2sh" ]; then echo /usr/bin/iv2sh; else echo /ebrmain/bin/iv2sh; fi) SetActiveTask "${INSTANCE_PID}" 0
@@ -37,39 +37,39 @@ fi
 /mnt/secure/su /bin/chmod 644 /dev/input/*
 
 # we're first, so publish our instance
-echo $$ >/tmp/koreader.pid
+echo $$ >/tmp/universalreader.pid
 
 # update to new version from OTA directory
 ko_update_check() {
-    NEWUPDATE="${KOREADER_DIR}/ota/update.tar.xz"
+    NEWUPDATE="${UNIVERSALREADER_DIR}/ota/update.tar.xz"
     if [ -f "${NEWUPDATE}" ]; then
         # Clear screen to delete UI leftovers
-        "${KOREADER_DIR}/fbink" --cls
-        "${KOREADER_DIR}/fbink" -q -y -7 -pmh "Updating KOReader"
+        "${UNIVERSALREADER_DIR}/fbink" --cls
+        "${UNIVERSALREADER_DIR}/fbink" -q -y -7 -pmh "Updating Universal Reader"
         # Keep a copy of the old manifest for cleaning leftovers later.
-        sed 's,^../,,' "${KOREADER_DIR}/ota/package.index" >/tmp/package.index.old
+        sed 's,^../,,' "${UNIVERSALREADER_DIR}/ota/package.index" >/tmp/package.index.old
         # Setup the FBInk daemon
-        export FBINK_NAMED_PIPE="/tmp/.koreader.fbink"
+        export FBINK_NAMED_PIPE="/tmp/.universalreader.fbink"
         rm -f "${FBINK_NAMED_PIPE}"
-        FBINK_PID="$("${KOREADER_DIR}/fbink" --daemon 1 %KOREADER% -q -y -6 -P 0)"
+        FBINK_PID="$("${UNIVERSALREADER_DIR}/fbink" --daemon 1 %UNIVERSALREADER% -q -y -6 -P 0)"
         # Open a handle to the fifo ourselves too: this prevent writes to the
         # fifo from hanging if fbink crashed (even with no one reading, its
         # buffer should still be big enough to never be full either).
         exec 3<>"${FBINK_NAMED_PIPE}"
-        (cd "${UNPACK_DIR}" && "${KOREADER_DIR}/unpack" -X "${NEWUPDATE}" >&3)
+        (cd "${UNPACK_DIR}" && "${UNIVERSALREADER_DIR}/unpack" -X "${NEWUPDATE}" >&3)
         fail=$?
         kill -TERM "${FBINK_PID}"
         # Cleanup behind us...
         if [ "${fail}" -eq 0 ]; then
             # Cleanup leftovers from previous install.
-            sed 's,^../,,' "${KOREADER_DIR}/ota/package.index" >/tmp/package.index.new
+            sed 's,^../,,' "${UNIVERSALREADER_DIR}/ota/package.index" >/tmp/package.index.new
             (cd "${UNPACK_DIR}" && grep -xvFf /tmp/package.index.new /tmp/package.index.old | xargs -r rm -vf)
-            "${KOREADER_DIR}/fbink" -q -y -6 -pm "Update successful :)"
-            "${KOREADER_DIR}/fbink" -q -y -5 -pm "KOReader will start momentarily . . ."
+            "${UNIVERSALREADER_DIR}/fbink" -q -y -6 -pm "Update successful :)"
+            "${UNIVERSALREADER_DIR}/fbink" -q -y -5 -pm "Universal Reader will start momentarily . . ."
         else
             # Uh oh...
-            "${KOREADER_DIR}/fbink" -q -y -6 -pmh "Update failed :("
-            "${KOREADER_DIR}/fbink" -q -y -5 -pm "KOReader may fail to function properly!"
+            "${UNIVERSALREADER_DIR}/fbink" -q -y -6 -pmh "Update failed :("
+            "${UNIVERSALREADER_DIR}/fbink" -q -y -5 -pm "Universal Reader may fail to function properly!"
         fi
         rm -f /tmp/package.index.old /tmp/package.index.new "${NEWUPDATE}" # always purge newupdate to prevent update loops
         # Fifo cleanup: close our handle, and unlink the path too (in case fbink crashed).
@@ -82,7 +82,7 @@ ko_update_check() {
 }
 
 # we're always starting from our working directory
-cd ${KOREADER_DIR} || exit
+cd ${UNIVERSALREADER_DIR} || exit
 
 # export dict directory
 export STARDICT_DATA_DIR="data/dict"
@@ -93,7 +93,7 @@ if [ -e crash.log ]; then
     mv -f crash.log.new crash.log
 fi
 
-export KO_EXIT_CODE="/tmp/.koreader.exit"
+export KO_EXIT_CODE="/tmp/.universalreader.exit"
 CRASH_COUNT=0
 CRASH_TS=0
 CRASH_PREV_TS=0
@@ -105,7 +105,7 @@ rm -f "${KO_EXIT_CODE}"
 RETURN_VALUE=${KO_RC_RESTART}
 while [ "${RETURN_VALUE}" -ne 0 ]; do
     if [ "${RETURN_VALUE}" -eq ${KO_RC_RESTART} ]; then
-        # Do an update check now, so we can actually update KOReader via the "Restart KOReader" menu entry ;).
+        # Do an update check now, so we can actually update Universal Reader via the "Restart Universal Reader" menu entry ;).
         ko_update_check
     fi
 
@@ -145,7 +145,7 @@ while [ "${RETURN_VALUE}" -ne 0 ]; do
         viewWidth=600
         viewHeight=800
         FONTH=16
-        eval "$("${KOREADER_DIR}/fbink" -e | tr ';' '\n' | grep -e viewWidth -e viewHeight -e FONTH | tr '\n' ';')"
+        eval "$("${UNIVERSALREADER_DIR}/fbink" -e | tr ';' '\n' | grep -e viewWidth -e viewHeight -e FONTH | tr '\n' ';')"
         # Compute margins & sizes relative to the screen's resolution, so we end up with a similar layout, no matter the device.
         # Height @ ~56.7%, w/ a margin worth 1.5 lines
         # shellcheck disable=SC2003
@@ -153,21 +153,21 @@ while [ "${RETURN_VALUE}" -ne 0 ]; do
         # shellcheck disable=SC2003
         bombMargin="$(expr ${FONTH} + ${FONTH} / 2)"
         # With a little notice at the top of the screen, on a big gray screen of death ;).
-        "${KOREADER_DIR}/fbink" -q -b -c -B GRAY9 -m -y 1 "Don't Panic! (Crash n°${CRASH_COUNT} -> ${RETURN_VALUE})"
+        "${UNIVERSALREADER_DIR}/fbink" -q -b -c -B GRAY9 -m -y 1 "Don't Panic! (Crash n°${CRASH_COUNT} -> ${RETURN_VALUE})"
         if [ "${CRASH_COUNT}" -eq 1 ]; then
             # Warn that we're sleeping for a bit...
-            "${KOREADER_DIR}/fbink" -q -b -O -m -y 2 "KOReader will restart in 15 sec."
+            "${UNIVERSALREADER_DIR}/fbink" -q -b -O -m -y 2 "Universal Reader will restart in 15 sec."
         fi
         # U+1F4A3, the hard way, because we can't use \u or \U escape sequences...
         # shellcheck disable=SC2039,SC3003
-        "${KOREADER_DIR}/fbink" -q -b -O -m -t regular=${KOREADER_DIR}/fonts/freefont/FreeSerif.ttf,px="${bombHeight}",top="${bombMargin}" -- $'\xf0\x9f\x92\xa3'
+        "${UNIVERSALREADER_DIR}/fbink" -q -b -O -m -t regular=${UNIVERSALREADER_DIR}/fonts/freefont/FreeSerif.ttf,px="${bombHeight}",top="${bombMargin}" -- $'\xf0\x9f\x92\xa3'
         # And then print the tail end of the log on the bottom of the screen...
         crashLog="$(tail -n 25 crash.log | sed -e 's/\t/    /g')"
         # The idea for the margins being to leave enough room for an fbink -Z bar, small horizontal margins, and a font size based on what 6pt looked like @ 265dpi
         # shellcheck disable=SC2003
-        "${KOREADER_DIR}/fbink" -q -b -O -t regular=${KOREADER_DIR}/fonts/droid/DroidSansMono.ttf,top="$(expr ${viewHeight} / 2 + ${FONTH} '*' 2 + ${FONTH} / 2)",left="$(expr ${viewWidth} / 60)",right="$(expr ${viewWidth} / 60)",px="$(expr ${viewHeight} / 64)" -- "${crashLog}"
+        "${UNIVERSALREADER_DIR}/fbink" -q -b -O -t regular=${UNIVERSALREADER_DIR}/fonts/droid/DroidSansMono.ttf,top="$(expr ${viewHeight} / 2 + ${FONTH} '*' 2 + ${FONTH} / 2)",left="$(expr ${viewWidth} / 60)",right="$(expr ${viewWidth} / 60)",px="$(expr ${viewHeight} / 64)" -- "${crashLog}"
         # So far, we hadn't triggered an actual screen refresh, do that now, to make sure everything is bundled in a single flashing refresh.
-        ${KOREADER_DIR}/fbink -q -f -s
+        ${UNIVERSALREADER_DIR}/fbink -q -f -s
         # Cue a lemming's faceplant sound effect!
 
         {
@@ -175,7 +175,7 @@ while [ "${RETURN_VALUE}" -ne 0 ]; do
             echo "Uh oh, something went awry... (Crash n°${CRASH_COUNT}: $(date +'%x @ %X'))"
         } >>crash.log 2>&1
         if [ "${CRASH_COUNT}" -lt 5 ] && [ "${ALWAYS_ABORT}" = "false" ]; then
-            echo "Attempting to restart KOReader . . ." >>crash.log 2>&1
+            echo "Attempting to restart Universal Reader . . ." >>crash.log 2>&1
             echo "!!!!" >>crash.log 2>&1
         fi
 
@@ -206,7 +206,7 @@ while [ "${RETURN_VALUE}" -ne 0 ]; do
     fi
 done
 
-rm -f "/tmp/koreader.pid"
+rm -f "/tmp/universalreader.pid"
 
 if pidof reader.lua >/dev/null 2>&1; then
     killall -TERM reader.lua

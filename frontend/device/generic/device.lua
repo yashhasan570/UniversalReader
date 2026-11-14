@@ -173,7 +173,7 @@ local Device = {
     -- The value here is table of 4 elements mapping the sensible linux constants to whatever
     -- nonsense the device actually has. Canonically it should return { 0, 1, 2, 3 } if the device
     -- matches <linux/fb.h> FB_ROTATE_* constants.
-    -- See https://github.com/koreader/koreader-base/blob/master/ffi/framebuffer.lua for full template
+    -- See https://github.com/yashhasan570/UniversalReader-base/blob/master/ffi/framebuffer.lua for full template
     -- of the table expected.
     usingForcedRotation = function() return nil end,
     -- needs full screen refresh when resumed from screensaver?
@@ -186,7 +186,7 @@ local Device = {
     hasOTARunning = no,
 
     -- set to yes on devices that have a non-blocking isWifiOn implementation
-    -- (c.f., https://github.com/koreader/koreader/pull/5211#issuecomment-521304139)
+    -- (c.f., https://github.com/yashhasan570/UniversalReader/pull/5211#issuecomment-521304139)
     hasFastWifiStatusQuery = no,
 
     -- set to yes on devices with system fonts
@@ -550,7 +550,7 @@ function Device:notifyBookState(title, document) end
 -- and only if allowed state is true at the time of waitForEvents() invocation.
 function Device:setAutoStandby(isAllowed) end
 
--- Hardware specific method to set OS-level file associations to launch koreader. Expects boolean map.
+-- Hardware specific method to set OS-level file associations to launch universalreader. Expects boolean map.
 function Device:associateFileExtensions(exts)
     logger.dbg("Device:associateFileExtensions():", util.tableSize(exts), "entries, OS handler missing")
 end

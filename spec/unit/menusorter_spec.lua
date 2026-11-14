@@ -176,7 +176,7 @@ describe("MenuSorter module", function()
         }
 
         local test_menu = MenuSorter:sort(menu_items, order)
-        --- @fixme: Currently broken because pairs (c.f., https://github.com/koreader/koreader/pull/6371#issuecomment-657251137)
+        --- @fixme: Currently broken because pairs (c.f., https://github.com/yashhasan570/UniversalReader/pull/6371#issuecomment-657251137)
         --print(require("dump")(test_menu))
 
         -- all four should be in the first menu

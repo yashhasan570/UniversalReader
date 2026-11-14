@@ -1980,7 +1980,7 @@ Universal Reader has a built-in OCR engine for recognizing words in scanned PDF 
 
 You can download language data files for Tesseract version 5.3.4 from https://tesseract-ocr.github.io/tessdoc/Data-Files
 
-Copy the language data files (e.g., eng.traineddata for English and spa.traineddata for Spanish) into koreader/data/tessdata]])
+Copy the language data files (e.g., eng.traineddata for English and spa.traineddata for Spanish) into universalreader/data/tessdata]])
 
 function ReaderHighlight:lookupDictWord()
     -- convert sboxes to word boxes

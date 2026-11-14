@@ -3,46 +3,46 @@
 export LC_ALL="en_US.UTF-8"
 
 # Universal Reader's working directory.
-# NOTE: We need to remember the *actual* KOREADER_DIR, not the relocalized version in /tmp...
-export KOREADER_DIR="${KOREADER_DIR:-${0%/*}}"
-UNPACK_DIR="${KOREADER_DIR%/*}"
+# NOTE: We need to remember the *actual* UNIVERSALREADER_DIR, not the relocalized version in /tmp...
+export UNIVERSALREADER_DIR="${UNIVERSALREADER_DIR:-${0%/*}}"
+UNPACK_DIR="${UNIVERSALREADER_DIR%/*}"
 
 # Relocalize ourselves to /tmp: this is used by Universal Reader to detect if the
 # original script has changed after an update (requiring a complete restart
 # from the parent launcher).
 if [ "$(dirname "${0}")" != '/tmp' ]; then
-    cp -pf "${0}" '/tmp/koreader.sh'
-    chmod 777 '/tmp/koreader.sh'
-    exec '/tmp/koreader.sh' "$@"
+    cp -pf "${0}" '/tmp/universalreader.sh'
+    chmod 777 '/tmp/universalreader.sh'
+    exec '/tmp/universalreader.sh' "$@"
 fi
 
 # we're always starting from our working directory
-cd "${KOREADER_DIR}" || exit
+cd "${UNIVERSALREADER_DIR}" || exit
 
 # update to new version from OTA directory
 ko_update_check() {
-    NEWUPDATE="${KOREADER_DIR}/ota/update.tar.xz"
+    NEWUPDATE="${UNIVERSALREADER_DIR}/ota/update.tar.xz"
     if [ -f "${NEWUPDATE}" ]; then
         # Clear screen to delete UI leftovers
         ./fbink --cls
         ./fbink -q -y -7 -pmh "Updating Universal Reader"
         # Keep a copy of the old manifest for cleaning leftovers later.
-        cp "${KOREADER_DIR}/ota/package.index" /tmp/
+        cp "${UNIVERSALREADER_DIR}/ota/package.index" /tmp/
         # Setup the FBInk daemon
-        export FBINK_NAMED_PIPE="/tmp/koreader.fbink"
+        export FBINK_NAMED_PIPE="/tmp/universalreader.fbink"
         rm -f "${FBINK_NAMED_PIPE}"
-        FBINK_PID="$(./fbink --daemon 1 %KOREADER% -q -y -6 -P 0)"
+        FBINK_PID="$(./fbink --daemon 1 %UNIVERSALREADER% -q -y -6 -P 0)"
         # Open a handle to the fifo ourselves too: this prevent writes to the
         # fifo from hanging if fbink crashed (even with no one reading, its
         # buffer should still be big enough to never be full either).
         exec 3<>"${FBINK_NAMED_PIPE}"
-        (cd "${UNPACK_DIR}" && "${KOREADER_DIR}/unpack" -X "${NEWUPDATE}" >&3)
+        (cd "${UNPACK_DIR}" && "${UNIVERSALREADER_DIR}/unpack" -X "${NEWUPDATE}" >&3)
         fail=$?
         kill -TERM "${FBINK_PID}"
         # Cleanup behind us...
         if [ "${fail}" -eq 0 ]; then
             # Cleanup leftovers from previous install.
-            (cd "${UNPACK_DIR}" && grep -xvFf "${KOREADER_DIR}/ota/package.index" /tmp/package.index | xargs -r rm -vf)
+            (cd "${UNPACK_DIR}" && grep -xvFf "${UNIVERSALREADER_DIR}/ota/package.index" /tmp/package.index | xargs -r rm -vf)
             ./fbink -q -y -6 -pm "Update successful :)"
             ./fbink -q -y -5 -pm "Universal Reader will start momentarily . . ."
         else
@@ -65,7 +65,7 @@ ko_update_check
 # If an update happened, and was successful, reexec
 if [ -n "${fail}" ] && [ "${fail}" -eq 0 ]; then
     # By now, we know we're in the right directory, and our script name is pretty much set in stone, so we can forgo using $0
-    exec ./koreader.sh "$@"
+    exec ./universalreader.sh "$@"
 fi
 
 # export dict directory
@@ -97,18 +97,18 @@ CRASH_TS=0
 CRASH_PREV_TS=0
 # **magic** values to request shell stuff. It starts at 85,
 # any number lower than that will exit this script.
-RESTART_KOREADER=85
+RESTART_UNIVERSALREADER=85
 ENTER_USBMS=86
 ENTER_QBOOKAPP=87
-RETURN_VALUE="${RESTART_KOREADER}"
+RETURN_VALUE="${RESTART_UNIVERSALREADER}"
 
 # Loop forever until Universal Reader requests a normal exit.
 while [ "${RETURN_VALUE}" -ne 0 ]; do
 
-    # move dictionaries from external storage to koreader private partition.
-    find /mnt/public/dict -type f -exec mv -v \{\} /mnt/private/koreader/data/dict \; 2>/dev/null
+    # move dictionaries from external storage to universalreader private partition.
+    find /mnt/public/dict -type f -exec mv -v \{\} /mnt/private/universalreader/data/dict \; 2>/dev/null
 
-    if [ ${RETURN_VALUE} -eq ${RESTART_KOREADER} ]; then
+    if [ ${RETURN_VALUE} -eq ${RESTART_UNIVERSALREADER} ]; then
         # Do an update check now, so we can actually update Universal Reader via the "Restart Universal Reader" menu entry ;).
         ko_update_check
     fi
@@ -117,7 +117,7 @@ while [ "${RETURN_VALUE}" -ne 0 ]; do
     ./reader.lua "$@" >>crash.log 2>&1
     RETURN_VALUE=$?
 
-    if [ ${RETURN_VALUE} -ne 0 ] && [ "${RETURN_VALUE}" -ne "${ENTER_USBMS}" ] && [ "${RETURN_VALUE}" -ne "${ENTER_QBOOKAPP}" ] && [ "${RETURN_VALUE}" -ne "${RESTART_KOREADER}" ]; then
+    if [ ${RETURN_VALUE} -ne 0 ] && [ "${RETURN_VALUE}" -ne "${ENTER_USBMS}" ] && [ "${RETURN_VALUE}" -ne "${ENTER_QBOOKAPP}" ] && [ "${RETURN_VALUE}" -ne "${RESTART_UNIVERSALREADER}" ]; then
         # Increment the crash counter
         CRASH_COUNT=$((CRASH_COUNT + 1))
         CRASH_TS=$(date +'%s')

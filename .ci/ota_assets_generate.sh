@@ -49,8 +49,8 @@ zsync_make() {
 }
 
 # Fetch latest nightly kotasync files.
-if out="$(run gh release view --json assets --jq '.assets[].name | select(test("^koreader-.*-latest-nightly\\.kotasync$"))' "${OTA_RELEASE}")" && [[ -n "${out}" ]]; then
-    run gh release download --dir="${assets_dir}/.ota" --pattern='koreader-*-latest-nightly.kotasync' "${OTA_RELEASE}"
+if out="$(run gh release view --json assets --jq '.assets[].name | select(test("^universalreader-.*-latest-nightly\\.kotasync$"))' "${OTA_RELEASE}")" && [[ -n "${out}" ]]; then
+    run gh release download --dir="${assets_dir}/.ota" --pattern='universalreader-*-latest-nightly.kotasync' "${OTA_RELEASE}"
     # shellcheck disable=SC2016
     onexit 'run rm -rf "${assets_dir}/.ota"'
 fi
@@ -72,7 +72,7 @@ while read -r line; do
 
     printf '%s\n' "${ANSI_GREEN}${asset[platform_name]}: ${asset[file]}${ANSI_RESET}"
 
-    latest_files=("koreader-${asset[platform]}"-latest-{"${channel}",nightly})
+    latest_files=("universalreader-${asset[platform]}"-latest-{"${channel}",nightly})
 
     case "${asset[platform]}.${asset[extension]}" in
 
@@ -81,7 +81,7 @@ while read -r line; do
             latest_make link "${asset[file]}" "${latest_files[@]}"
             if [[ "${asset[stable]}" == 'true' ]] && [[ "${asset[commit_hash]}" ]]; then
                 commit_count="$(git rev-list --count "v${asset[base_version]}")"
-                run sh -c "printf '%s\n%u\n' 'v${asset[version]}' '${commit_count}' >koreader-android-fdroid-latest"
+                run sh -c "printf '%s\n%u\n' 'v${asset[version]}' '${commit_count}' >universalreader-android-fdroid-latest"
             fi
             ;;
 
@@ -92,8 +92,8 @@ while read -r line; do
             kotasync_make "${stem}.tar.xz" "${stem}.kotasync" "${latest_files[@]/%/.kotasync}"
             # Old OTA.
             case "${asset[platform]}" in
-                kobo*) opts=('--manifest=koreader/ota/package.index') pats=('-x!koreader.png') ;;
-                pocketbook*) opts=('--manifest=applications/koreader/ota/package.index' '--manifest-transform=s/^/..\//') pats=('-x!system') ;;
+                kobo*) opts=('--manifest=universalreader/ota/package.index') pats=('-x!universalreader.png') ;;
+                pocketbook*) opts=('--manifest=applications/universalreader/ota/package.index' '--manifest-transform=s/^/..\//') pats=('-x!system') ;;
                 *) opts=() pats=() ;;
             esac
             release_make "${opts[@]}" "${stem}.targz" "${asset[file]}" "${pats[@]}"

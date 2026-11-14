@@ -16,7 +16,7 @@ local ConfirmBox = require("ui/widget/confirmbox")
 local InfoMessage = require("ui/widget/infomessage")
 local UIManager = require("ui/uimanager")
 local dbg = require("dbg")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local ffiUtil = require("ffi/util")
 local _ = require("gettext")
@@ -510,7 +510,7 @@ function PluginLoader:stopPluginInstanceByName(name)
 end
 
 --- Calls the deletePluginSettings() method on a plugin instance of a given name if it's currently loaded.
---- This is only intended for plugins that manage settings in G_reader_settings or koreader/settings.
+--- This is only intended for plugins that manage settings in G_reader_settings or universalreader/settings.
 --- @param name string The name of the plugin whose settings should be deleted.
 --- @return boolean Success, string|nil
 function PluginLoader:deletePluginSettingsByName(name)
@@ -527,7 +527,7 @@ function PluginLoader:deletePluginSettingsByName(name)
 end
 
 --- Calls the deletePluginSettings() method on a plugin instance if it's currently loaded.
---- This is only intended for plugins that manage settings in G_reader_settings or koreader/settings.
+--- This is only intended for plugins that manage settings in G_reader_settings or universalreader/settings.
 --- @param instance table The plugin instance whose settings should be deleted.
 --- @return boolean Success, string|nil
 function PluginLoader:deletePluginSettings(instance)

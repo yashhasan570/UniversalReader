@@ -12,14 +12,14 @@ describe("NewsDownloader URL normalization", function()
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Lorem Ipsum Feed</title>
-    <link>https://koreader.rocks</link>
+    <link>https://universalreader.rocks</link>
     <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</description>
-    <atom:link href="https://koreader.rocks/lorem-feed/rss" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://universalreader.rocks/lorem-feed/rss" rel="self" type="application/rss+xml"/>
     <item>
       <title><![CDATA[Lorem Ipsum Article]]></title>
-      <link>https://koreader.rocks/lorem-feed/redirect/https%3A%2F%2Fkoreader.rocks%2Florem%2Fipsum%2Farticle</link>
+      <link>https://universalreader.rocks/lorem-feed/redirect/https%3A%2F%2Funiversalreader.rocks%2Florem%2Fipsum%2Farticle</link>
       <pubDate>Sat, 14 Feb 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">https://koreader.rocks/lorem/ipsum/article</guid>
+      <guid isPermaLink="false">https://universalreader.rocks/lorem/ipsum/article</guid>
       <description><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit.]]></description>
       <content:encoded><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit.]]></content:encoded>
     </item>
@@ -58,13 +58,13 @@ describe("NewsDownloader URL normalization", function()
         local first_item = item[1] or item
         assert.equals("Lorem Ipsum Article", first_item.title)
         assert.equals(
-            "https://koreader.rocks/lorem-feed/redirect/https%3A%2F%2Fkoreader.rocks%2Florem%2Fipsum%2Farticle",
+            "https://universalreader.rocks/lorem-feed/redirect/https%3A%2F%2Funiversalreader.rocks%2Florem%2Fipsum%2Farticle",
             first_item.link
         )
     end)
 
     it("preserves path separators while encoding spaces", function()
-        local url = "https://koreader.rocks/lorem/feed/blog path/ipsum article"
+        local url = "https://universalreader.rocks/lorem/feed/blog path/ipsum article"
         local requested_url
 
         with_mock(socket_http, "request", function(request)
@@ -74,12 +74,12 @@ describe("NewsDownloader URL normalization", function()
             DownloadBackend:getResponseAsString(url, nil, false, nil)
         end)
 
-        assert.equals("https://koreader.rocks/lorem/feed/blog%20path/ipsum%20article", requested_url)
+        assert.equals("https://universalreader.rocks/lorem/feed/blog%20path/ipsum%20article", requested_url)
         assert.is_true(requested_url ~= url)
     end)
 
     it("preserves existing percent-encoded octets in path", function()
-        local url = "https://koreader.rocks/lorem/feed/redirect/https%3A%2F%2Fkoreader.rocks%2Florem%2Fipsum%2Farticle"
+        local url = "https://universalreader.rocks/lorem/feed/redirect/https%3A%2F%2Funiversalreader.rocks%2Florem%2Fipsum%2Farticle"
         local requested_url
 
         with_mock(socket_http, "request", function(request)

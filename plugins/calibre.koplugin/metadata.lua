@@ -8,7 +8,7 @@ of storing it.
 @module koplugin.calibre.metadata
 --]]--
 
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local rapidjson = require("rapidjson")
 local logger = require("logger")
 local util = require("util")

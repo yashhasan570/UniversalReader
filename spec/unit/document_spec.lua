@@ -49,7 +49,7 @@ describe("EPUB document module", function()
 
     setup(function()
         require("commonrequire")
-        cre = require("libs/libkoreader-cre")
+        cre = require("libs/libuniversalreader-cre")
         DocumentRegistry = require("document/documentregistry")
     end)
 

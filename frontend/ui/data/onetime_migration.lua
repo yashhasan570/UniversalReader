@@ -4,7 +4,7 @@ Centralizes any and all one time migration concerns.
 
 local DataStorage = require("datastorage")
 local ffiUtil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local LuaSettings = require("luasettings")
 local SQ3 = require("lua-ljsqlite3/init")
@@ -34,12 +34,12 @@ local function drop_fontcache()
     end
 end
 
--- ReaderTypography, https://github.com/koreader/koreader/pull/6072
+-- ReaderTypography, https://github.com/yashhasan570/UniversalReader/pull/6072
 if last_migration_date < 20200421 then
     logger.info("Performing one-time migration for 20200421")
 
     -- Drop the Fontlist cache early, in case it's in an incompatible format for some reason...
-    -- c.f., https://github.com/koreader/koreader/issues/9771#issuecomment-1546308746
+    -- c.f., https://github.com/yashhasan570/UniversalReader/issues/9771#issuecomment-1546308746
     -- (This is basically the 20220914 migration step applied preemptively, as readertypography *will* attempt to load it).
     drop_fontcache()
 
@@ -83,10 +83,10 @@ if last_migration_date < 20200421 then
 end
 
 -- NOTE: ReaderRolling, on the other hand, does some lower-level things @ onReadSettings tied to CRe that would be much harder to factor out.
---       https://github.com/koreader/koreader/pull/1930
+--       https://github.com/yashhasan570/UniversalReader/pull/1930
 -- NOTE: The Gestures plugin also handles its settings migration on its own, but deals with it sanely.
 
--- ScreenSaver, https://github.com/koreader/koreader/pull/7371
+-- ScreenSaver, https://github.com/yashhasan570/UniversalReader/pull/7371
 if last_migration_date < 20210306 then
     logger.info("Performing one-time migration for 20210306 (1/2)")
 
@@ -135,7 +135,7 @@ if last_migration_date < 20210306 then
     end
 end
 
--- Statistics, https://github.com/koreader/koreader/pull/7471
+-- Statistics, https://github.com/yashhasan570/UniversalReader/pull/7471
 if last_migration_date < 20210330 then
     logger.info("Performing one-time migration for 20210330")
 
@@ -160,7 +160,7 @@ if last_migration_date < 20210330 then
     end
 end
 
--- ScreenSaver, https://github.com/koreader/koreader/pull/7496
+-- ScreenSaver, https://github.com/yashhasan570/UniversalReader/pull/7496
 if last_migration_date < 20210404 then
     logger.info("Performing one-time migration for 20210404")
 
@@ -171,7 +171,7 @@ if last_migration_date < 20210404 then
     end
 end
 
--- Fontlist, cache migration, https://github.com/koreader/koreader/pull/7524
+-- Fontlist, cache migration, https://github.com/yashhasan570/UniversalReader/pull/7524
 if last_migration_date < 20210409 then
     logger.info("Performing one-time migration for 20210409")
 
@@ -189,7 +189,7 @@ if last_migration_date < 20210409 then
     DocCache:refreshSnapshot()
 end
 
--- Calibre, cache migration, https://github.com/koreader/koreader/pull/7528
+-- Calibre, cache migration, https://github.com/yashhasan570/UniversalReader/pull/7528
 if last_migration_date < 20210412 then
     logger.info("Performing one-time migration for 20210412")
 
@@ -211,7 +211,7 @@ if last_migration_date < 20210412 then
     DocCache:refreshSnapshot()
 end
 
--- Calibre, cache encoding format change, https://github.com/koreader/koreader/pull/7543
+-- Calibre, cache encoding format change, https://github.com/yashhasan570/UniversalReader/pull/7543
 if last_migration_date < 20210414 then
     logger.info("Performing one-time migration for 20210414")
 
@@ -222,8 +222,8 @@ if last_migration_date < 20210414 then
     end
 end
 
--- 20210503: DocCache, migration to Persist, https://github.com/koreader/koreader/pull/7624
--- 20210508: DocCache, KOPTInterface hash fix, https://github.com/koreader/koreader/pull/7634
+-- 20210503: DocCache, migration to Persist, https://github.com/yashhasan570/UniversalReader/pull/7624
+-- 20210508: DocCache, KOPTInterface hash fix, https://github.com/yashhasan570/UniversalReader/pull/7634
 if last_migration_date < 20210508 then
     logger.info("Performing one-time migration for 20210503 & 20210508")
 
@@ -231,9 +231,9 @@ if last_migration_date < 20210508 then
     DocCache:clearDiskCache()
 end
 
--- 20210518, ReaderFooter, https://github.com/koreader/koreader/pull/7702
--- 20210622, ReaderFooter, https://github.com/koreader/koreader/pull/7876
--- 20240616, ReaderFooter, https://github.com/koreader/koreader/pull/11999
+-- 20210518, ReaderFooter, https://github.com/yashhasan570/UniversalReader/pull/7702
+-- 20210622, ReaderFooter, https://github.com/yashhasan570/UniversalReader/pull/7876
+-- 20240616, ReaderFooter, https://github.com/yashhasan570/UniversalReader/pull/11999
 -- NOTE: Used when we add new default settings.
 --       May need to be run multiple times, as other upgrade steps may attempt to load readerfooter,
 --       and missing defaults could lead to undefined behavior.
@@ -255,12 +255,12 @@ local function readerfooter_defaults(date)
     G_reader_settings:saveSetting("footer", settings)
 end
 
--- https://github.com/koreader/koreader/pull/7702
+-- https://github.com/yashhasan570/UniversalReader/pull/7702
 if last_migration_date < 20210518 then
     readerfooter_defaults("20210518")
 end
 
--- 20210521, ReaderZooming, zoom_factor -> kopt_zoom_factor, https://github.com/koreader/koreader/pull/7728
+-- 20210521, ReaderZooming, zoom_factor -> kopt_zoom_factor, https://github.com/yashhasan570/UniversalReader/pull/7728
 if last_migration_date < 20210521 then
     logger.info("Performing one-time migration for 20210521")
 
@@ -273,7 +273,7 @@ if last_migration_date < 20210521 then
     end
 end
 
--- 20210531, ReaderZooming, deprecate zoom_mode in global settings, https://github.com/koreader/koreader/pull/7780
+-- 20210531, ReaderZooming, deprecate zoom_mode in global settings, https://github.com/yashhasan570/UniversalReader/pull/7780
 if last_migration_date < 20210531 then
     logger.info("Performing one-time migration for 20210531")
 
@@ -291,12 +291,12 @@ if last_migration_date < 20210531 then
     end
 end
 
--- https://github.com/koreader/koreader/pull/7876
+-- https://github.com/yashhasan570/UniversalReader/pull/7876
 if last_migration_date < 20210622 then
     readerfooter_defaults("20210622")
 end
 
--- 20210629, Moves Duration Format to Date Time settings for other plugins to use, https://github.com/koreader/koreader/pull/7897
+-- 20210629, Moves Duration Format to Date Time settings for other plugins to use, https://github.com/yashhasan570/UniversalReader/pull/7897
 if last_migration_date < 20210629 then
     logger.info("Performing one-time migration for 20210629")
 
@@ -308,7 +308,7 @@ if last_migration_date < 20210629 then
     end
 end
 
--- 20210715, Rename `numeric` to `natural`, https://github.com/koreader/koreader/pull/7978
+-- 20210715, Rename `numeric` to `natural`, https://github.com/yashhasan570/UniversalReader/pull/7978
 if last_migration_date < 20210715 then
     logger.info("Performing one-time migration for 20210715")
     if G_reader_settings:has("collate") then
@@ -319,7 +319,7 @@ if last_migration_date < 20210715 then
     end
 end
 
--- 20210720, Reset all user's duration time to classic, https://github.com/koreader/koreader/pull/8008
+-- 20210720, Reset all user's duration time to classic, https://github.com/yashhasan570/UniversalReader/pull/8008
 if last_migration_date < 20210720 then
     logger.info("Performing one-time migration for 20210720")
     -- With PR 7897 and migration date 20210629, we migrated everyone's duration format to the combined setting.
@@ -329,7 +329,7 @@ if last_migration_date < 20210720 then
     G_reader_settings:saveSetting("duration_format", "classic")
 end
 
--- 20210831, Clean VirtualKeyboard settings of disabled layouts, https://github.com/koreader/koreader/pull/8159
+-- 20210831, Clean VirtualKeyboard settings of disabled layouts, https://github.com/yashhasan570/UniversalReader/pull/8159
 if last_migration_date < 20210831 then
     logger.info("Performing one-time migration for 20210831")
     local keyboard_layouts = G_reader_settings:readSetting("keyboard_layouts") or {}
@@ -344,14 +344,14 @@ if last_migration_date < 20210831 then
     G_reader_settings:saveSetting("keyboard_layouts", keyboard_layouts_new)
 end
 
--- 20210902, Remove unneeded auto_warmth settings after https://github.com/koreader/koreader/pull/8154
+-- 20210902, Remove unneeded auto_warmth settings after https://github.com/yashhasan570/UniversalReader/pull/8154
 if last_migration_date < 20210925 then
     logger.info("Performing one-time migration for 20210925")
     G_reader_settings:delSetting("frontlight_auto_warmth")
     G_reader_settings:delSetting("frontlight_max_warmth_hour")
 end
 
--- OPDS, add new server, https://github.com/koreader/koreader/pull/8606
+-- OPDS, add new server, https://github.com/yashhasan570/UniversalReader/pull/8606
 if last_migration_date < 20220116 then
     logger.info("Performing one-time migration for 20220116")
 
@@ -388,7 +388,7 @@ if last_migration_date < 20220116 then
 end
 
 -- Disable the jump marker on the Libra 2, to avoid the worst of epdc race issues...
--- c.f., https://github.com/koreader/koreader/issues/8414
+-- c.f., https://github.com/yashhasan570/UniversalReader/issues/8414
 if last_migration_date < 20220205 then
     logger.info("Performing one-time migration for 20220205")
 
@@ -398,7 +398,7 @@ if last_migration_date < 20220205 then
     end
 end
 
--- Rename several time storing settings and shift their value to the new meaning see (https://github.com/koreader/koreader/pull/8999)
+-- Rename several time storing settings and shift their value to the new meaning see (https://github.com/yashhasan570/UniversalReader/pull/8999)
 if last_migration_date < 20220426 then
     local function migrateSettingsName(old, new, factor)
         factor = factor or 1
@@ -419,7 +419,7 @@ if last_migration_date < 20220426 then
     migrateSettingsName("device_status_memory_interval", "device_status_memory_interval_minutes")
 end
 
--- Rename several time storing settings and shift their value to the new meaning follow up to (https://github.com/koreader/koreader/pull/8999)
+-- Rename several time storing settings and shift their value to the new meaning follow up to (https://github.com/yashhasan570/UniversalReader/pull/8999)
 if last_migration_date < 20220523 then
     local function migrateSettingsName(old, new, factor)
         factor = factor or 1
@@ -432,11 +432,11 @@ if last_migration_date < 20220523 then
     migrateSettingsName("highlight_long_hold_threshold", "highlight_long_hold_threshold_s")
 end
 
--- https://github.com/koreader/koreader/pull/9104
+-- https://github.com/yashhasan570/UniversalReader/pull/9104
 if last_migration_date < 20220625 then
     os.remove("afterupdate.marker")
 
-    -- Move an existing `koreader/patch.lua` to `koreader/patches/1-patch.lua` (-> will be executed in `early`)
+    -- Move an existing `universalreader/patch.lua` to `universalreader/patches/1-patch.lua` (-> will be executed in `early`)
     local data_dir = DataStorage:getDataDir()
     local patch_dir = data_dir .. "/patches"
     if lfs.attributes(data_dir .. "/patch.lua", "mode") == "file" then
@@ -449,7 +449,7 @@ if last_migration_date < 20220625 then
     end
 end
 
--- https://github.com/koreader/koreader/pull/9371
+-- https://github.com/yashhasan570/UniversalReader/pull/9371
 if last_migration_date < 20220819 then
     logger.info("Performing one-time migration for 20220819")
 
@@ -467,14 +467,14 @@ if last_migration_date < 20220819 then
     end
 end
 
--- Fontlist, cache format change (https://github.com/koreader/koreader/pull/9513)
+-- Fontlist, cache format change (https://github.com/yashhasan570/UniversalReader/pull/9513)
 if last_migration_date < 20220914 then
     logger.info("Performing one-time migration for 20220914")
 
     drop_fontcache()
 end
 
--- The great defaults.persistent.lua migration to LuaDefaults (https://github.com/koreader/koreader/pull/9546)
+-- The great defaults.persistent.lua migration to LuaDefaults (https://github.com/yashhasan570/UniversalReader/pull/9546)
 if last_migration_date < 20220930 then
     logger.info("Performing one-time migration for 20220930")
 
@@ -514,7 +514,7 @@ if last_migration_date < 20220930 then
     end
 end
 
--- Extend the 20220205 hack to *all* the devices flagged as unreliable..., https://github.com/koreader/koreader/pull/9691
+-- Extend the 20220205 hack to *all* the devices flagged as unreliable..., https://github.com/yashhasan570/UniversalReader/pull/9691
 if last_migration_date < 20221027 then
     logger.info("Performing one-time migration for 20221027")
 
@@ -524,7 +524,7 @@ if last_migration_date < 20221027 then
     end
 end
 
--- 20230531, Rename `strcoll_mixed` to `strcoll`+`collate_mixed`, https://github.com/koreader/koreader/pull/10198
+-- 20230531, Rename `strcoll_mixed` to `strcoll`+`collate_mixed`, https://github.com/yashhasan570/UniversalReader/pull/10198
 if last_migration_date < 20230531 then
     logger.info("Performing one-time migration for 20230531")
     if G_reader_settings:readSetting("collate") == "strcoll_mixed" then
@@ -533,7 +533,7 @@ if last_migration_date < 20230531 then
     end
 end
 
--- 20230703, FileChooser Sort by: "date modified" only, https://github.com/koreader/koreader/pull/10627
+-- 20230703, FileChooser Sort by: "date modified" only, https://github.com/yashhasan570/UniversalReader/pull/10627
 if last_migration_date < 20230703 then
     logger.info("Performing one-time migration for 20230703")
     local collate = G_reader_settings:readSetting("collate")
@@ -542,7 +542,7 @@ if last_migration_date < 20230703 then
     end
 end
 
--- 20230707, OPDS, no more special calibre catalog, https://github.com/koreader/koreader/pull/10657
+-- 20230707, OPDS, no more special calibre catalog, https://github.com/yashhasan570/UniversalReader/pull/10657
 if last_migration_date < 20230707 then
     logger.info("Performing one-time migration for 20230707")
 
@@ -560,7 +560,7 @@ if last_migration_date < 20230707 then
     end
 end
 
--- 20230710, Migrate to a full settings table, and disable KOSync's auto sync mode if wifi_enable_action is not turn_on, https://github.com/koreader/koreader/pull/10669
+-- 20230710, Migrate to a full settings table, and disable KOSync's auto sync mode if wifi_enable_action is not turn_on, https://github.com/yashhasan570/UniversalReader/pull/10669
 if last_migration_date < 20230710 then
     logger.info("Performing one-time migration for 20230710")
 
@@ -601,7 +601,7 @@ if last_migration_date < 20230710 then
     end
 end
 
--- 20230731, aka., "let's kill all those stupid and weird mxcfb workarounds", https://github.com/koreader/koreader/pull/10771
+-- 20230731, aka., "let's kill all those stupid and weird mxcfb workarounds", https://github.com/yashhasan570/UniversalReader/pull/10771
 if last_migration_date < 20230731 then
     logger.info("Performing one-time migration for 20230731")
 
@@ -613,7 +613,7 @@ if last_migration_date < 20230731 then
     end
 end
 
--- 20230802, Statistics plugin null id_book in page_stat_data, https://github.com/koreader/koreader/pull/10749
+-- 20230802, Statistics plugin null id_book in page_stat_data, https://github.com/yashhasan570/UniversalReader/pull/10749
 if last_migration_date < 20230802 then
     logger.info("Performing one-time migration for 20230802")
     local db_location = DataStorage:getSettingsDir() .. "/statistics.sqlite3"
@@ -636,7 +636,7 @@ if last_migration_date < 20230802 then
     end
 end
 
--- 20230901, new handling of the pdf contrast ("gamma") setting, https://github.com/koreader/koreader/pull/10798
+-- 20230901, new handling of the pdf contrast ("gamma") setting, https://github.com/yashhasan570/UniversalReader/pull/10798
 if last_migration_date < 20230901 then
     logger.info("Performing one-time migration for 20230901")
 
@@ -646,7 +646,7 @@ if last_migration_date < 20230901 then
     end
 end
 
--- 20231217, change folder_shortcuts setting from array to hash table, https://github.com/koreader/koreader/pull/11221
+-- 20231217, change folder_shortcuts setting from array to hash table, https://github.com/yashhasan570/UniversalReader/pull/11221
 if last_migration_date < 20231217 then
     logger.info("Performing one-time migration for 20231217")
 
@@ -661,7 +661,7 @@ if last_migration_date < 20231217 then
     end
 end
 
--- 20240408, drop sleep screen/screensaver image_file setting in favor of document cover, https://github.com/koreader/koreader/pull/11549
+-- 20240408, drop sleep screen/screensaver image_file setting in favor of document cover, https://github.com/yashhasan570/UniversalReader/pull/11549
 if last_migration_date < 20240408 then
     logger.info("Performing one-time migration for 20240408")
 
@@ -672,12 +672,12 @@ if last_migration_date < 20240408 then
     end
 end
 
--- https://github.com/koreader/koreader/pull/11999
+-- https://github.com/yashhasan570/UniversalReader/pull/11999
 if last_migration_date < 20240616 then
     readerfooter_defaults("20240616")
 end
 
--- 20240731, ReaderFooter: store unscaled progress bar margins, https://github.com/koreader/koreader/pull/12243
+-- 20240731, ReaderFooter: store unscaled progress bar margins, https://github.com/yashhasan570/UniversalReader/pull/12243
 if last_migration_date < 20240731 then
     logger.info("Performing one-time migration for 20240731")
 
@@ -689,7 +689,7 @@ if last_migration_date < 20240731 then
     end
 end
 
--- 20240911, Defaults: Deprecate DKOPTREADER_CONFIG_DOC_LANGS_TEXT after #11977, https://github.com/koreader/koreader/pull/12504
+-- 20240911, Defaults: Deprecate DKOPTREADER_CONFIG_DOC_LANGS_TEXT after #11977, https://github.com/yashhasan570/UniversalReader/pull/12504
 if last_migration_date < 20240911 then
     logger.info("Performing one-time migration for 20240911")
 
@@ -700,7 +700,7 @@ if last_migration_date < 20240911 then
     G_defaults:flush()
 end
 
--- 20240914, Write highlights to PDF: revisited, https://github.com/koreader/koreader/pull/12509
+-- 20240914, Write highlights to PDF: revisited, https://github.com/yashhasan570/UniversalReader/pull/12509
 if last_migration_date < 20240914 then
     logger.info("Performing one-time migration for 20240914")
 
@@ -714,7 +714,7 @@ if last_migration_date < 20240914 then
     G_reader_settings:delSetting("save_document")
 end
 
--- 20240915, metric_length -> dimension_units, https://github.com/koreader/koreader/pull/12507
+-- 20240915, metric_length -> dimension_units, https://github.com/yashhasan570/UniversalReader/pull/12507
 if last_migration_date < 20240915 then
     logger.info("Performing one-time migration for 20240915")
 
@@ -724,7 +724,7 @@ if last_migration_date < 20240915 then
     end
 end
 
--- 20240928, Profiles auto-execute, https://github.com/koreader/koreader/pull/12564
+-- 20240928, Profiles auto-execute, https://github.com/yashhasan570/UniversalReader/pull/12564
 if last_migration_date < 20240928 then
     logger.info("Performing one-time migration for 20240928")
 
@@ -742,7 +742,7 @@ if last_migration_date < 20240928 then
 end
 
 -- 20241123, Switch "Until 'exit sleep screen' gesture" to "Until a key press" for non-touch devices
--- https://github.com/koreader/koreader/pull/12747
+-- https://github.com/yashhasan570/UniversalReader/pull/12747
 if last_migration_date < 20241123 then
     logger.info("Performing one-time migration for 20241123")
 
@@ -753,7 +753,7 @@ if last_migration_date < 20241123 then
 end
 
 -- 20241207, We moved patch management to core. Remove the original plugin.
--- https://github.com/koreader/koreader/pull/12862
+-- https://github.com/yashhasan570/UniversalReader/pull/12862
 if last_migration_date < 20241207 then
     logger.info("Performing one-time migration for 20241207")
 
@@ -761,7 +761,7 @@ if last_migration_date < 20241207 then
 end
 
 -- 20241208, Remove unused setting.
--- https://github.com/koreader/koreader/pull/12871
+-- https://github.com/yashhasan570/UniversalReader/pull/12871
 if last_migration_date < 20241208 then
     logger.info("Performing one-time migration for 20241208")
 
@@ -769,7 +769,7 @@ if last_migration_date < 20241208 then
 end
 
 -- 20241228, Refactor wallabag plugin.
--- https://github.com/koreader/koreader/pull/12949
+-- https://github.com/yashhasan570/UniversalReader/pull/12949
 if last_migration_date < 20241228 then
     logger.info("Performing one-time migration for 20241228")
 
@@ -804,7 +804,7 @@ if last_migration_date < 20241228 then
 end
 
 -- 20250207, Separate GoTo and Back actions for Reader and FileManager.
--- https://github.com/koreader/koreader/pull/13167
+-- https://github.com/yashhasan570/UniversalReader/pull/13167
 if last_migration_date < 20250207 then
     logger.info("Performing one-time migration for 20250207")
 
@@ -834,7 +834,7 @@ if last_migration_date < 20250207 then
 end
 
 -- 20250302, Move OPDS settings from settings.reader.ui to settings/opds.lua.
--- https://github.com/koreader/koreader/pull/13338
+-- https://github.com/yashhasan570/UniversalReader/pull/13338
 if last_migration_date < 20250302 then
     logger.info("Performing one-time migration for 20250302")
 
@@ -848,7 +848,7 @@ if last_migration_date < 20250302 then
 end
 
 -- 20250318, Remove obsolete plugins
--- https://github.com/koreader/koreader/pull/12932
+-- https://github.com/yashhasan570/UniversalReader/pull/12932
 if last_migration_date < 20250318 then
     logger.info("Performing one-time migration for 20250318")
     local base = DataStorage:getDataDir() .. "/plugins/"
@@ -861,7 +861,7 @@ if last_migration_date < 20250318 then
 end
 
 -- 20250405, Modify file browser show_finished setting to show_filter table.
--- https://github.com/koreader/koreader/pull/13503
+-- https://github.com/yashhasan570/UniversalReader/pull/13503
 if last_migration_date < 20250405 then
     logger.info("Performing one-time migration for 20250405")
 
@@ -877,10 +877,10 @@ if last_migration_date < 20250405 then
     G_reader_settings:delSetting("show_finished")
 end
 
--- Global settings, https://github.com/koreader/koreader/pull/4945 & https://github.com/koreader/koreader/pull/5655
+-- Global settings, https://github.com/yashhasan570/UniversalReader/pull/4945 & https://github.com/yashhasan570/UniversalReader/pull/5655
 -- Limit the check to the most recent update. ReaderUI calls this one unconditionally to update docsettings, too.
 -- 20250601, Refactor default footnote style tweaks
--- https://github.com/koreader/koreader/pull/13613
+-- https://github.com/yashhasan570/UniversalReader/pull/13613
 if last_migration_date < 20250601 then
     logger.info("Performing one-time migration for 20250601")
 
@@ -889,7 +889,7 @@ if last_migration_date < 20250601 then
 end
 
 -- 20250914, Move all ReadTimer plugin settings into a single table.
--- https://github.com/koreader/koreader/pull/14309
+-- https://github.com/yashhasan570/UniversalReader/pull/14309
 if last_migration_date < 20250914 then
     logger.info("Performing one-time migration for 20250914")
 
@@ -912,7 +912,7 @@ if last_migration_date < 20250914 then
 end
 
 -- 20250929, Screensaver message position refactor: top/middle/bottom -> banner/box with custom positioning
--- https://github.com/koreader/koreader/pull/14371
+-- https://github.com/yashhasan570/UniversalReader/pull/14371
 if last_migration_date < 20250929 then
     logger.info("Performing one-time migration for 20250929")
 
@@ -946,7 +946,7 @@ if last_migration_date < 20250929 then
 end
 
 -- 20260306, Enable virtual keyboard on kindle 4
--- https://github.com/koreader/koreader/pull/15057
+-- https://github.com/yashhasan570/UniversalReader/pull/15057
 if last_migration_date < 20260306 then
     logger.info("Performing one-time migration for 20260306")
 
@@ -957,7 +957,7 @@ if last_migration_date < 20260306 then
 end
 
 -- 20260428, Hotkeys plugin: add text_selection to hotkeys_reader defaults
--- https://github.com/koreader/koreader/pull/14867
+-- https://github.com/yashhasan570/UniversalReader/pull/14867
 if last_migration_date < 20260428 then
     logger.info("Performing one-time migration for 20260428")
 
@@ -977,7 +977,7 @@ if last_migration_date < 20260428 then
 end
 
 -- 20260512, Move HttpInspector plugin settings into one table.
--- https://github.com/koreader/koreader/pull/15373
+-- https://github.com/yashhasan570/UniversalReader/pull/15373
 if last_migration_date < 20260512 then
     logger.info("Performing one-time migration for 20260512")
 
@@ -994,7 +994,7 @@ if last_migration_date < 20260512 then
 end
 
 -- 20260517, Move BookShortcuts plugin settings into the settings file.
--- https://github.com/koreader/koreader/pull/15392
+-- https://github.com/yashhasan570/UniversalReader/pull/15392
 if last_migration_date < 20260517 then
     logger.info("Performing one-time migration for 20260517")
 
@@ -1013,7 +1013,7 @@ if last_migration_date < 20260517 then
 end
 
 -- 20260623, Move Kosync plugin settings into a separate file
--- https://github.com/koreader/koreader/pull/15591
+-- https://github.com/yashhasan570/UniversalReader/pull/15591
 if last_migration_date < 20260623 then
     logger.info("Performing one-time migration for 20260623")
     local kosync_setting = G_reader_settings:readSetting("kosync")
@@ -1026,7 +1026,7 @@ if last_migration_date < 20260623 then
 end
 
 -- 20260804, Remove CloudStorage app
--- https://github.com/koreader/koreader/pull/15793
+-- https://github.com/yashhasan570/UniversalReader/pull/15793
 if last_migration_date < 20260804 then
     logger.info("Performing one-time migration for 20260804")
     ffiUtil.purgeDir(DataStorage:getDataDir() .. "/frontend/apps/cloudstorage")

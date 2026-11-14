@@ -1,6 +1,6 @@
 local service = [[
 {
-    "base_url" : "https://sync.koreader.rocks:443/",
+    "base_url" : "https://sync.universalreader.rocks:443/",
     "name" : "api",
     "methods" : {
         "register" : {
@@ -68,7 +68,7 @@ describe("KOSync modules #notest", function()
         client = Spore.new_from_string(service)
         package.loaded['Spore.Middleware.GinClient'] = {}
         require('Spore.Middleware.GinClient').call = function(self, req)
-            req.headers['accept'] = "application/vnd.koreader.v1+json"
+            req.headers['accept'] = "application/vnd.universalreader.v1+json"
         end
         package.loaded['Spore.Middleware.KOSyncAuth'] = {}
         require('Spore.Middleware.KOSyncAuth').call = function(args, req)
@@ -76,7 +76,7 @@ describe("KOSync modules #notest", function()
             req.headers['x-auth-key'] = args.userkey
         end
         -- password should be hashed before submitting to server
-        username, password = "koreader", md5.sum("koreader")
+        username, password = "universalreader", md5.sum("universalreader")
         -- fake progress data
         doc, metadata, percentage, progress, device, device_id =
             "41cce710f34e5ec21315e19c99821415", -- fast digest of the document

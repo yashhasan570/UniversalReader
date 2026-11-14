@@ -3,7 +3,7 @@ local Geom = require("ui/geometry")
 local UIManager
 local WakeupMgr = require("device/wakeupmgr")
 local ffiUtil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local time = require("ui/time")
 local util = require("util")
@@ -394,12 +394,12 @@ local KoboNova = Kobo:extend{
 
 -- Kobo Forma:
 -- NOTE: Right now, we enforce Portrait orientation on startup to avoid getting touch coordinates wrong,
---       no matter the rotation we were started from (c.f., platform/kobo/koreader.sh).
+--       no matter the rotation we were started from (c.f., platform/kobo/universalreader.sh).
 -- NOTE: For the FL, assume brightness is WO, and actual_brightness is RO!
 --       i.e., we could have a real KoboPowerD:frontlightIntensityHW() by reading actual_brightness ;).
 -- NOTE: Rotation events *may* not be enabled if Nickel has never been brought up in that power cycle.
 --       i.e., this will affect KSM users.
---       c.f., https://github.com/koreader/koreader/pull/4414#issuecomment-449652335
+--       c.f., https://github.com/yashhasan570/UniversalReader/pull/4414#issuecomment-449652335
 --       There's also a CM_ROTARY_ENABLE command, but which seems to do as much nothing as the STATUS one...
 local KoboFrost = Kobo:extend{
     model = "Kobo_frost",
@@ -447,7 +447,7 @@ local KoboStorm = Kobo:extend{
     --       will mysteriously fail with a timeout (5s)...
     --       This obviously leads to *terrible* user experience,
     --       so we've tried a few things over the years to attempt to deal with it.
-    --       c.f., https://github.com/koreader/koreader/issues/7340 for the genesis of all that.
+    --       c.f., https://github.com/yashhasan570/UniversalReader/issues/7340 for the genesis of all that.
     -- NOTE: On a possibly related note, on NXP devices (even earlier ones), Nickel will *always* wait for markers in pairs:
     --       the "expected" marker to wait for, and the *previous* one right before that.
     --       Of course, that first wait will mostly always return early, because that refresh is usually much older and already dealt with.
@@ -537,11 +537,11 @@ local KoboIo = Kobo:extend{
         nl_inverted = true,
     },
     -- It would appear that the Libra 2 inherited its ancestor's quirks, and more...
-    -- c.f., https://github.com/koreader/koreader/issues/8414 & https://github.com/koreader/koreader/issues/8664
+    -- c.f., https://github.com/yashhasan570/UniversalReader/issues/8414 & https://github.com/yashhasan570/UniversalReader/issues/8664
     hasReliableMxcWaitFor = no,
     -- NOTE: There are at least two hardware revisions of this device (*without* a device code change, this time),
     --       with *significant* hardware changes, so we'll handle this by making the sysfs path discovery automagic.
-    --       c.f., https://github.com/koreader/koreader/issues/9218
+    --       c.f., https://github.com/yashhasan570/UniversalReader/issues/9218
     automagic_sysfs = true,
 }
 
@@ -564,7 +564,7 @@ local KoboGoldfinch = Kobo:extend{
     },
     battery_sysfs = "/sys/class/power_supply/battery",
     -- Board is eerily similar to the Libra 2, so, it inherits the same quirks...
-    -- c.f., https://github.com/koreader/koreader/issues/9552#issuecomment-1293000313
+    -- c.f., https://github.com/yashhasan570/UniversalReader/issues/9552#issuecomment-1293000313
     hasReliableMxcWaitFor = no,
 }
 
@@ -1069,7 +1069,7 @@ function Kobo:init()
         -- As found on (at least), the Aura H2O
         self.hasIRGridSysfsKnob = "/sys/devices/virtual/input/input1/neocmd"
     elseif lfs.attributes("/sys/devices/platform/imx-i2c.1/i2c-1/1-0050/neocmd", "mode") == "file" then
-        -- As found on (at least) the Glo HD (c.f., https://github.com/koreader/koreader/pull/9377#issuecomment-1213544478)
+        -- As found on (at least) the Glo HD (c.f., https://github.com/yashhasan570/UniversalReader/pull/9377#issuecomment-1213544478)
         self.hasIRGridSysfsKnob = "/sys/devices/platform/imx-i2c.1/i2c-1/1-0050/neocmd"
     end
 
@@ -1434,7 +1434,7 @@ function Kobo:standby(max_duration)
 
     -- The odd Sunxi needs some time to settle before entering standby.
     -- This will avoid the screen puzzling effect documented in
-    -- https://github.com/koreader/koreader/pull/10306#issue-1659242042 not only for
+    -- https://github.com/yashhasan570/UniversalReader/pull/10306#issue-1659242042 not only for
     -- WiFi toggle, but (almost) everywhere.
     ffiUtil.usleep(90000) -- sleep 0.09s (0.08s would also work)
 
@@ -1764,7 +1764,7 @@ end
 function Kobo:isStartupScriptUpToDate()
     local md5 = require("ffi/MD5")
     -- Compare the hash of the *active* script to the *potential* one.
-    return md5.sumFile("/tmp/koreader.sh") == md5.sumFile("koreader.sh")
+    return md5.sumFile("/tmp/universalreader.sh") == md5.sumFile("universalreader.sh")
 end
 
 function Kobo:UIManagerReady(uimgr)
@@ -1888,7 +1888,7 @@ elseif codename == "trilogy" and product_id == "310" then
     -- This is where things get interesting...
     -- The early 'A' variant (the actual model name being N905, without any letter suffix, unlike the two other variants)
     -- does *NOT* feature an internal SD card, and is manufactured in China instead of Taiwan... because it is *NOT* an NTX board.
-    -- cf. https://github.com/koreader/koreader/issues/9742
+    -- cf. https://github.com/yashhasan570/UniversalReader/issues/9742
     if os.getenv("PLATFORM") == "freescale" then
         return KoboTrilogyA
     else

@@ -1,13 +1,13 @@
 Files: *
-Copyright: Copyright (C) 2012 - 2020 KOReader developers
+Copyright: Copyright (C) 2012 - 2020 Universal Reader developers
 License: AGPL-3
   The full text of the AGPL-3 license is distributed with the software as in
-  /usr/share/doc/koreader/COPYING on Debian systems.
+  /usr/share/doc/universalreader/COPYING on Debian systems.
 
 Files: base
 Copyright: Various
 License: Various
-  Have a look at https://github.com/koreader/koreader-base/tree/master/thirdparty
+  Have a look at https://github.com/yashhasan570/UniversalReader-base/tree/master/thirdparty
   for a exhaustive list of third party software distributed with this program.
 
 Files: resources/fonts/nerdfonts
@@ -27,7 +27,7 @@ License: AGPL-3
   of the conditions or license applying to the document itself.
 
   The full text of the AGPL-3 license is distributed with the software as in
-  /usr/share/doc/koreader/COPYING on Debian systems.
+  /usr/share/doc/universalreader/COPYING on Debian systems.
 
 
 MIT License (for all the MIT licensed code indicated above)

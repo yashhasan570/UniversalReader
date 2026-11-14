@@ -4,7 +4,7 @@ This module contains miscellaneous helper functions for the Universal Reader fro
 
 local Utf8Proc = require("ffi/utf8proc")
 local ffiUtil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local md5 = require("ffi/sha2").md5
 local _ = require("gettext")
 local C_ = _.pgettext

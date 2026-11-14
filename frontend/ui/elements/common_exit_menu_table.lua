@@ -18,7 +18,7 @@ exit_settings.exit = {
         UIManager:broadcastEvent(Event:new("Exit"))
     end,
 }
-exit_settings.restart_koreader = {
+exit_settings.restart_universalreader = {
     text = _("Restart Universal Reader"),
     callback = function()
         UIManager:broadcastEvent(Event:new("Restart"))
@@ -27,7 +27,7 @@ exit_settings.restart_koreader = {
 if not Device:canRestart()  then
     exit_settings.exit_menu = exit_settings.exit
     exit_settings.exit = nil
-    exit_settings.restart_koreader = nil
+    exit_settings.restart_universalreader = nil
 end
 if Device:canSuspend() then
     exit_settings.sleep = {

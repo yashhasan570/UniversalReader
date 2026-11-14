@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=Universal Reader
 Comment=Ebook reader
-Exec=koreader %u
-Icon=rocks.koreader.Universal Reader
+Exec=universalreader %u
+Icon=app.universalreader.reader
 Terminal=false
 Type=Application
 Categories=Graphics;
@@ -10,5 +10,5 @@ MimeType=application/epub+zip;application/fb2;application/fb3;application/msword
 
 # Otherwise assumed incompatible with some mobile OSes
 # See <https://puri.sm/posts/specify-form-factors-in-your-librem-5-apps/>
-# and <https://github.com/koreader/koreader/issues/11118>
+# and <https://github.com/yashhasan570/UniversalReader/issues/11118>
 X-Purism-FormFactor=Workstation;Mobile;

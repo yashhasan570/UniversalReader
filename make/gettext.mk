@@ -2,7 +2,7 @@ PHONY += mo mo-clean po pot
 
 SELF := $(lastword $(MAKEFILE_LIST))
 
-DOMAIN = koreader
+DOMAIN = universalreader
 TEMPLATE_DIR = l10n/templates
 MSGFMT_BIN = msgfmt
 XGETTEXT_BIN = xgettext

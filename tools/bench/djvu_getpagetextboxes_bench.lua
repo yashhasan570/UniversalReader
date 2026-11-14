@@ -47,7 +47,7 @@ if not package.loaded["document/canvascontext"] then
     }
 end
 
-local djvu = require("libs/libkoreader-djvu")
+local djvu = require("libs/libuniversalreader-djvu")
 local DjvuDocument = require("frontend/document/djvudocument")
 
 local ok, doc = pcall(djvu.openDocument, file, false, nil)

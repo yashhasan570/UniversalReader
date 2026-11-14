@@ -1,6 +1,6 @@
 local Device = require("device")
 local Screensaver = require("ui/screensaver")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local _ = require("gettext")
 local N_ = _.ngettext
 local T = require("ffi/util").template

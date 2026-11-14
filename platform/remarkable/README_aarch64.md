@@ -8,4 +8,4 @@ with a USB cable.
 
 # Install & Launching
 
-Kindly refer to the wiki at https://github.com/koreader/koreader/wiki/Installation-on-reMarkable#manual-installation-on-remarkable-paper-pro
+Kindly refer to the wiki at https://github.com/yashhasan570/UniversalReader/wiki/Installation-on-reMarkable#manual-installation-on-remarkable-paper-pro

@@ -1,9 +1,9 @@
 LINUX_DIR = $(PLATFORM_DIR)/linux
-LINUX_PACKAGE = koreader-linux-$(LINUX_ARCH)$(KODEDUG_SUFFIX)-$(VERSION).tar.xz
+LINUX_PACKAGE = universalreader-linux-$(LINUX_ARCH)$(KODEDUG_SUFFIX)-$(VERSION).tar.xz
 LINUX_PACKAGE_COMPRESSION =  --block-list=0
 
 DIST_DIR = $(INSTALL_DIR)/dist
-DIST_APPID = rocks.koreader.KOReader
+DIST_APPID = app.universalreader.reader
 
 GLIBC_VERSION = $(shell ldd --version | sed -n '1s/.* \([0-9.]\+\)$$/\1/p')
 
@@ -11,26 +11,26 @@ define mkupdate_linux
 	rm -rf $1
 	install -d $1/usr/lib
 	# Runtime.
-	cd $(INSTALL_DIR) && '$(abspath tools/mkrelease.sh)' $(abspath $1/usr/lib)/ . $(call release_excludes,koreader/)
+	cd $(INSTALL_DIR) && '$(abspath tools/mkrelease.sh)' $(abspath $1/usr/lib)/ . $(call release_excludes,universalreader/)
 	# Add bin launcher indirection.
 	install -d $1/usr/bin
-	ln -s ../lib/koreader/koreader.sh $1/usr/bin/koreader
-	# Setup launcher to use ~/.config/koreader for writable storage.
-	sed -i -e 's/^# export @KOREADER_FLAVOR@$$/export KO_MULTIUSER=1/' $1/usr/lib/koreader/koreader.sh
+	ln -s ../lib/universalreader/universalreader.sh $1/usr/bin/universalreader
+	# Setup launcher to use ~/.config/universalreader for writable storage.
+	sed -i -e 's/^# export @UNIVERSALREADER_FLAVOR@$$/export KO_MULTIUSER=1/' $1/usr/lib/universalreader/universalreader.sh
 	# AppStream metadata.
-	install -D -m644 $(LINUX_DIR)/koreader.metainfo.xml $1/usr/share/metainfo/$(DIST_APPID).metainfo.xml
+	install -D -m644 $(LINUX_DIR)/universalreader.metainfo.xml $1/usr/share/metainfo/$(DIST_APPID).metainfo.xml
 	sed -i -e 's/%%VERSION%%/$(VERSION)/' -e 's/%%DATE%%/$(RELEASE_DATE)/' $1/usr/share/metainfo/$(DIST_APPID).metainfo.xml
 	# Copyright & license information.
-	install -D -m644 COPYING $(LINUX_DIR)/copyright -t $1/usr/share/doc/koreader/
+	install -D -m644 COPYING $(LINUX_DIR)/copyright -t $1/usr/share/doc/universalreader/
 	# Desktop entry.
-	install -D -m644 $(LINUX_DIR)/koreader.desktop $1/usr/share/applications/$(DIST_APPID).desktop
+	install -D -m644 $(LINUX_DIR)/universalreader.desktop $1/usr/share/applications/$(DIST_APPID).desktop
 	# Icons.
-	install -D -m644 $(LINUX_DIR)/icons/256x256/koreader.png $1/usr/share/icons/hicolor/256x256/apps/$(DIST_APPID).png
-	install -D -m644 $(LINUX_DIR)/icons/512x512/koreader.png $1/usr/share/icons/hicolor/512x512/apps/$(DIST_APPID).png
-	install -D -m644 resources/koreader.svg $1/usr/share/icons/hicolor/scalable/apps/$(DIST_APPID).svg
+	install -D -m644 $(LINUX_DIR)/icons/256x256/universalreader.png $1/usr/share/icons/hicolor/256x256/apps/$(DIST_APPID).png
+	install -D -m644 $(LINUX_DIR)/icons/512x512/universalreader.png $1/usr/share/icons/hicolor/512x512/apps/$(DIST_APPID).png
+	install -D -m644 resources/universalreader.svg $1/usr/share/icons/hicolor/scalable/apps/$(DIST_APPID).svg
 	# Man page.
-	install -D -m644 $(LINUX_DIR)/koreader.1 -t $1/usr/share/man/man1/
-	gzip -9 $1/usr/share/man/man1/koreader.1
+	install -D -m644 $(LINUX_DIR)/universalreader.1 -t $1/usr/share/man/man1/
+	gzip -9 $1/usr/share/man/man1/universalreader.1
 endef
 
 update-txz: all

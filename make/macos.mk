@@ -10,8 +10,8 @@ endef
 
 update-7z: all
 	mkdir -p $(INSTALL_DIR)/bundle/Contents/{MacOS,Resources}
-	cp -pv $(MACOS_DIR)/koreader.icns $(INSTALL_DIR)/bundle/Contents/Resources/icon.icns
-	cd $(INSTALL_DIR)/koreader && '$(abspath tools/mkrelease.sh)' ../bundle/Contents/koreader/ . $(release_excludes)
+	cp -pv $(MACOS_DIR)/universalreader.icns $(INSTALL_DIR)/bundle/Contents/Resources/icon.icns
+	cd $(INSTALL_DIR)/universalreader && '$(abspath tools/mkrelease.sh)' ../bundle/Contents/universalreader/ . $(release_excludes)
 	cp -pv $(MACOS_DIR)/menu.xml $(INSTALL_DIR)/bundle/Contents/MainMenu.xib
 	ibtool --compile $(INSTALL_DIR)/bundle/Contents/Resources/Base.lproj/MainMenu.nib $(INSTALL_DIR)/bundle/Contents/MainMenu.xib
 	rm -vf $(INSTALL_DIR)/bundle/Contents/MainMenu.xib

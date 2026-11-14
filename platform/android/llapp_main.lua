@@ -3,7 +3,7 @@ local android = require("android")
 -- setup Lua paths, and ffi helper / override
 require("setupkoenv")
 
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local ffi = require("ffi")
 local dummy = require("ffi/posix_h")
 local C = ffi.C

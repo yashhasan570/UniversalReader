@@ -1,6 +1,6 @@
--- koreader-dicts bilingual and monolingual dictionaries for Universal Reader.
--- Generated from the project's catalog with `kdicts koreader`. Do not edit by hand.
--- Source: https://github.com/DanielGregorini/koreader-dicts
+-- universalreader-dicts bilingual and monolingual dictionaries for Universal Reader.
+-- Generated from the project's catalog with `kdicts universalreader`. Do not edit by hand.
+-- Source: https://github.com/DanielGregorini/universalreader-dicts
 -- Built from Princeton WordNet, the Open Multilingual Wordnet and Wiktionary;
 -- every archive carries LICENSE and ATTRIBUTION for the sources it uses.
 return {
@@ -10,7 +10,7 @@ return {
         lang_out = "eng",
         entries = 815066,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-en.zip",
     },
     {
         name = "English-Portuguese (WordNet + Wiktionary)",
@@ -18,7 +18,7 @@ return {
         lang_out = "por",
         entries = 172842,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-pt.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-pt.zip",
     },
     {
         name = "English-Spanish (WordNet + Wiktionary)",
@@ -26,7 +26,7 @@ return {
         lang_out = "spa",
         entries = 174258,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-es.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-es.zip",
     },
     {
         name = "English-Italian (WordNet + Wiktionary)",
@@ -34,7 +34,7 @@ return {
         lang_out = "ita",
         entries = 169373,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-it.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-it.zip",
     },
     {
         name = "English-German (Wiktionary)",
@@ -42,7 +42,7 @@ return {
         lang_out = "deu",
         entries = 67375,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-de.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-de.zip",
     },
     {
         name = "English-French (WordNet)",
@@ -50,7 +50,7 @@ return {
         lang_out = "fra",
         entries = 84803,
         license = "CeCILL-C",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-fr.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-fr.zip",
     },
     {
         name = "English-Russian (Wiktionary)",
@@ -58,7 +58,7 @@ return {
         lang_out = "rus",
         entries = 58922,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-ru.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-ru.zip",
     },
     {
         name = "English-Polish (WordNet + Wiktionary)",
@@ -66,7 +66,7 @@ return {
         lang_out = "pol",
         entries = 177956,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-pl.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-pl.zip",
     },
     {
         name = "English-Dutch (WordNet + Wiktionary)",
@@ -74,7 +74,7 @@ return {
         lang_out = "nld",
         entries = 162346,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-nl.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-nl.zip",
     },
     {
         name = "English-Greek (WordNet + Wiktionary)",
@@ -82,7 +82,7 @@ return {
         lang_out = "ell",
         entries = 158536,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-el.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-el.zip",
     },
     {
         name = "English-Finnish (WordNet + Wiktionary)",
@@ -90,7 +90,7 @@ return {
         lang_out = "fin",
         entries = 179652,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-fi.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-fi.zip",
     },
     {
         name = "English-Japanese (WordNet + Wiktionary)",
@@ -98,7 +98,7 @@ return {
         lang_out = "jpn",
         entries = 163102,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-ja.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-ja.zip",
     },
     {
         name = "English-Korean (Wiktionary)",
@@ -106,7 +106,7 @@ return {
         lang_out = "kor",
         entries = 25985,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-ko.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-ko.zip",
     },
     {
         name = "English-Chinese (WordNet + Wiktionary)",
@@ -114,7 +114,7 @@ return {
         lang_out = "zho",
         entries = 170953,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-zh.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-zh.zip",
     },
     {
         name = "English-Arabic (WordNet + Wiktionary)",
@@ -122,7 +122,7 @@ return {
         lang_out = "ara",
         entries = 155624,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/en-ar.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/en-ar.zip",
     },
     {
         name = "Portuguese (Wiktionary)",
@@ -130,7 +130,7 @@ return {
         lang_out = "por",
         entries = 81068,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/pt-pt.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/pt-pt.zip",
     },
     {
         name = "Portuguese-English (WordNet + Wiktionary)",
@@ -138,7 +138,7 @@ return {
         lang_out = "eng",
         entries = 102769,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/pt-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/pt-en.zip",
     },
     {
         name = "Portuguese-Spanish (WordNet + Wiktionary)",
@@ -146,7 +146,7 @@ return {
         lang_out = "spa",
         entries = 36505,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/pt-es.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/pt-es.zip",
     },
     {
         name = "Portuguese-Italian (WordNet + Wiktionary)",
@@ -154,7 +154,7 @@ return {
         lang_out = "ita",
         entries = 34816,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/pt-it.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/pt-it.zip",
     },
     {
         name = "Spanish (Wiktionary)",
@@ -162,7 +162,7 @@ return {
         lang_out = "spa",
         entries = 133146,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/es-es.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/es-es.zip",
     },
     {
         name = "Spanish-English (WordNet + Wiktionary)",
@@ -170,7 +170,7 @@ return {
         lang_out = "eng",
         entries = 129570,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/es-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/es-en.zip",
     },
     {
         name = "Spanish-Portuguese (WordNet + Wiktionary)",
@@ -178,7 +178,7 @@ return {
         lang_out = "por",
         entries = 26039,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/es-pt.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/es-pt.zip",
     },
     {
         name = "Spanish-Italian (WordNet + Wiktionary)",
@@ -186,7 +186,7 @@ return {
         lang_out = "ita",
         entries = 21419,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/es-it.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/es-it.zip",
     },
     {
         name = "Italian (Wiktionary)",
@@ -194,7 +194,7 @@ return {
         lang_out = "ita",
         entries = 68755,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/it-it.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/it-it.zip",
     },
     {
         name = "Italian-English (WordNet + Wiktionary)",
@@ -202,7 +202,7 @@ return {
         lang_out = "eng",
         entries = 167851,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/it-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/it-en.zip",
     },
     {
         name = "Italian-Spanish (WordNet + Wiktionary)",
@@ -210,7 +210,7 @@ return {
         lang_out = "spa",
         entries = 24199,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/it-es.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/it-es.zip",
     },
     {
         name = "German (Wiktionary)",
@@ -218,7 +218,7 @@ return {
         lang_out = "deu",
         entries = 181914,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/de-de.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/de-de.zip",
     },
     {
         name = "German-English (Wiktionary)",
@@ -226,7 +226,7 @@ return {
         lang_out = "eng",
         entries = 125898,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/de-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/de-en.zip",
     },
     {
         name = "French (Wiktionary)",
@@ -234,7 +234,7 @@ return {
         lang_out = "fra",
         entries = 514854,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/fr-fr.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/fr-fr.zip",
     },
     {
         name = "French-Portuguese (Wiktionary)",
@@ -242,7 +242,7 @@ return {
         lang_out = "por",
         entries = 28505,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/fr-pt.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/fr-pt.zip",
     },
     {
         name = "Russian (Wiktionary)",
@@ -250,7 +250,7 @@ return {
         lang_out = "rus",
         entries = 450168,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/ru-ru.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/ru-ru.zip",
     },
     {
         name = "Russian-English (Wiktionary)",
@@ -258,7 +258,7 @@ return {
         lang_out = "eng",
         entries = 82549,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/ru-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/ru-en.zip",
     },
     {
         name = "Polish (Wiktionary)",
@@ -266,7 +266,7 @@ return {
         lang_out = "pol",
         entries = 115143,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/pl-pl.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/pl-pl.zip",
     },
     {
         name = "Polish-English (WordNet + Wiktionary)",
@@ -274,7 +274,7 @@ return {
         lang_out = "eng",
         entries = 124144,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/pl-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/pl-en.zip",
     },
     {
         name = "Czech (Wiktionary)",
@@ -282,7 +282,7 @@ return {
         lang_out = "ces",
         entries = 46726,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/cs-cs.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/cs-cs.zip",
     },
     {
         name = "Czech-English (Wiktionary)",
@@ -290,7 +290,7 @@ return {
         lang_out = "eng",
         entries = 54439,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/cs-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/cs-en.zip",
     },
     {
         name = "Dutch (Wiktionary)",
@@ -298,7 +298,7 @@ return {
         lang_out = "nld",
         entries = 195662,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/nl-nl.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/nl-nl.zip",
     },
     {
         name = "Dutch-English (WordNet + Wiktionary)",
@@ -306,7 +306,7 @@ return {
         lang_out = "eng",
         entries = 98897,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/nl-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/nl-en.zip",
     },
     {
         name = "Greek (Wiktionary)",
@@ -314,7 +314,7 @@ return {
         lang_out = "ell",
         entries = 452197,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/el-el.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/el-el.zip",
     },
     {
         name = "Greek-English (WordNet + Wiktionary)",
@@ -322,7 +322,7 @@ return {
         lang_out = "eng",
         entries = 62934,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/el-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/el-en.zip",
     },
     {
         name = "Finnish-English (WordNet + Wiktionary)",
@@ -330,7 +330,7 @@ return {
         lang_out = "eng",
         entries = 254435,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/fi-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/fi-en.zip",
     },
     {
         name = "Japanese (Wiktionary)",
@@ -338,7 +338,7 @@ return {
         lang_out = "jpn",
         entries = 111345,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/ja-ja.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/ja-ja.zip",
     },
     {
         name = "Japanese-English (WordNet + Wiktionary)",
@@ -346,7 +346,7 @@ return {
         lang_out = "eng",
         entries = 155255,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/ja-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/ja-en.zip",
     },
     {
         name = "Chinese (Wiktionary)",
@@ -354,7 +354,7 @@ return {
         lang_out = "zho",
         entries = 71140,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/zh-zh.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/zh-zh.zip",
     },
     {
         name = "Arabic-English (WordNet + Wiktionary)",
@@ -362,6 +362,6 @@ return {
         lang_out = "eng",
         entries = 28892,
         license = "CC BY-SA 4.0",
-        url = "https://github.com/DanielGregorini/koreader-dicts/releases/latest/download/ar-en.zip",
+        url = "https://github.com/DanielGregorini/universalreader-dicts/releases/latest/download/ar-en.zip",
     },
 }

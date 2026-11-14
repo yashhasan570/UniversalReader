@@ -72,7 +72,7 @@ function SSH:start()
         "-E",
         "-R",
         "-p", self.SSH_port,
-        "-P /tmp/dropbear_koreader.pid")
+        "-P /tmp/dropbear_universalreader.pid")
     -- prevent login without public key (discourage allow_no_password option)
     if self.key_only_auth then
         cmd = string.format("%s %s", cmd, "-s")
@@ -122,7 +122,7 @@ function SSH:start()
 end
 
 function SSH:isRunning()
-    return util.pathExists("/tmp/dropbear_koreader.pid")
+    return util.pathExists("/tmp/dropbear_universalreader.pid")
 end
 
 --- Stops the Dropbear process started by this plugin.
@@ -133,7 +133,7 @@ function SSH:stopPlugin(force)
         return true
     end
 
-    local pid_path = "/tmp/dropbear_koreader.pid"
+    local pid_path = "/tmp/dropbear_universalreader.pid"
 
     local function readPID()
         local f = io.open(pid_path, "r")
@@ -196,7 +196,7 @@ function SSH:stop()
                 -- Last resort: kill every dropbear process to close all sessions.
                 logger.warn("SSH: force-stop also failed, using killall:", err)
                 os.execute("killall -9 dropbear 2>/dev/null")
-                os.remove("/tmp/dropbear_koreader.pid")
+                os.remove("/tmp/dropbear_universalreader.pid")
                 UIManager:show(InfoMessage:new{
                     text = _("SSH server forcefully stopped."),
                     timeout = 2,

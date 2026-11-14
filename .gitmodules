@@ -1,18 +1,18 @@
-[submodule "koreader-base"]
+[submodule "universalreader-base"]
 	path = base
-	url = https://github.com/koreader/koreader-base.git
+	url = https://github.com/yashhasan570/UniversalReader-base.git
 [submodule "platform/android/luajit-launcher"]
 	path = platform/android/luajit-launcher
-	url = https://github.com/koreader/android-luajit-launcher.git
+	url = https://github.com/universalreader/android-luajit-launcher.git
 [submodule "test"]
 	path = test
-	url = https://github.com/koreader/test-data.git
+	url = https://github.com/universalreader/test-data.git
 	shallow = true
 [submodule "resources/fonts"]
 	path = resources/fonts
-	url = https://github.com/koreader/koreader-fonts.git
+	url = https://github.com/yashhasan570/UniversalReader-fonts.git
 	shallow = true
 [submodule "l10n"]
 	path = l10n
-	url = https://github.com/koreader/koreader-translations.git
+	url = https://github.com/yashhasan570/UniversalReader-translations.git
 	shallow = true

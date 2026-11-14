@@ -199,7 +199,7 @@ local _completeFaceProperties = function(face_obj)
     end
 end
 
--- Callback to be used by libkoreader-xtext.so to get Freetype
+-- Callback to be used by libuniversalreader-xtext.so to get Freetype
 -- instantiated fallback fonts when needed for shaping text
 -- (Beware: any error in this code won't be noticed when this
 -- is called from the C module...)
@@ -348,12 +348,12 @@ function Font:getFace(font, size, faceindex)
         }
         self.faces[hash] = face_obj
 
-        -- Callback to be used by libkoreader-xtext.so to get Freetype
+        -- Callback to be used by libuniversalreader-xtext.so to get Freetype
         -- instantiated fallback fonts when needed for shaping text
         face_obj.getFallbackFont = function(num)
             return _getFallbackFont(face_obj, num)
         end
-        -- Font features, to be given by libkoreader-xtext.so to HarfBuzz.
+        -- Font features, to be given by libuniversalreader-xtext.so to HarfBuzz.
         -- (Could be tweaked by font if needed. Note that NotoSans does not
         -- have common ligatures, like for "fi" or "fl", so we won't see
         -- them in the UI.)

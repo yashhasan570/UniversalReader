@@ -19,16 +19,16 @@ describe("NewsDownloader module", function()
 <rss version="2.0">
 <channel>
   <title>Universal Reader News</title>
-  <link>https://github.com/koreader/koreader</link>
+  <link>https://github.com/yashhasan570/UniversalReader</link>
   <description>Universal Reader updates and release notes</description>
   <item>
     <title>Universal Reader v2023.05 released</title>
-    <link>https://github.com/koreader/koreader/releases/tag/v2023.05</link>
+    <link>https://github.com/yashhasan570/UniversalReader/releases/tag/v2023.05</link>
     <description>New release with improved PDF rendering and UI enhancements</description>
   </item>
   <item>
     <title>Universal Reader v2023.04 released</title>
-    <link>https://github.com/koreader/koreader/releases/tag/v2023.04</link>
+    <link>https://github.com/yashhasan570/UniversalReader/releases/tag/v2023.04</link>
     <description>&lt;p&gt;Bug fixes &amp; improved EPUB handling&lt;/p&gt;</description>
   </item>
 </channel>
@@ -70,16 +70,16 @@ describe("NewsDownloader module", function()
             assert.truthy(feeds)
 
             -- Test channel link
-            assert.equals("https://github.com/koreader/koreader", feeds.rss.channel.link)
+            assert.equals("https://github.com/yashhasan570/UniversalReader", feeds.rss.channel.link)
 
             -- Test item links
-            assert.equals("https://github.com/koreader/koreader/releases/tag/v2023.05",
+            assert.equals("https://github.com/yashhasan570/UniversalReader/releases/tag/v2023.05",
                           feeds.rss.channel.item[1].link)
-            assert.equals("https://github.com/koreader/koreader/releases/tag/v2023.04",
+            assert.equals("https://github.com/yashhasan570/UniversalReader/releases/tag/v2023.04",
                           feeds.rss.channel.item[2].link)
 
             -- Test getFeedLink function using the exposed module function
-            assert.equals("https://github.com/koreader/koreader/releases/tag/v2023.05",
+            assert.equals("https://github.com/yashhasan570/UniversalReader/releases/tag/v2023.05",
                           NewsDownloader.getFeedLink(feeds.rss.channel.item[1].link))
         end)
     end)
@@ -89,12 +89,12 @@ describe("NewsDownloader module", function()
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Universal Reader GitHub Commits</title>
-  <link href="https://github.com/koreader/koreader/commits/master.atom"/>
+  <link href="https://github.com/yashhasan570/UniversalReader/commits/master.atom"/>
   <updated>2023-05-15T12:00:00Z</updated>
   <entry>
     <title>Fix PDF rendering issue</title>
-    <link href="https://github.com/koreader/koreader/commit/abc123"/>
-    <id>https://github.com/koreader/koreader/commit/abc123</id>
+    <link href="https://github.com/yashhasan570/UniversalReader/commit/abc123"/>
+    <id>https://github.com/yashhasan570/UniversalReader/commit/abc123</id>
     <updated>2023-05-15T12:00:00Z</updated>
     <content type="html">
       &lt;pre&gt;This commit fixes the PDF rendering issue on eInk screens&lt;/pre&gt;
@@ -102,8 +102,8 @@ describe("NewsDownloader module", function()
   </entry>
   <entry>
     <title type="html">Improve EPUB &amp; FB2 support</title>
-    <link href="https://github.com/koreader/koreader/commit/def456"/>
-    <id>https://github.com/koreader/koreader/commit/def456</id>
+    <link href="https://github.com/yashhasan570/UniversalReader/commit/def456"/>
+    <id>https://github.com/yashhasan570/UniversalReader/commit/def456</id>
     <updated>2023-05-14T10:30:00Z</updated>
     <content type="html">
       &lt;pre&gt;Add better support for EPUB and FB2 formats&lt;/pre&gt;
@@ -147,13 +147,13 @@ describe("NewsDownloader module", function()
             assert.truthy(feeds)
 
             -- Test feed link (with attributes)
-            assert.equals("https://github.com/koreader/koreader/commits/master.atom",
+            assert.equals("https://github.com/yashhasan570/UniversalReader/commits/master.atom",
                           NewsDownloader.getFeedLink(feeds.feed.link))
 
             -- Test entry links
-            assert.equals("https://github.com/koreader/koreader/commit/abc123",
+            assert.equals("https://github.com/yashhasan570/UniversalReader/commit/abc123",
                           NewsDownloader.getFeedLink(feeds.feed.entry[1].link))
-            assert.equals("https://github.com/koreader/koreader/commit/def456",
+            assert.equals("https://github.com/yashhasan570/UniversalReader/commit/def456",
                           NewsDownloader.getFeedLink(feeds.feed.entry[2].link))
         end)
     end)

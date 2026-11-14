@@ -7,7 +7,7 @@ local CanvasContext = require("document/canvascontext")
 local Geom = require("ui/geometry")
 local Math = require("optmath")
 local TileCacheItem = require("document/tilecacheitem")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 
 --[[

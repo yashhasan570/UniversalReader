@@ -199,7 +199,7 @@ end
 function Cervantes:isStartupScriptUpToDate()
     local md5 = require("ffi/MD5")
     -- Compare the hash of the *active* script to the *potential* one.
-    return md5.sumFile("/tmp/koreader.sh") == md5.sumFile("koreader.sh")
+    return md5.sumFile("/tmp/universalreader.sh") == md5.sumFile("universalreader.sh")
 end
 
 -- This method is the same as the one in kobo/device.lua except the sleep cover part.

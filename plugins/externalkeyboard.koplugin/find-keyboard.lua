@@ -1,6 +1,6 @@
 local bit = require("bit")
 local ffi = require("ffi")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 
 -- Constants from the linux kernel input-event-codes.h
 local KEY_UP = 103

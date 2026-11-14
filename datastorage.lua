@@ -4,7 +4,7 @@
 
 -- need low-level mechanism to detect android to avoid recursive dependency
 local isAndroid, android = pcall(require, "android")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 
 local DataStorage = {}
 
@@ -19,7 +19,7 @@ function DataStorage:getDataDir()
     if os.getenv("KO_HOME") then
         data_dir = os.getenv("KO_HOME")
     elseif isAndroid then
-        data_dir = android.getExternalStoragePath() .. "/koreader"
+        data_dir = android.getExternalStoragePath() .. "/universalreader"
     elseif os.getenv("UBUNTU_APPLICATION_ISOLATION") then
         local app_id = os.getenv("APP_ID")
         local package_name = app_id:match("^(.-)_")
@@ -27,7 +27,7 @@ function DataStorage:getDataDir()
         data_dir = string.format("%s/%s", os.getenv("XDG_DATA_HOME"), package_name)
     elseif os.getenv("APPIMAGE") or os.getenv("FLATPAK") or os.getenv("KO_MULTIUSER") then
         if os.getenv("XDG_CONFIG_HOME") then
-            data_dir = string.format("%s/%s", os.getenv("XDG_CONFIG_HOME"), "koreader")
+            data_dir = string.format("%s/%s", os.getenv("XDG_CONFIG_HOME"), "universalreader")
             if lfs.attributes(os.getenv("XDG_CONFIG_HOME"), "mode") ~= "directory" then
                 lfs.mkdir(os.getenv("XDG_CONFIG_HOME"))
             end
@@ -36,7 +36,7 @@ function DataStorage:getDataDir()
             if lfs.attributes(user_rw, "mode") ~= "directory" then
                 lfs.mkdir(user_rw)
             end
-            data_dir = string.format("%s/%s", user_rw, "koreader")
+            data_dir = string.format("%s/%s", user_rw, "universalreader")
         end
     else
         data_dir = "."
@@ -81,7 +81,7 @@ function DataStorage:getPatchesDir()
 end
 
 --- Gets the full configuration/data path.
--- @treturn string Directory path (e.g., /mnt/onboard/.adds/koreader)
+-- @treturn string Directory path (e.g., /mnt/onboard/.adds/universalreader)
 function DataStorage:getFullDataDir()
     if full_data_dir then return full_data_dir end
 

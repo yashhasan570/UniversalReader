@@ -306,7 +306,7 @@ end
 
 function TextBoxWidget:_measureWithXText()
     if not self._xtext_loaded then
-        xtext = require("libs/libkoreader-xtext")
+        xtext = require("libs/libuniversalreader-xtext")
         TextBoxWidget._xtext_loaded = true
     end
     if type(self.charlist) == "table" then

@@ -205,7 +205,7 @@ local COMMON_XKB_LAYOUTS = {
 }
 
 -- Language conversion
-local KOREADER_XKB_LAYOUTS = {
+local UNIVERSALREADER_XKB_LAYOUTS = {
     ar = { "ara", "basic" },
     bg_BG = { "bg", "bds" },
     bn = { "bd", "basic" },
@@ -232,7 +232,7 @@ local KOREADER_XKB_LAYOUTS = {
 
 -- Universal Reader interface languages that have no virtual keyboard layout, plus
 -- commonly used national layouts for the same language.
-local KOREADER_EXTRA_XKB_LAYOUTS = {
+local UNIVERSALREADER_EXTRA_XKB_LAYOUTS = {
     { "ca", "es", "cat" },
     { "en_GB", "gb", "basic" },
     { "eo", "epo", "basic" },
@@ -253,20 +253,20 @@ local KOREADER_EXTRA_XKB_LAYOUTS = {
     { "zh_TW", "tw", "tw" },
 }
 
-local function available_koreader_layouts()
+local function available_universalreader_layouts()
     local virtual_keyboard = read_file("frontend/ui/widget/virtualkeyboard.lua")
     local map = virtual_keyboard:match("lang_to_keyboard_layout%s*=%s*{(.-)\n    },")
     assert(map, "VirtualKeyboard.lang_to_keyboard_layout not found")
     local layouts = {}
     for language in map:gmatch("\n%s*([%w_]+)%s*=") do
-        local xkb_layout = KOREADER_XKB_LAYOUTS[language]
+        local xkb_layout = UNIVERSALREADER_XKB_LAYOUTS[language]
         table.insert(layouts, {
             language = language,
             layout = xkb_layout and xkb_layout[1] or language:match("^[^_]+"),
             variant = xkb_layout and xkb_layout[2] or "basic",
         })
     end
-    for _, layout_info in ipairs(KOREADER_EXTRA_XKB_LAYOUTS) do
+    for _, layout_info in ipairs(UNIVERSALREADER_EXTRA_XKB_LAYOUTS) do
         table.insert(layouts, {
             language = layout_info[1],
             layout = layout_info[2],
@@ -289,8 +289,8 @@ local function available_common_layouts()
     return layouts
 end
 
-local function available_koreader_layout_variants(symbols_dir)
-    local layouts = available_koreader_layouts()
+local function available_universalreader_layout_variants(symbols_dir)
+    local layouts = available_universalreader_layouts()
     local variants = {}
     local rules = read_file(symbols_dir .. "/../rules/evdev.lst")
     local in_variant_section = false
@@ -445,8 +445,8 @@ if arguments.common or arguments.all or arguments.all_variants then
     local written = 0
     local skipped = 0
     local layouts = arguments.xkb and available_xkb_layouts(arguments.symbols_dir, arguments.all_variants)
-        or arguments.all_variants and available_koreader_layout_variants(arguments.symbols_dir)
-        or arguments.all and available_koreader_layouts()
+        or arguments.all_variants and available_universalreader_layout_variants(arguments.symbols_dir)
+        or arguments.all and available_universalreader_layouts()
         or available_common_layouts()
     for _, layout_info in ipairs(layouts) do
         local success, entries, name = pcall(load_layout, arguments.symbols_dir, layout_info.layout, layout_info.variant)

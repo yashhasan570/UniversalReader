@@ -20,7 +20,7 @@ local function yes() return true end
 local function no() return false end
 
 local ext_path = "/mnt/ext1/system/config/extensions.cfg"
-local app_name = "koreader.app"
+local app_name = "universalreader.app"
 
 local PocketBook = Generic:extend{
     model = "PocketBook",
@@ -68,7 +68,7 @@ local PocketBook = Generic:extend{
     inkview_translates_buttons = false,
 
     -- Some Pocketbook devices need special handling after resume to restore the correct orientation.
-    -- See https://github.com/koreader/koreader/issues/11033 for details.
+    -- See https://github.com/yashhasan570/UniversalReader/issues/11033 for details.
     needs_orientation_sync_after_resume = false,
 
     -- Will be set appropriately at init
@@ -143,7 +143,7 @@ function PocketBook:init()
             end
 
             -- Legacy devices return incomplete/broken data, fix it without breaking saner devices.
-            -- c.f., https://github.com/koreader/koreader-base/blob/50a965c28fd5ea2100257aa9ce2e62c9c301155c/ffi/framebuffer_linux.lua#L119-L189
+            -- c.f., https://github.com/yashhasan570/UniversalReader-base/blob/50a965c28fd5ea2100257aa9ce2e62c9c301155c/ffi/framebuffer_linux.lua#L119-L189
             if string.byte(ffi.string(finfo.id, 16), 1, 1) == 0 then
                 local xres_virtual = vinfo.xres_virtual
                 if not IS_ALIGNED(vinfo.xres_virtual, 32) then
@@ -295,7 +295,7 @@ function PocketBook:notifyBookState(title, document)
             fo:close()
         end
     end
-    inkview.SetSubtaskInfo(inkview.GetCurrentTask(), 0, title and (title .. " - koreader") or "koreader", fn or _("N/A"))
+    inkview.SetSubtaskInfo(inkview.GetCurrentTask(), 0, title and (title .. " - universalreader") or "universalreader", fn or _("N/A"))
 end
 
 function PocketBook:setDateTime(year, month, day, hour, min, sec)
@@ -326,7 +326,7 @@ function PocketBook:associateFileExtensions(assoc)
             info[m[1]] = m
         end
     end
-    local res = {"#koreader"}
+    local res = {"#universalreader"}
     for k,v in pairs(assoc) do
         local t = info[k]
         if t then
@@ -467,7 +467,7 @@ end
 function PocketBook:isStartupScriptUpToDate()
     local md5 = require("ffi/MD5")
     -- Compare the hash of the *active* script to the *potential* one.
-    return md5.sumFile("/tmp/koreader.app") == md5.sumFile("../koreader.app")
+    return md5.sumFile("/tmp/universalreader.app") == md5.sumFile("../universalreader.app")
 end
 
 function PocketBook:UIManagerReady(uimgr)
@@ -677,7 +677,7 @@ local PocketBook630 = PocketBook:extend{
 local PocketBook631 = PocketBook:extend{
     model = "PBTouchHD",
     display_dpi = 300,
-    -- see https://github.com/koreader/koreader/pull/6531#issuecomment-676629182
+    -- see https://github.com/yashhasan570/UniversalReader/pull/6531#issuecomment-676629182
     hasNaturalLight = function() return inkview.GetFrontlightColor() >= 0 end,
 }
 
@@ -748,7 +748,7 @@ local PocketBook700 = PocketBook:extend{
     display_dpi = 300,
     isAlwaysPortrait = yes,
     hasNaturalLight = yes,
-    -- c.f., https://github.com/koreader/koreader/issues/9556
+    -- c.f., https://github.com/yashhasan570/UniversalReader/issues/9556
     inkview_translates_buttons = true,
     needs_orientation_sync_after_resume = true,
 }
@@ -762,7 +762,7 @@ local PocketBook700K3 = PocketBook:extend{
     canUseCBB = no, -- 24bpp
     isAlwaysPortrait = yes,
     hasNaturalLight = yes,
-    -- c.f., https://github.com/koreader/koreader/issues/9556
+    -- c.f., https://github.com/yashhasan570/UniversalReader/issues/9556
     inkview_translates_buttons = true,
     needs_orientation_sync_after_resume = true,
 }
@@ -778,7 +778,7 @@ local PocketBook710 = PocketBook:extend{
     display_dpi = 300,
     isAlwaysPortrait = yes,
     hasNaturalLight = yes,
-    -- c.f., https://github.com/koreader/koreader/issues/9556
+    -- c.f., https://github.com/yashhasan570/UniversalReader/issues/9556
     inkview_translates_buttons = true,
     needs_orientation_sync_after_resume = true,
 }

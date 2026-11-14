@@ -3,9 +3,9 @@
 export LC_ALL="en_US.UTF-8"
 
 # Working directory.
-KOREADER_DIR="$(dirname "$(realpath "$0")")"
+UNIVERSALREADER_DIR="$(dirname "$(realpath "$0")")"
 
-# export @KOREADER_FLAVOR@
+# export @UNIVERSALREADER_FLAVOR@
 
 # Canonicalize non-option arguments so we can change dir.
 # (Pop left, push right - each arg once so we end with the orig order.)
@@ -18,7 +18,7 @@ for arg; do
 done
 
 # We're always starting from our working directory.
-cd "${KOREADER_DIR}" || exit
+cd "${UNIVERSALREADER_DIR}" || exit
 
 RETURN_VALUE=85
 while [ ${RETURN_VALUE} -eq 85 ]; do

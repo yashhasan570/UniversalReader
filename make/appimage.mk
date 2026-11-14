@@ -13,17 +13,17 @@ endef
 update-appimage: all $(MKAPPIMAGE)
 	$(call mkupdate_linux,$(APPDIR))
 	# Setup AppDir.
-	ln -s usr/bin/koreader $(APPDIR)/AppRun
+	ln -s usr/bin/universalreader $(APPDIR)/AppRun
 	ln -s usr/share/applications/$(DIST_APPID).desktop $(APPDIR)/
 ifeq (,$(wildcard $(UBUNTU_LIBBSD)))
 	# Only warn if it's missing (e.g. when testing on a non-Ubuntu distribution).
 	echo 'WARNING: not bundling missing $(UBUNTU_LIBBSD)' 1>&2
 else
-	install $(UBUNTU_LIBBSD) -t $(APPDIR)/usr/lib/koreader/libs/
+	install $(UBUNTU_LIBBSD) -t $(APPDIR)/usr/lib/universalreader/libs/
 endif
 	# Generate AppImage.
 	echo 'Creating appimage: $(LINUX_PACKAGE)'
-	$(call appimage_generate,koreader,$(VERSION))
+	$(call appimage_generate,universalreader,$(VERSION))
 	# Cleanup.
 	rm -rf $(APPDIR)
 

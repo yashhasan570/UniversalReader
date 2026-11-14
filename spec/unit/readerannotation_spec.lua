@@ -6,7 +6,7 @@ describe("ReaderAnnotation export and import", function()
         orig_device_id = G_reader_settings:readSetting("device_id", "target")
         ReaderAnnotation = require("apps/reader/modules/readerannotation")
         Notification = require("ui/widget/notification")
-        lfs = require("libs/libkoreader-lfs")
+        lfs = require("libs/libuniversalreader-lfs")
         filepath = require("datastorage"):getDataDir() .. "/readerannotation.annotations.lua"
     end)
 

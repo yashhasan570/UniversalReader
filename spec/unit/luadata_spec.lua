@@ -3,7 +3,7 @@ describe("luadata module", function()
     setup(function()
         require("commonrequire")
         DataStorage = require("datastorage")
-        lfs = require("libs/libkoreader-lfs")
+        lfs = require("libs/libuniversalreader-lfs")
         Settings = require("luadata"):open(DataStorage:getDataDir() .. "/this-is-not-a-valid-file")
     end)
 

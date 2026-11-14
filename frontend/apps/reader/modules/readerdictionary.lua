@@ -25,7 +25,7 @@ local Utf8Proc = require("ffi/utf8proc")
 local ffi = require("ffi")
 local C = ffi.C
 local ffiUtil  = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local posix = require("ffi/posix")
 local time = require("ui/time")
@@ -870,7 +870,7 @@ function ReaderDictionary:onHtmlDictionaryLinkTapped(dictionary, link)
     end
 
     -- The protocol is either "bword" or there is no protocol, only the word.
-    -- https://github.com/koreader/koreader/issues/3588#issuecomment-357088125
+    -- https://github.com/yashhasan570/UniversalReader/issues/3588#issuecomment-357088125
     local url_prefix = "bword://"
     local word
     if link.uri:sub(1,url_prefix:len()) == url_prefix then
@@ -1126,7 +1126,7 @@ function ReaderDictionary:cleanSelection(text, is_sane)
         text = text:gsub("^[Qq][Uu]'", '') -- french qu'
         -- There may be a need to remove some (all?) diacritical marks
         -- https://en.wikipedia.org/wiki/Combining_character#Unicode_ranges
-        -- see discussion at https://github.com/koreader/koreader/issues/1649
+        -- see discussion at https://github.com/yashhasan570/UniversalReader/issues/1649
         -- Commented for now, will have to be checked by people who read
         -- languages and texts that use them.
         -- text = text:gsub("\204[\128-\191]", '') -- U+0300 to U+033F

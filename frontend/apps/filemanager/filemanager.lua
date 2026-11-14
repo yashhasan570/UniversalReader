@@ -35,7 +35,7 @@ local TitleBar = require("ui/widget/titlebar")
 local UIManager = require("ui/uimanager")
 local ffiUtil = require("ffi/util")
 local filemanagerutil = require("apps/filemanager/filemanagerutil")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local util = require("util")
 local _ = require("gettext")
@@ -414,7 +414,7 @@ function FileManager:init()
     self:registerModule("devicelistener", DeviceListener:new{ ui = self })
     self:registerModule("networklistener", NetworkListener:new{ ui = self })
 
-    -- koreader plugins
+    -- universalreader plugins
     for _, plugin_module in ipairs(PluginLoader:loadPlugins()) do
         if not plugin_module.is_doc_only then
             local ok, plugin_or_err = PluginLoader:createPluginInstance(

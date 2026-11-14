@@ -5,7 +5,7 @@ describe("PluginLoader module", function()
     setup(function()
         require("commonrequire")
         UIManager = require("ui/uimanager")
-        original_lfs = require("libs/libkoreader-lfs")
+        original_lfs = require("libs/libuniversalreader-lfs")
     end)
 
     before_each(function()
@@ -38,7 +38,7 @@ describe("PluginLoader module", function()
         G_reader_settings:reset({})
         G_reader_settings:saveSetting("extra_plugin_paths", {})
 
-        package.replace("libs/libkoreader-lfs", lfs_mock)
+        package.replace("libs/libuniversalreader-lfs", lfs_mock)
         PluginLoader = package.reload("pluginloader")
         PluginLoader.show_info = true
         PluginLoader.enabled_plugins = {}
@@ -48,12 +48,12 @@ describe("PluginLoader module", function()
     end)
 
     after_each(function()
-        package.replace("libs/libkoreader-lfs", original_lfs)
+        package.replace("libs/libuniversalreader-lfs", original_lfs)
         package.unload("pluginloader")
     end)
 
     it("discovers plugins by directory id and matches disabled settings against that id", function()
-        local lfs_mock = require("libs/libkoreader-lfs")
+        local lfs_mock = require("libs/libuniversalreader-lfs")
         lfs_mock.dir_results.plugins = {
             ".",
             "..",

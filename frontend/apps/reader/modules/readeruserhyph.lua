@@ -6,13 +6,13 @@ local InputDialog = require("ui/widget/inputdialog")
 local UIManager = require("ui/uimanager")
 local Utf8Proc = require("ffi/utf8proc")
 local WidgetContainer = require("ui/widget/container/widgetcontainer")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local _ = require("gettext")
 local T = require("ffi/util").template
 
 -- if sometime in the future crengine is updated to use normalized utf8 for hyphenation
--- this variable can be set to `true`. (see discussion in : https://github.com/koreader/crengine/pull/466),
+-- this variable can be set to `true`. (see discussion in : https://github.com/universalreader/crengine/pull/466),
 -- and some `if NORM then` branches can be simplified.
 local NORM = false
 

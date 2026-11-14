@@ -1,7 +1,7 @@
 local Generic = require("device/generic/device")
 local UIManager
 local time = require("ui/time")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 
 -- We're going to need a few <linux/fb.h> & <linux/input.h> constants...
@@ -105,7 +105,7 @@ local function kindleAuthenticateNetwork(essid)
     local haslipc, lipc = pcall(require, "liblipclua")
     local lipc_handle
     if haslipc then
-        lipc_handle = lipc.init("com.github.koreader.networkmgr")
+        lipc_handle = lipc.init("com.github.universalreader.networkmgr")
     end
     if lipc_handle then
         lipc_handle:set_string_property("com.lab126.cmd", "ensureConnection", "wifi:" .. essid)
@@ -204,7 +204,7 @@ local function kindleScanThenGetResults()
     local haslipc, lipc = pcall(require, "liblipclua")
     local lipc_handle
     if haslipc then
-        lipc_handle = lipc.init("com.github.koreader.networkmgr")
+        lipc_handle = lipc.init("com.github.universalreader.networkmgr")
     end
     if not lipc_handle then
         logger.dbg("kindleScanThenGetResults: Failed to acquire a lipc handle for NetworkMgr")
@@ -271,7 +271,7 @@ local function kindleEnableWifi(toggle)
     local haslipc, lipc = pcall(require, "liblipclua")
     local lipc_handle
     if haslipc then
-        lipc_handle = lipc.init("com.github.koreader.networkmgr")
+        lipc_handle = lipc.init("com.github.universalreader.networkmgr")
     end
     if lipc_handle then
         -- Be extremely thorough... c.f., #6019
@@ -298,7 +298,7 @@ local function isWifiUp()
     local haslipc, lipc = pcall(require, "liblipclua")
     local lipc_handle
     if haslipc then
-        lipc_handle = lipc.init("com.github.koreader.networkmgr")
+        lipc_handle = lipc.init("com.github.universalreader.networkmgr")
     end
     if lipc_handle then
         local status = lipc_handle:get_int_property("com.lab126.wifid", "enable") or 0
@@ -333,7 +333,7 @@ local function isSpecialOffers()
         logger.warn("could not load liblipclua:", lipc)
         return true
     end
-    local lipc_handle = lipc.init("com.github.koreader.device")
+    local lipc_handle = lipc.init("com.github.universalreader.device")
     if not lipc_handle then
         logger.warn("could not get lipc handle")
         return true
@@ -740,13 +740,13 @@ function Kindle:usbPlugIn()
     --       To that end, we're currently SIGSTOPping volumd to inhibit the system's USBMS mode handling.
     --       It's not perfect (e.g., if the system is setup for USBMS and not USBNet,
     --       the frontlight will be turned off when plugged in), but it at least prevents users from completely
-    --       shooting themselves in the foot (c.f., https://github.com/koreader/koreader/issues/3220)!
+    --       shooting themselves in the foot (c.f., https://github.com/yashhasan570/UniversalReader/issues/3220)!
     --       On the upside, we don't have to bother waking up the WM to show us the USBMS screen :D.
     -- NOTE: If the device is put in USBNet mode before we even start, everything's peachy, though :).
 end
 
 -- Hopefully, the event sources are fairly portable...
--- c.f., https://github.com/koreader/koreader/pull/11174#issuecomment-1830064445
+-- c.f., https://github.com/yashhasan570/UniversalReader/pull/11174#issuecomment-1830064445
 -- NOTE: There's no distinction between real button presses and powerd_test -p or lipc-set-prop -i com.lab126.powerd powerButton 1
 local POWERD_EVENT_SOURCES = {
     [1] = "BUTTON_WAKEUP",  -- outOfScreenSaver 1
@@ -857,7 +857,7 @@ end
 function Kindle:isStartupScriptUpToDate()
     local md5 = require("ffi/MD5")
     -- Compare the hash of the *active* script to the *potential* one.
-    return md5.sumFile("/var/tmp/koreader.sh") == md5.sumFile("koreader.sh")
+    return md5.sumFile("/var/tmp/universalreader.sh") == md5.sumFile("universalreader.sh")
 end
 
 function Kindle:UIManagerReady(uimgr)
@@ -907,7 +907,7 @@ end
 function Kindle:ambientBrightnessLevel()
     local haslipc, lipc = pcall(require, "liblipclua")
     if not haslipc or lipc == nil then return 0 end
-    local lipc_handle = lipc.init("com.github.koreader.ambientbrightness")
+    local lipc_handle = lipc.init("com.github.universalreader.ambientbrightness")
     if not lipc_handle then return 0 end
     local value = lipc_handle:get_int_property("com.lab126.powerd", "alsLux")
     lipc_handle:close()
@@ -1500,7 +1500,7 @@ function KindleOasis:init()
     --- @note See comments in KindleOasis2:init() for details.
     local haslipc, lipc = pcall(require, "liblipclua")
     if haslipc then
-        local lipc_handle = lipc.init("com.github.koreader.screen")
+        local lipc_handle = lipc.init("com.github.universalreader.screen")
         if lipc_handle then
             local orientation_code = lipc_handle:get_string_property(
                 "com.lab126.winmgr", "accelerometer")
@@ -1613,7 +1613,7 @@ function KindleOasis2:init()
     --       since they're only exposed inside the stock reader, and not the Home/KUAL Booklets.
     local haslipc, lipc = pcall(require, "liblipclua")
     if haslipc then
-        local lipc_handle = lipc.init("com.github.koreader.screen")
+        local lipc_handle = lipc.init("com.github.universalreader.screen")
         if lipc_handle then
             local orientation_code = lipc_handle:get_string_property(
                 "com.lab126.winmgr", "accelerometer")
@@ -1681,7 +1681,7 @@ function KindleOasis3:init()
     --- @note The same quirks as on the Oasis 2 apply ;).
     local haslipc, lipc = pcall(require, "liblipclua")
     if haslipc then
-        local lipc_handle = lipc.init("com.github.koreader.screen")
+        local lipc_handle = lipc.init("com.github.universalreader.screen")
         if lipc_handle then
             local orientation_code = lipc_handle:get_string_property(
                 "com.lab126.winmgr", "accelerometer")
@@ -1760,7 +1760,7 @@ function KindleBasic3:init()
 
     -- This device doesn't emit ABS_MT_TRACKING_ID:-1 events on contact lift,
     -- so we have to rely on contact lift detection via BTN_TOUCH:0,
-    -- c.f., https://github.com/koreader/koreader/issues/5070
+    -- c.f., https://github.com/yashhasan570/UniversalReader/issues/5070
     self.input.snow_protocol = true
     self.input.handleTouchEv = self.input.handleTouchEvSnow
 end
@@ -1863,7 +1863,7 @@ function KindleScribe:init()
     --- @note The same quirks as on the Oasis 2 and 3 apply ;).
     local haslipc, lipc = pcall(require, "liblipclua")
     if haslipc then
-        local lipc_handle = lipc.init("com.github.koreader.screen")
+        local lipc_handle = lipc.init("com.github.universalreader.screen")
         if lipc_handle then
             local orientation_code = lipc_handle:get_string_property(
                 "com.lab126.winmgr", "accelerometer")
@@ -1926,7 +1926,7 @@ function KindleScribe3:init()
     --- @note This is an assumption carried over from the KS(2) -HD
     local haslipc, lipc = pcall(require, "liblipclua")
     if haslipc then
-        local lipc_handle = lipc.init("com.github.koreader.screen")
+        local lipc_handle = lipc.init("com.github.universalreader.screen")
         if lipc_handle then
             local orientation_code = lipc_handle:get_string_property(
                 "com.lab126.winmgr", "accelerometer")
@@ -1989,7 +1989,7 @@ function KindleScribeColorSoft:init()
     --- @note This is an assumption carried over from the KS(2) -HD
     local haslipc, lipc = pcall(require, "liblipclua")
     if haslipc then
-        local lipc_handle = lipc.init("com.github.koreader.screen")
+        local lipc_handle = lipc.init("com.github.universalreader.screen")
         if lipc_handle then
             local orientation_code = lipc_handle:get_string_property(
                 "com.lab126.winmgr", "accelerometer")
@@ -2070,7 +2070,7 @@ function KindleTouch:exit()
         -- fake a touch event
         if self.touch_dev then
             local width, height = self.screen:getScreenWidth(), self.screen:getScreenHeight()
-            require("libs/libkoreader-input").fakeTapInput(self.touch_dev,
+            require("libs/libuniversalreader-input").fakeTapInput(self.touch_dev,
                 math.min(width, height)/2,
                 math.max(width, height)-30
             )

@@ -10,7 +10,7 @@ local buffer = require("string.buffer")
 local ffi = require("ffi")
 local C = ffi.C
 local cre -- Delayed loading
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local lru = require("ffi/lru")
 local time = require("ui/time")
@@ -101,7 +101,7 @@ end
 
 function CreDocument:engineInit()
     if not engine_initialized then
-        cre = require("libs/libkoreader-cre")
+        cre = require("libs/libuniversalreader-cre")
 
         -- When forking to execute any stuff in a sub-process,
         -- as that stuff may not care about properly closing
@@ -1544,7 +1544,7 @@ end
 
 function CreDocument:buildSyntheticPageMapIfNoneDocumentProvided(chars_per_synthetic_page)
     -- for backward compatibility with legacy user patches
-    -- https://github.com/koreader/koreader/issues/9020#issuecomment-2033259217
+    -- https://github.com/yashhasan570/UniversalReader/issues/9020#issuecomment-2033259217
     if not self._document:hasPageMapDocumentProvided() then
         self._document:buildSyntheticPageMap(chars_per_synthetic_page or 1024)
     end
@@ -1698,10 +1698,10 @@ function CreDocument:setupCallCache()
     --[[
     --- @note: If explicitly destroying the references to the caches is necessary to get their content collected by the GC,
     ---        then you have a ref leak to this Document instance somewhere,
-    ---        c.f., https://github.com/koreader/koreader/pull/7634#discussion_r627820424
+    ---        c.f., https://github.com/yashhasan570/UniversalReader/pull/7634#discussion_r627820424
     ---        Keep in mind that a *lot* of ReaderUI modules keep a ref to document, so it may be fairly remote!
     ---        A good contender for issues like these would be references being stored in the class object instead
-    ---        of in instance objects because of inheritance rules. c.f., https://github.com/koreader/koreader/pull/9586,
+    ---        of in instance objects because of inheritance rules. c.f., https://github.com/yashhasan570/UniversalReader/pull/9586,
     ---        which got rid of a giant leak of every ReaderUI module via the active_widgets array...
     ---        A simple testing methodology is to create a dummy buffer alongside self.buffer in drawCurrentView,
     ---        push it to the global cache via _callCacheSet, and trace the BlitBuffer gc method in ffi/blitbuffer.lua.
@@ -1883,7 +1883,7 @@ function CreDocument:setupCallCache()
             elseif name:sub(1,6) == "toggle" then add_reset = true
             elseif name:sub(1,6) == "update" then add_reset = true
             elseif name:sub(1,6) == "enable" then add_reset = true
-            elseif name == "zoomFont" then add_reset = true -- not used by koreader
+            elseif name == "zoomFont" then add_reset = true -- not used by universalreader
             elseif name == "resetCallCache" then add_reset = true
             elseif name == "cacheFlows" then add_reset = true
             elseif name == "buildSyntheticPageMap" then add_reset = true

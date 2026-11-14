@@ -43,14 +43,14 @@ local metadata = {
         _ ("Release notes available on the link below"),
     },
     screenshots = {
-        { image = "https://github.com/koreader/koreader-artwork/raw/master/koreader-menu-framed.png",
+        { image = "https://github.com/yashhasan570/UniversalReader-artwork/raw/master/universalreader-menu-framed.png",
           caption = "Document menu.",
           default = true,
         },
-        { image = "https://github.com/koreader/koreader-artwork/raw/master/koreader-footnotes-framed.png",
+        { image = "https://github.com/yashhasan570/UniversalReader-artwork/raw/master/universalreader-footnotes-framed.png",
           caption = "Document footnotes.",
         },
-        { image = "https://github.com/koreader/koreader-artwork/raw/master/koreader-dictionary-framed.png",
+        { image = "https://github.com/yashhasan570/UniversalReader-artwork/raw/master/universalreader-dictionary-framed.png",
           caption = "Dictionary popup.",
         }
     },
@@ -70,22 +70,22 @@ local metadata = {
 
     -- appstream metadata that needs no translation
     component = [[
-  <id>rocks.koreader.Universal Reader</id>
+  <id>app.universalreader.reader</id>
 
   <name>Universal Reader</name>
-  <developer id="rocks.koreader">
-    <name>Universal Reader Community</name>
+  <developer id="rocks.universalreader">
+    <name>Universal Reader</name>
   </developer>
 
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>AGPL-3.0-only</project_license>
 
-  <url type="homepage">https://koreader.rocks/</url>
-  <url type="bugtracker">https://github.com/koreader/koreader/issues</url>
-  <url type="faq">https://koreader.rocks/user_guide</url>
-  <url type="translate">https://hosted.weblate.org/engage/koreader/</url>
-  <url type="vcs-browser">https://github.com/koreader/koreader</url>
-  <url type="contribute">https://github.com/koreader/koreader</url>
+  <url type="homepage">https://universalreader.rocks/</url>
+  <url type="bugtracker">https://github.com/yashhasan570/UniversalReader/issues</url>
+  <url type="faq">https://universalreader.rocks/user_guide</url>
+  <url type="translate">https://hosted.weblate.org/engage/universalreader/</url>
+  <url type="vcs-browser">https://github.com/yashhasan570/UniversalReader</url>
+  <url type="contribute">https://github.com/yashhasan570/UniversalReader</url>
 
   <branding>
     <color type="primary" scheme_preference="light">#ffffff</color>
@@ -150,7 +150,7 @@ local metadata = {
     <mediatype>text/plain</mediatype>
   </provides>
 
-  <launchable type="desktop-id">rocks.koreader.Universal Reader.desktop</launchable>
+  <launchable type="desktop-id">app.universalreader.reader.desktop</launchable>
 
   <categories>
     <category>Office</category>
@@ -230,7 +230,7 @@ local function tag(element, lang, str, pad)
 end
 
 local function genAppstream()
-    local metadata_file = "platform/linux/koreader.metainfo.xml"
+    local metadata_file = "platform/linux/universalreader.metainfo.xml"
     print("Building appstream metadata, this might take a while...")
     local t = {}
     local desc = metadata.desc
@@ -325,7 +325,7 @@ local function genAppstream()
         end
     end
     table.insert(t, [[      </description>
-      <url>https://github.com/koreader/koreader/releases/tag/%%VERSION%%</url>
+      <url>https://github.com/yashhasan570/UniversalReader/releases/tag/%%VERSION%%</url>
     </release>
   </releases>]])
     table.insert(t, '</component>')

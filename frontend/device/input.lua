@@ -246,7 +246,7 @@ function Input:init()
     elseif self.device:isRemarkable() and os.getenv("KO_USE_BLIGHT") == "1" then
         self.input = require("ffi/input_blight")
     else
-        self.input = require("libs/libkoreader-input")
+        self.input = require("libs/libuniversalreader-input")
     end
 
     -- Initialize instance-specific tables
@@ -797,7 +797,7 @@ function Input:handleKeyBoardEv(ev)
         end
     end
     -- On (some?) Kindles, cyttsp will report BTN_TOOL_DOUBLETAP on a two-slot contact... but with no data in the second slot :/.
-    -- c.f., https://github.com/koreader/koreader/pull/13714
+    -- c.f., https://github.com/yashhasan570/UniversalReader/pull/13714
     if ev.code == C.BTN_TOOL_DOUBLETAP and ev.value == 1 and self.cur_slot ~= self.main_finger_slot and (self:getCurrentMtSlotData("x") == nil or self:getCurrentMtSlotData("y") == nil) then
         -- Drop the empty slot to avoid breaking GestureDetector
         self:setCurrentMtSlot("id", -1)
@@ -1403,7 +1403,7 @@ function Input:handleTouchEvLegacy(ev)
                 -- On Kobo Mk. 3 devices, the frame that reports a contact lift *actually* does the coordinates transform for us...
                 -- Unfortunately, our own transforms are not stateful, so, just revert 'em here,
                 -- since we can't simply avoid not doing 'em for that frame...
-                -- c.f., https://github.com/koreader/koreader/issues/2128#issuecomment-1236289909 for logs on a Touch B
+                -- c.f., https://github.com/yashhasan570/UniversalReader/issues/2128#issuecomment-1236289909 for logs on a Touch B
                 -- NOTE: We can afford to do this here instead of on SYN_REPORT because the kernel *always*
                 --       reports ABS_PRESSURE after ABS_X/ABS_Y.
                 if self.touch_kobo_mk3_protocol then

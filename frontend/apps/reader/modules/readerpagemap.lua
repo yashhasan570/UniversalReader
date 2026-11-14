@@ -29,7 +29,7 @@ local ReaderPageMap = WidgetContainer:extend{
     show_page_labels = nil,
     use_page_labels = nil,
     page_labels_cache = nil, -- hash table
-    chars_per_synthetic_page_default = 1500, -- see https://github.com/koreader/koreader/issues/9020#issuecomment-2046025613
+    chars_per_synthetic_page_default = 1500, -- see https://github.com/yashhasan570/UniversalReader/issues/9020#issuecomment-2046025613
     chars_per_synthetic_page = nil, -- not nil means the synthetic pagemap has been created
 }
 

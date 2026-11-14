@@ -6,7 +6,7 @@ local UIManager
 local ffi = require("ffi")
 local C = ffi.C
 local FFIUtil = require("ffi/util")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local util = require("util")
 local _ = require("gettext")
@@ -243,7 +243,7 @@ function Device:init()
         end,
     }
 
-    -- disable translation for specific models, where media keys follow gravity, see https://github.com/koreader/koreader/issues/12423
+    -- disable translation for specific models, where media keys follow gravity, see https://github.com/yashhasan570/UniversalReader/issues/12423
     local models = {
         go7 = true,
         gocolor7 = true,

@@ -28,7 +28,7 @@ if ! [ -d "${1}" ]; then
     exit 1
 fi
 
-VERSION="$(cat "${1}/koreader/git-rev" | sed 's/_macos$//')"
+VERSION="$(cat "${1}/universalreader/git-rev" | sed 's/_macos$//')"
 APP_PATH="${1}/bundle"
 APP_BUNDLE="${1}/../Universal Reader"
 APP_ARCH="$(uname -m)"
@@ -58,11 +58,11 @@ cat <<END >"${APP_PATH}/Contents/Info.plist"
         <key>CFBundleDisplayName</key>
         <string>Universal Reader</string>
         <key>CFBundleExecutable</key>
-        <string>koreader</string>
+        <string>universalreader</string>
         <key>CFBundleIconFile</key>
         <string>icon.icns</string>
         <key>CFBundleIdentifier</key>
-        <string>rocks.koreader</string>
+        <string>rocks.universalreader</string>
         <key>CFBundleShortVersionString</key>
         <string>${VERSION#v}</string>
         <key>CFBundleInfoDictionaryVersion</key>
@@ -125,15 +125,15 @@ cat <<END >"${APP_PATH}/Contents/Info.plist"
 </plist>
 END
 
-pushd "${APP_PATH}/Contents/koreader"
+pushd "${APP_PATH}/Contents/universalreader"
 
 # Prepare bundle for distribution.
 mv COPYING README.md ../Resources/
-mv koreader ../MacOS/koreader
+mv universalreader ../MacOS/universalreader
 
 # Adjust reader.lua a bit.
 sed '1d' reader.lua >tempfile
-sed -i.backup 's/.\/reader.lua/koreader/' tempfile
+sed -i.backup 's/.\/reader.lua/universalreader/' tempfile
 mv tempfile reader.lua
 rm -f tempfile*
 chmod -x reader.lua
@@ -156,6 +156,6 @@ codesign --force --deep -s - "${APP_BUNDLE}.app"
 
 # Package as 7z reduces size from 80MB to 30MB.
 if command_exists "7z"; then
-    7z a -l -m0=flzma2 -mx=9 "koreader-macos-${MACOSX_DEPLOYMENT_TARGET}-${APP_ARCH}-${VERSION}.7z" "${APP_BUNDLE}.app"
+    7z a -l -m0=flzma2 -mx=9 "universalreader-macos-${MACOSX_DEPLOYMENT_TARGET}-${APP_ARCH}-${VERSION}.7z" "${APP_BUNDLE}.app"
     rm -rf "${APP_BUNDLE}.app"
 fi

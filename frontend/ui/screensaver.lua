@@ -18,7 +18,7 @@ local VerticalGroup = require("ui/widget/verticalgroup")
 local VerticalSpan = require("ui/widget/verticalspan")
 local ffiUtil = require("ffi/util")
 local filemanagerutil = require("apps/filemanager/filemanagerutil")
-local lfs = require("libs/libkoreader-lfs")
+local lfs = require("libs/libuniversalreader-lfs")
 local logger = require("logger")
 local time = require("ui/time")
 local util = require("util")
@@ -442,7 +442,7 @@ function Screensaver:setup(event, event_message)
     if self.screensaver_type == "random_image" then
         local screensaver_dir = G_reader_settings:readSetting(self.prefix .. "screensaver_dir")
                              or G_reader_settings:readSetting("screensaver_dir")
-        self.image_file = _getRandomImage(screensaver_dir) or "resources/koreader.png" -- Fallback image
+        self.image_file = _getRandomImage(screensaver_dir) or "resources/universalreader.png" -- Fallback image
     end
 
     -- Use the right background setting depending on the effective mode, now that fallbacks have kicked in.

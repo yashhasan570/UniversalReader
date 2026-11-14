@@ -15,7 +15,7 @@ local PocketBookPowerD = BasePowerD:new{
 
 function PocketBookPowerD:frontlightIntensityHW()
     -- Always update fl_intensity (and perhaps fl_warmth) from the OS value whenever queried (it's fast).
-    -- This way koreader settings can stay in sync even if the value is changed behind its back.
+    -- This way universalreader settings can stay in sync even if the value is changed behind its back.
     self.fl_intensity = math.max(0, inkview.GetFrontlightState())
     if self.device:hasNaturalLight() then
         self.fl_warmth = math.max(0, inkview.GetFrontlightColor())

@@ -9,7 +9,7 @@ describe("docsettings module", function()
         DataStorage = require("datastorage")
         docsettings = require("docsettings")
         ffiutil = require("ffi/util")
-        lfs = require("libs/libkoreader-lfs")
+        lfs = require("libs/libuniversalreader-lfs")
 
         docsettings_dir = DataStorage:getDocSettingsDir()
     end)
