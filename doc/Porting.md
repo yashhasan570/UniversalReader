@@ -11,7 +11,7 @@ Feel free to open issues in our issue tracker if you need further help on this t
 
 ### Current mxcfb eInk devices
 
-Universal Reader uses the Linux framebuffer to control eInk devices, so the output module for mxcfb (i.e., those based on Freescale/NXP hardware) devices is [`base/ffi/framebuffer_mxcfb.lua`](https://github.com/yashhasan570/UniversalReader-base/blob/master/ffi/framebuffer_mxcfb.lua).
+Universal Reader uses the Linux framebuffer to control eInk devices, so the output module for mxcfb (i.e., those based on Freescale/NXP hardware) devices is [`base/ffi/framebuffer_mxcfb.lua`](https:///blob/master/ffi/framebuffer_mxcfb.lua).
 
 Most common bitdepths are supported, although no devices should actually be using anything other than 8bpp, 16bpp and 32bpp.  
 For 8bpp, we assume the grayscale palette is NOT inverted.  
@@ -20,12 +20,12 @@ At 16bpp, we assume the pixel format is RGB565.
 
 For obvious performance reasons, we prefer 8bpp, and we will attempt to enforce that on devices which are not natively running at that depth (i.e., [on Kobos](https://github.com/yashhasan570/UniversalReader/blob/d1cd5e7ad4283611c57007b2c2d3dd5f7dab7057/platform/kobo/universalreader.sh#L138-L186)).  
 As explained below, the same considerations should be kept in mind regarding the effective 16c palette of eInk screens.  
-When we're in control of the data, we attempt to always use "perfect" in-palette colors (c.f., the [COLOR constants](https://github.com/yashhasan570/UniversalReader-base/blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/blitbuffer.lua#L1881-L1889) in the BlitBuffer module).  
-Otherwise, when there'd be significant gain in doing so (i.e., when displaying mainly image content), we attempt to make use of [dithering](https://github.com/yashhasan570/UniversalReader-base/blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/blitbuffer.lua#L227-L271), ideally [offloaded to the hardware](https://github.com/yashhasan570/UniversalReader-base/blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/framebuffer_mxcfb.lua#L412-L423) when supported.
+When we're in control of the data, we attempt to always use "perfect" in-palette colors (c.f., the [COLOR constants](https:///blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/blitbuffer.lua#L1881-L1889) in the BlitBuffer module).  
+Otherwise, when there'd be significant gain in doing so (i.e., when displaying mainly image content), we attempt to make use of [dithering](https:///blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/blitbuffer.lua#L227-L271), ideally [offloaded to the hardware](https:///blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/framebuffer_mxcfb.lua#L412-L423) when supported.
 
-The actual framebuffer content is then refreshed (i.e., displayed) via device-specific ioctls, making the best effort in using device-specific capabilities, whether that be [optimized waveform modes](https://github.com/yashhasan570/UniversalReader-base/blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/framebuffer_mxcfb.lua#L643-L655), hardware dithering or [hardware inversion](https://github.com/yashhasan570/UniversalReader-base/blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/framebuffer_mxcfb.lua#L253-L256).
+The actual framebuffer content is then refreshed (i.e., displayed) via device-specific ioctls, making the best effort in using device-specific capabilities, whether that be [optimized waveform modes](https:///blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/framebuffer_mxcfb.lua#L643-L655), hardware dithering or [hardware inversion](https:///blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/framebuffer_mxcfb.lua#L253-L256).
 
-The platform-specific Lua FFI modules for using the mxcfb driver are generated from the [kernel header files](https://github.com/yashhasan570/UniversalReader-base/tree/master/ffi-cdecl/include) using [ffi-cdecl](https://github.com/universalreader/ffi-cdecl). `ffi-cdecl` operates on [C files](https://github.com/yashhasan570/UniversalReader-base/tree/master/ffi-cdecl) which specify what to export.
+The platform-specific Lua FFI modules for using the mxcfb driver are generated from the [kernel header files](https:///tree/master/ffi-cdecl/include) using [ffi-cdecl](https://github.com/universalreader/ffi-cdecl). `ffi-cdecl` operates on [C files](https:///tree/master/ffi-cdecl) which specify what to export.
 
 To use `ffi-cdecl` first you need to build the gcc plugin for the platform toolchain, e.g.:
 ```
@@ -33,14 +33,14 @@ cd ffi-cdecl
 make clean
 PATH=$HOME/x-tools/arm-remarkable-linux-gnueabihf/bin/:$PATH make CHOST=arm-remarkable-linux-gnueabihf CROSS_DIR=$HOME/x-tools/arm-remarkable-linux-gnueabihf/
 ```
-Then you can (re)generate the [ffi lua files](https://github.com/yashhasan570/UniversalReader-base/tree/master/ffi), e.g.
+Then you can (re)generate the [ffi lua files](https:///tree/master/ffi), e.g.
 ```
 PATH=$HOME/x-tools/arm-remarkable-linux-gnueabihf/bin/:$PATH ./ffi-cdecl arm-remarkable-linux-gnueabihf-gcc ../universalreader/base/ffi-cdecl/mxcfb_remarkable_decl.c ../universalreader/base/ffi/mxcfb_remarkable_h.lua
 ```
 
 ### Legacy einkfb eInk devices
 
-Universal Reader uses the Linux framebuffer to control eInk devices, so the output module for legacy einkfb devices is [`base/ffi/framebuffer_einkfb.lua`](https://github.com/yashhasan570/UniversalReader-base/blob/master/ffi/framebuffer_einkfb.lua).
+Universal Reader uses the Linux framebuffer to control eInk devices, so the output module for legacy einkfb devices is [`base/ffi/framebuffer_einkfb.lua`](https:///blob/master/ffi/framebuffer_einkfb.lua).
 
 Following are the framebuffers that `framebuffer_einkfb.lua` currently supports:
 
@@ -56,23 +56,23 @@ For 8bpp framebuffers, it means each pixel is instead stored in 1 byte, making a
 The effective color palette of the display is still limited to 16 shades of gray: it will do a decimating quantization pass on its own on refresh.  
 So, while a black pixel will indeed be `0x00`, any color value < `0x11` (the next effective shade of gray in the [palette](https://github.com/NiLuJe/FBInk/blob/4f0230b17c480cdc75dd5497fddf33937781c812/fbink_internal.h#L327-L334)) will be displayed as pure black, too.  
 If the palette is expected to be inverted, then all the bits are flipped in the same way as done on a 4bpp framebuffer.  
-In practice, [this is always the case](https://github.com/yashhasan570/UniversalReader-base/blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/framebuffer_linux.lua#L242-L245).
+In practice, [this is always the case](https:///blob/a1fc4e43b7cce7a76b13224e145f9bada343d8ea/ffi/framebuffer_linux.lua#L242-L245).
 
 The actual framebuffer content is then refreshed (i.e., displayed) via device-specific ioctls.
 
 ## Blitter Module
 
 All the intermediary buffers are handled in a pixel format that matches the output module in use as closely as possible.  
-The magic happens in [`base/ffi/blitbuffer.lua`](https://github.com/yashhasan570/UniversalReader-base/blob/master/ffi/blitbuffer.lua), with some help from the [LinuxFB](https://github.com/yashhasan570/UniversalReader-base/blob/master/ffi/framebuffer_linux.lua) frontend to the output modules.
+The magic happens in [`base/ffi/blitbuffer.lua`](https:///blob/master/ffi/blitbuffer.lua), with some help from the [LinuxFB](https:///blob/master/ffi/framebuffer_linux.lua) frontend to the output modules.
 
-Note that on most devices, a [C version](https://github.com/yashhasan570/UniversalReader-base/blob/master/blitbuffer.c) is used instead for more consistent performance.  
+Note that on most devices, a [C version](https:///blob/master/blitbuffer.c) is used instead for more consistent performance.  
 Which version is more easily readable to a newcomer is up for debate, so, don't hesitate to cross-reference ;).  
 Feature-parity should be complete, with the exception of 4bpp support in the C version.  
 If you need a bit of guidance, you can also take a look at [FBInk](https://github.com/NiLuJe/FBInk), and/or ping [@NiLuJe](https://github.com/NiLuJe) on gitter.
 
 ## Input Module
 
-We have an [`input.c`](https://github.com/yashhasan570/UniversalReader-base/blob/master/input/input.c) module in [universalreader-base][kb-framework] that reads input events from Linux's input system and passes it on to the Lua frontend.  
+We have an [`input.c`](https:///blob/master/input/input.c) module in [universalreader-base][kb-framework] that reads input events from Linux's input system and passes it on to the Lua frontend.  
 Basically, you don't need to change that module because it should support most of the events.
 
 For this part, the file you have to hack on is [`universalreader/frontend/ui/input.lua`](https://github.com/yashhasan570/UniversalReader/blob/master/frontend/ui/input.lua).
@@ -98,6 +98,6 @@ More information on Linux's input system:
  * <http://www.kernel.org/doc/Documentation/input/event-codes.txt>
  * <http://www.kernel.org/doc/Documentation/input/input.txt>
 
-[kb-framework]:https://github.com/yashhasan570/UniversalReader-base
+[kb-framework]:https://
 
 <!-- kate: indent-mode cstyle; indent-width 4; replace-tabs on; remove-trailing-spaces none; -->

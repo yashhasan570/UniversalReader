@@ -469,7 +469,7 @@ Notes and limitations:
    use any service/driver that would make the parent process vision
    of the device state incoherent (ie: it should not use UIManager,
    display widgets, change settings, enable wifi...).
-   It is allowed to modify the filesystem, as long as Universal Reader
+   It is allowed to modify the filesystem, as long as KOreader
    has not a cached vision of this filesystem part.
    Its returned value(s) are returned to the parent.
 

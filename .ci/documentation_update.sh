@@ -13,6 +13,6 @@ if run git -C doc/html diff --exit-code --ignore-matching-lines='^<i[^>]*>Last u
     echo -e "${ANSI_GREEN}Documentation unchanged."
     exit
 fi
-run git -C doc/html -c user.name='Universal Reader build bot' -c user.email='non-reply@koreader.rocks' commit --amend -m 'Automated documentation build from CI.'
+run git -C doc/html -c user.name='Universal Reader build bot' -c user.email='non-reply@' commit --amend -m 'Automated documentation build from CI.'
 run git -C doc/html push -f --quiet
 echo -e "\\n${ANSI_GREEN}Documentation update pushed."

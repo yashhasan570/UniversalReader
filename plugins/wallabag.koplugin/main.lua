@@ -4,7 +4,7 @@ or in their original formats. It can archive or delete articles from Wallabag wh
 in Universal Reader. And it will delete or archive them locally when you finish them elsewhere.
 
 @todo Integrate comments from https://github.com/yashhasan570/UniversalReader/pull/12949
-@todo Translate the new menu labels? See https://github.com/yashhasan570/UniversalReader-translations
+@todo Translate the new menu labels? See https://
 @todo Make sure all menu labels and message texts are wrapped in _() for translation
 @todo An option to parse comma-separated reviews as tags, full text as review?
 

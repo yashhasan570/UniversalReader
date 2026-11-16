@@ -62,7 +62,7 @@ cat <<END >"${APP_PATH}/Contents/Info.plist"
         <key>CFBundleIconFile</key>
         <string>icon.icns</string>
         <key>CFBundleIdentifier</key>
-        <string>rocks.koreader</string>
+        <string>rocks.universalreader</string>
         <key>CFBundleShortVersionString</key>
         <string>${VERSION#v}</string>
         <key>CFBundleInfoDictionaryVersion</key>

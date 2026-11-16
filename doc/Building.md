@@ -324,5 +324,5 @@ To disable ccache, use `export USE_NO_CCACHE=1` before make.
 
 [circleci-conf]:https://github.com/yashhasan570/UniversalReader/blob/master/.circleci/config.yml
 [universalreader-weblate]:https://hosted.weblate.org/engage/universalreader/
-[base-readme]:https://github.com/yashhasan570/UniversalReader-base/blob/master/README.md
+[base-readme]:https:///blob/master/README.md
 [l10n-readme]:https://github.com/yashhasan570/UniversalReader/blob/master/l10n/README.md

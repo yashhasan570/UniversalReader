@@ -3,7 +3,7 @@ LINUX_PACKAGE = universalreader-linux-$(LINUX_ARCH)$(KODEDUG_SUFFIX)-$(VERSION).
 LINUX_PACKAGE_COMPRESSION =  --block-list=0
 
 DIST_DIR = $(INSTALL_DIR)/dist
-DIST_APPID = app.universalreader.reader
+DIST_APPID = rocks.universalreader.Universal Reader
 
 GLIBC_VERSION = $(shell ldd --version | sed -n '1s/.* \([0-9.]\+\)$$/\1/p')
 

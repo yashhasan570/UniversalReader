@@ -142,7 +142,7 @@ ko_update_check() {
         # Setup the FBInk daemon
         export FBINK_NAMED_PIPE="/tmp/universalreader.fbink"
         rm -f "${FBINK_NAMED_PIPE}"
-        FBINK_PID="$(/var/tmp/fbink --daemon 1 %UNIVERSALREADER% -q -y -6 -P 0)"
+        FBINK_PID="$(/var/tmp/fbink --daemon 1 %KOREADER% -q -y -6 -P 0)"
         # Open a handle to the fifo ourselves too: this prevent writes to the
         # fifo from hanging if fbink crashed (even with no one reading, its
         # buffer should still be big enough to never be full either).
@@ -341,7 +341,7 @@ done
 
 # clean up our own process tree in case the reader crashed (if needed, to avoid flooding KUAL's log)
 if pidof reader.lua >/dev/null 2>&1; then
-    logmsg "Sending a SIGTERM to stray Universal Reader processes . . ."
+    logmsg "Sending a SIGTERM to stray KOreader processes . . ."
     killall -TERM reader.lua
 fi
 

@@ -2,7 +2,7 @@
 Name=Universal Reader
 Comment=Ebook reader
 Exec=universalreader %u
-Icon=app.universalreader.reader
+Icon=rocks.universalreader.Universal Reader
 Terminal=false
 Type=Application
 Categories=Graphics;

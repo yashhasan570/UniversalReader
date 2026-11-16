@@ -25,7 +25,7 @@ local ota_dir = DataStorage:getDataDir() .. "/ota/"
 local OTAManager = {
     -- NOTE: Each URL *MUST* end with a /
     ota_servers = {
-        "http://ota.koreader.rocks/",
+        "http://ota./",
         "https://github.com/yashhasan570/UniversalReader/releases/download/ota/",
         "http://universalreader-fr.ak-team.com/",
         "http://universalreader-pl.ak-team.com/",

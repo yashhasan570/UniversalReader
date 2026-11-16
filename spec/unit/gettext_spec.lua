@@ -8,7 +8,7 @@ local test_po_part1 = [[
 msgid ""
 msgstr ""
 "Project-Id-Version: Universal Reader\n"
-"Report-Msgid-Bugs-To: https://github.com/yashhasan570/UniversalReader-base/issues\n"
+"Report-Msgid-Bugs-To: https:///issues\n"
 "POT-Creation-Date: 2019-08-10 06:01+0000\n"
 "PO-Revision-Date: 2019-08-08 06:34+0000\n"
 "Last-Translator: Frans de Jonge <fransdejonge@gmail.com>\n"

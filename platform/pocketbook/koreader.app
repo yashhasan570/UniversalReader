@@ -51,7 +51,7 @@ ko_update_check() {
         # Setup the FBInk daemon
         export FBINK_NAMED_PIPE="/tmp/.universalreader.fbink"
         rm -f "${FBINK_NAMED_PIPE}"
-        FBINK_PID="$("${UNIVERSALREADER_DIR}/fbink" --daemon 1 %UNIVERSALREADER% -q -y -6 -P 0)"
+        FBINK_PID="$("${UNIVERSALREADER_DIR}/fbink" --daemon 1 %KOREADER% -q -y -6 -P 0)"
         # Open a handle to the fifo ourselves too: this prevent writes to the
         # fifo from hanging if fbink crashed (even with no one reading, its
         # buffer should still be big enough to never be full either).

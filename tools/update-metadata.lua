@@ -70,19 +70,19 @@ local metadata = {
 
     -- appstream metadata that needs no translation
     component = [[
-  <id>app.universalreader.reader</id>
+  <id>rocks.universalreader.Universal Reader</id>
 
   <name>Universal Reader</name>
-  <developer id="rocks.koreader">
-    <name>Universal Reader</name>
+  <developer id="rocks.universalreader">
+    <name>Universal Reader Community</name>
   </developer>
 
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>AGPL-3.0-only</project_license>
 
-  <url type="homepage">https://koreader.rocks/</url>
+  <url type="homepage">https:///</url>
   <url type="bugtracker">https://github.com/yashhasan570/UniversalReader/issues</url>
-  <url type="faq">https://koreader.rocks/user_guide</url>
+  <url type="faq">https:///user_guide</url>
   <url type="translate">https://hosted.weblate.org/engage/universalreader/</url>
   <url type="vcs-browser">https://github.com/yashhasan570/UniversalReader</url>
   <url type="contribute">https://github.com/yashhasan570/UniversalReader</url>
@@ -150,7 +150,7 @@ local metadata = {
     <mediatype>text/plain</mediatype>
   </provides>
 
-  <launchable type="desktop-id">app.universalreader.reader.desktop</launchable>
+  <launchable type="desktop-id">rocks.universalreader.Universal Reader.desktop</launchable>
 
   <categories>
     <category>Office</category>

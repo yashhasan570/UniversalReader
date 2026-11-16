@@ -65,16 +65,16 @@ class Logcat:
     )
 
     ACTIVITY_MANAGER_DEATH_RX = re.compile(
-        # Process org.universalreader.launcher.debug (pid 2785) has died
+        # Process .debug (pid 2785) has died
         r'Process [ ] {package} [ ] \( pid [ ] {pid} \) [ ] has [ ] died'
         .format(**RX), re.X,
     )
     ACTIVITY_MANAGER_START_RX1 = re.compile(
-        # Start proc 2525:org.universalreader.launcher/u0a56 for activity org.universalreader.launcher/.MainActivity
+        # Start proc 2525:/u0a56 for activity /.MainActivity
         r'Start [ ] proc [ ] {pid} : {package} /'
         .format(**RX), re.X,
     )
-    # Start proc org.universalreader.launcher.debug for activity org.universalreader.launcher.debug/org.universalreader.launcher.MainActivity: pid=2686 uid=10047 gids={50047, 3003, 1028, 1015}
+    # Start proc .debug for activity .debug/.MainActivity: pid=2686 uid=10047 gids={50047, 3003, 1028, 1015}
     ACTIVITY_MANAGER_START_RX2 = re.compile(
         r'Start [ ] proc [ ] {package} [ ] .* \b pid={pid} \b'
         .format(**RX), re.X,
@@ -315,7 +315,7 @@ def main():
     if bool(args.clear or args.dump) and bool(args.filter):
         parser.error('logcat and filter options are mutually exclusive')
     if (args.packages, args.tags) == (None, None):
-        args.packages = 'org.universalreader.launcher,org.universalreader.launcher.debug'
+        args.packages = ',.debug'
         args.tags = 'Universal Reader,NativeGlue,dlopen,k2pdfopt,libmupdf,luajit-launcher'
     if not args.packages and not args.tags:
         parser.error('no packages and no tags, means there\'s nothing to filter!')

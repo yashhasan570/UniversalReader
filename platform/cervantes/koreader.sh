@@ -31,7 +31,7 @@ ko_update_check() {
         # Setup the FBInk daemon
         export FBINK_NAMED_PIPE="/tmp/universalreader.fbink"
         rm -f "${FBINK_NAMED_PIPE}"
-        FBINK_PID="$(./fbink --daemon 1 %UNIVERSALREADER% -q -y -6 -P 0)"
+        FBINK_PID="$(./fbink --daemon 1 %KOREADER% -q -y -6 -P 0)"
         # Open a handle to the fifo ourselves too: this prevent writes to the
         # fifo from hanging if fbink crashed (even with no one reading, its
         # buffer should still be big enough to never be full either).
@@ -97,10 +97,10 @@ CRASH_TS=0
 CRASH_PREV_TS=0
 # **magic** values to request shell stuff. It starts at 85,
 # any number lower than that will exit this script.
-RESTART_UNIVERSALREADER=85
+RESTART_KOREADER=85
 ENTER_USBMS=86
 ENTER_QBOOKAPP=87
-RETURN_VALUE="${RESTART_UNIVERSALREADER}"
+RETURN_VALUE="${RESTART_KOREADER}"
 
 # Loop forever until Universal Reader requests a normal exit.
 while [ "${RETURN_VALUE}" -ne 0 ]; do
@@ -108,7 +108,7 @@ while [ "${RETURN_VALUE}" -ne 0 ]; do
     # move dictionaries from external storage to universalreader private partition.
     find /mnt/public/dict -type f -exec mv -v \{\} /mnt/private/universalreader/data/dict \; 2>/dev/null
 
-    if [ ${RETURN_VALUE} -eq ${RESTART_UNIVERSALREADER} ]; then
+    if [ ${RETURN_VALUE} -eq ${RESTART_KOREADER} ]; then
         # Do an update check now, so we can actually update Universal Reader via the "Restart Universal Reader" menu entry ;).
         ko_update_check
     fi
@@ -117,7 +117,7 @@ while [ "${RETURN_VALUE}" -ne 0 ]; do
     ./reader.lua "$@" >>crash.log 2>&1
     RETURN_VALUE=$?
 
-    if [ ${RETURN_VALUE} -ne 0 ] && [ "${RETURN_VALUE}" -ne "${ENTER_USBMS}" ] && [ "${RETURN_VALUE}" -ne "${ENTER_QBOOKAPP}" ] && [ "${RETURN_VALUE}" -ne "${RESTART_UNIVERSALREADER}" ]; then
+    if [ ${RETURN_VALUE} -ne 0 ] && [ "${RETURN_VALUE}" -ne "${ENTER_USBMS}" ] && [ "${RETURN_VALUE}" -ne "${ENTER_QBOOKAPP}" ] && [ "${RETURN_VALUE}" -ne "${RESTART_KOREADER}" ]; then
         # Increment the crash counter
         CRASH_COUNT=$((CRASH_COUNT + 1))
         CRASH_TS=$(date +'%s')

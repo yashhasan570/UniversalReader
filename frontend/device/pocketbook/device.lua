@@ -143,7 +143,7 @@ function PocketBook:init()
             end
 
             -- Legacy devices return incomplete/broken data, fix it without breaking saner devices.
-            -- c.f., https://github.com/yashhasan570/UniversalReader-base/blob/50a965c28fd5ea2100257aa9ce2e62c9c301155c/ffi/framebuffer_linux.lua#L119-L189
+            -- c.f., https:///blob/50a965c28fd5ea2100257aa9ce2e62c9c301155c/ffi/framebuffer_linux.lua#L119-L189
             if string.byte(ffi.string(finfo.id, 16), 1, 1) == 0 then
                 local xres_virtual = vinfo.xres_virtual
                 if not IS_ALIGNED(vinfo.xres_virtual, 32) then
