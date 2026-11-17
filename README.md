@@ -71,6 +71,7 @@ Universal Reader is developed and supported by volunteers all around the world. 
 - document lesser-known features on the [wiki][link-wiki]
 - help others with your knowledge on the [forum][link-forum]
 
+Right now we only support [liberapay](https://liberapay.com/Universal Reader) donations.
 
 ## Contributors
 
@@ -101,7 +102,3 @@ Universal Reader is developed and supported by volunteers all around the world. 
 [link-weblate]:https://hosted.weblate.org/engage/universalreader/?utm_source=widget
 [link-wiki]:https://github.com/yashhasan570/UniversalReader/wiki
 [link-wiki-zip]:https://github.com/yashhasan570/UniversalReader/wiki/ZIP
-
-## Contact
-
-Questions, problem reports or feedback? Reach us on Telegram: [@johnconstantine570](https://t.me/johnconstantine570)
